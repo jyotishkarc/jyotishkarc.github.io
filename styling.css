@@ -18,17 +18,21 @@ a {
 
 nav {
     display: flex;
+    padding-top: 15px;
     padding-bottom: 15px;
+    margin-bottom: 40px;
 }
 
 .nav-name a, .nav-name-bengali a {
     display: flex;
+    width: 100%;
+    font-size: 1.9em;
+    font-family: 'Helvetica';
     text-align: center;
+    /* padding-top: 6px; */
     padding-left: 25px;
     padding-right: 5px;
     margin-top:16px;
-    font-size: 1.8em;
-    font-family: 'Helvetica';
     margin-bottom: 16px;
     color: #000;
     transition: 0.9s;
@@ -36,31 +40,31 @@ nav {
 
 .nav-name a:hover {
     color: #0c00b6;
-    transform: scale(1.07);
+    transform: scale(1.02);
     transition: 0.3s;
 }
 
-.wrap {
+/* .wrap {
     display: grid;
     position: absolute;
-}
+} */
 
-.nav-name-bengali {
+/* .nav-name-bengali {
     opacity: 0;
-}
+} */
 
-.nav-name-bengali a {
+/* .nav-name-bengali a {
     font-family: "Noto Serif Bengali", system-ui;
     font-weight: bold;
     font-size: 1.99em;
     text-align:center;
-}
+} */
 
-.nav-name, .nav-name-bengali {
+/* .nav-name, .nav-name-bengali {
     transition: opacity 0.5s linear;
     grid-row: 1;
     grid-column: 1;
-}
+} */
 
 /* .wrap:hover .nav-name {
     opacity: 0;
@@ -69,11 +73,31 @@ nav {
     opacity: 1;
 } */
 
+.nav-name-details {
+    display: flex;
+    padding-left: 15px;
+    /* transform: translateY(-50%); */
+    text-align: center;
+}
 
+.nav-name-details i {
+    display: inline-block;
+    font-size: 2.3em;
+    /* padding-top: 19px; */
+    /* transform: translateY(35%); */
+}
+
+.fa-language {
+    position: absolute;
+    transform: translateY(50%);
+}
 
 .nav-links {
     flex: 1;
     text-align: right;
+    padding-right: 10px;
+    /* border: 2px solid #3d3c3c; */
+    /* border-radius: 10px / 10px; */
 }
 
 .nav-links ul li {
@@ -214,6 +238,7 @@ p {
     margin: 0 auto; /* Center image horizontally within its container */
     border-radius: 10%;
     max-width: 80%; /* Allow image to fill its container */
+    min-width: 200px;
     height: auto;
     transform: scale(0.95);
     padding-top: 5px;
@@ -235,19 +260,21 @@ p {
 /* Style for the social icons container */
 .social-icons {
     display: flex;
+    /* aspect-ratio: 1 / 1; */
     justify-content: center; /* Center the icons */
     margin: 10px; /* Adds space between image and icons */
     padding-top: 2px;
     padding-bottom: 2px;
     transform: scale(0.95);
-    /* flex-shrink: ; */
+    flex-shrink: 0.5;
 }
 
 .social-icons a {
     width: 50px;
-    height: 50px;
+    height: auto;
+    aspect-ratio : 1 / 1;
     margin: 0 15px; /* Space between the icons */
-    font-size: 25px; /* Size of the icons */
+    /* font-size: 0px; Size of the icons */
     color: #333; /* Default color */
     border: 2px solid #5cb6f3;
     text-align: center;
@@ -256,14 +283,16 @@ p {
     box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.05);
     margin: 0 20px;
     border-radius: 30%;
-    position: relative;
+    /* position: relative; */
+    position: sticky;
     overflow: hidden;
     transition: 0.4s;
+    /* flex-shrink: 0.1; */
     /* cursor: pointer; */
 }
 
 .social-icons a .fab, .social-icons a .ai {
-    font-size: 30px;
+    font-size: 180%;
     line-height: 50px;
     position: relative;
     z-index: 10;
@@ -273,13 +302,14 @@ p {
 .social-icons a::after{
     content: '';
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    aspect-ratio : 1 / 1;
     top: -90px;
     /* bottom: 90px; */
     left: 0;
     background: linear-gradient(-45deg, #de7b01, #1908ff);
     position: absolute;
-    transition: 0.2s;
+    transition: 0.2s fade-in-out;
 }
 
 .social-icons a:hover::after {
@@ -304,7 +334,7 @@ p {
     padding-bottom: auto;
     padding-left: 20px;
     padding-right: 20px;
-    flex-grow: 1; /* Allow text content to take up remaining space */
+    flex-grow: 0.8; /* Allow text content to take up remaining space */
     text-align: justify;
     text-justify: inter-word;
     text-justify: auto;
