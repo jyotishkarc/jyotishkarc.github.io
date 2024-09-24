@@ -8,7 +8,7 @@
 
 body {
     margin: 60px auto;
-    width: 70%;
+    width: 80%;
 }
 
 a {
@@ -310,6 +310,11 @@ p {
     text-justify: auto;
     /* text-justify: distribute-all-lines; */
 }
+
+.collaborator {
+    color: chocolate;
+}
+
 
 .footer {
     font-family: 'Helvetica' , 'Sans-Serif', 'Avenir';
