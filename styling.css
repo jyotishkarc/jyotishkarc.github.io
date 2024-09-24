@@ -324,4 +324,75 @@ p {
 
 
 
+/*  */
 
+
+
+/*  */
+
+
+
+
+/*for responsive square grid*/
+
+.c-container{
+    height:100%;
+    margin-top:50px;
+    white-space:nowrap;
+    background-color:#FFFFFF;
+    font-size:0;
+}
+
+/*.c-squares{
+    width:30vh;
+    height:30vh;
+    display:inline;
+}*/
+
+.c-link{
+    position:relative;
+    display:inline-block;
+    height:30vh;
+    width:30vh;
+    font-size:small;
+}
+.c-thumb{
+    height:30vh;
+    width:30vh;
+    margin:0;
+}
+
+.c-name{
+    z-index:5;
+    background-color:#14277D;
+    opacity:0;
+    /* cosmetic */ color:#FFF;font-size:2em;transition:opacity 500ms;
+}
+.c-name2{
+    z-index:5;
+    background-color:#000;
+    opacity:0;
+    /* cosmetic */ color:#FFF;font-size:2em;transition:opacity 500ms;
+}
+
+.c-link:hover .c-name{
+    opacity:0.8;
+}
+
+.c-link:hover .c-name2{
+    opacity:0.8;
+}
+
+
+
+/* used class from site css */
+br.empty{
+    display:block;
+    font-size:0;margin:0;padding:0;height:0;line-height:0;
+}
+
+.stm{
+    position:absolute;
+    top:0;right:0;bottom:0;left:0;
+    margin:0;
+}
