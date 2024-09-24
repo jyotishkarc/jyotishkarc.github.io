@@ -83,7 +83,6 @@ nav {
 .nav-name-details i {
     display: inline-block;
     font-size: 2.3em;
-    transition: 0.4s;
     /* padding-top: 19px; */
     /* transform: translateY(35%); */
 }
@@ -232,7 +231,7 @@ p {
     max-width: 35%; /* Set a fixed width for the photo-and-icons section */
     flex-shrink: 0; /* Prevents the section from shrinking */
     margin: 5px;
-    margin-bottom: 80px;
+    margin-bottom: 10px;
     /* flex: 1; */
 }
 
@@ -354,6 +353,15 @@ p {
     color: chocolate;
 }
 
+/* FOOTER */
+
+footer {
+    margin-top: 20px;
+    border-top: 1px solid #d5d5d5;
+    font-size: .8em;
+    color: #999999;
+    font-weight:lighter;
+}
 
 .footer {
     font-family: 'Helvetica' , 'Sans-Serif', 'Avenir';
@@ -365,20 +373,6 @@ p {
     justify-content: center;
 }
 
-
-
-
-/*  */
-
-footer {
-    margin-top: 100px;
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
-    color: #999999;
-    font-weight:lighter;
-}
-
-/*  */
 
 
 
