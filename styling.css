@@ -83,13 +83,24 @@ nav {
 .nav-name-details i {
     display: inline-block;
     font-size: 2.3em;
+    transition: 0.4s;
     /* padding-top: 19px; */
     /* transform: translateY(35%); */
+}
+
+.nav-name-details a {
+    transition: 0.8s;
+}
+
+.nav-name-details a:hover {
+    transform: rotateX(360deg);
+    transition: 0.6s;
 }
 
 .fa-language {
     position: absolute;
     transform: translateY(50%);
+    /* transition: 0.4s; */
 }
 
 .nav-links {
@@ -135,8 +146,6 @@ nav {
 .navbar-element:hover {
     transform: scale(1.4);
 }
-
-
 
 /* a:hover {
     text-decoration: underline;
