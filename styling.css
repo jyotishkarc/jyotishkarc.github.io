@@ -236,8 +236,8 @@ p {
 .social-icons {
     display: flex;
     justify-content: center; /* Center the icons */
-    margin: 2px; /* Adds space between image and icons */
-    padding-top: 0px;
+    margin: 10px; /* Adds space between image and icons */
+    padding-top: 2px;
     padding-bottom: 2px;
     transform: scale(0.95);
     /* flex-shrink: ; */
@@ -298,7 +298,7 @@ p {
 
 .text-content {
     /* font-family: "Roboto Slab", serif; */
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-right: 10px;
     padding-top: 15px;
     padding-bottom: auto;
