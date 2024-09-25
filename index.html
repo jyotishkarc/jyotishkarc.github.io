@@ -22,6 +22,9 @@
         <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css" integrity="sha384-NvKbDTEnL+A8F/AA5Tc5kmMLSJHUO868P+lDtTpJIeQdGYaUIuLr4lVGOEA1OcMy" crossorigin="anonymous">
     </head>
 
     <!-- <body> -->
@@ -35,7 +38,8 @@
                 
                 <div class="nav-name-details"><a><i class="fa-solid fa-language"></i></a></div>
 
-                <div class="nav-links">
+                <div class="nav-links" id="navLinks">
+                    <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
                         <li><a class="navbar-element" href=" ">Home</a>
                         <li><a class="navbar-element" href="research.html">Research</a>
@@ -44,6 +48,7 @@
                         </li>
                     </ul>
                 </div>
+                <a><i class="menu-close fa-solid fa-bars" onclick="showMenu()"></i></a>
             </nav>
         </section>
 
@@ -87,5 +92,17 @@
             <small>&copy 2024, Jyotishka Ray Choudhury. All rights reserved.</small>
         </footer>
 
-</body>
+        <script>
+            var navLinks = document.getElementById("navLinks")
+
+            function showMenu() {
+                navLinks.style.right = "0"
+            }
+
+            function hideMenu() {
+                navLinks.style.right = "-250px"
+            }
+        </script>
+
+    </body>
 </html>
