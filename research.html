@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Jyotishka's Home Page</title>
+        <meta name="google-site-verification" content="lLFhq5Fye8DLJsRynzjC8hWz2YQj7RikNk4HZUFowbI" />
+        <!-- <META name="description" content="jyotishka"> -->
+        <!-- <META name="keywords" content="jyotishka, statistics, machine learning"> -->
+        
+        <!-- Favicon -->
+        <link rel="icon" href="images/favicon/jrc-logo-circle-border.png">
+        
+        <!-- link to main stylesheet -->
+        <link rel="stylesheet" type="text/css" href="styling.css">
+        
+        <!-- Font Awesome symbols -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <!-- Academicions (for Google Scholar button)-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css" integrity="sha384-NvKbDTEnL+A8F/AA5Tc5kmMLSJHUO868P+lDtTpJIeQdGYaUIuLr4lVGOEA1OcMy" crossorigin="anonymous">
+    </head>
+
+    <body>
+    <!-- <body oncontextmenu="return false"> -->
+        <section class="header">
+            <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a>
+            <nav>
+                <!-- <div class="wrap"> -->
+                <div class="nav-name"><a>Jyotishka Ray Choudhury</a></div>
+                <!-- <div class="nav-name-bengali"><a>জ্যোতিষ্ক রায় চৌধুরী </a></div> -->
+
+                
+                <div class="nav-name-details"><a><i class="fa-solid fa-language"></i></a></div>
+
+                <div class="nav-links" id="navLinks">
+                    <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a class="navbar-element" href="index.html">Home</a>
+                        <li><a class="navbar-element" href="research.html">Research</a>
+                        <li><a class="navbar-element" href="blog.html">Blog</a>
+                        <li><a class="navbar-element" href="random.html">Random</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </nav>
+        </section>
+
+
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat eveniet iste, totam modi impedit ipsam minus voluptatibus itaque nobis neque alias magnam? Sed, doloremque repudiandae. Ipsum pariatur consequatur reiciendis cum!
+
+
+        <footer class="footer">
+            <small>&copy 2024 Jyotishka Ray Choudhury. All rights reserved.</small>
+        </footer>
+
+        <script>
+            var navLinks = document.getElementById("navLinks")
+
+            function showMenu() {
+                navLinks.style.right = "0"
+            }
+
+            function hideMenu() {
+                navLinks.style.right = "-200px"
+            }
+        </script>
+
+    </body>
+</html>
