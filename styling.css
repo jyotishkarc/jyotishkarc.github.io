@@ -445,7 +445,6 @@ nav .fa-bars {
     .nav-name a {
         font-size: 1.2em;
         text-align: left;
-        /* transform: translateX(10%); */
     }
 
     .nav-name-details i {
@@ -505,10 +504,10 @@ nav .fa-bars {
 
     .photo-and-icons {
         display: flex;
-        /* float: left; */
         flex-direction: column; /* Stack children vertically */
+        /* text-align: justify; */
         align-items: center; /* Center children horizontally */
-        max-width: 100%; /* Set a fixed width for the photo-and-icons section */
+        max-width: 100%; /* Set a fixed width for the photo-and-icons */
         flex-shrink: 0; /* Prevents the section from shrinking */
         margin: 5px;
         margin-bottom: 5px;
