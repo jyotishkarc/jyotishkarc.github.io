@@ -423,8 +423,12 @@ nav .fa-bars {
     nav .fa-bars {
         display: inline-block;
         margin: auto;
-        padding-right: 22px;
+        margin-right: 7%;
+        padding-top: 1px;
+        right: 0;
+        /* padding-right: 22px; */
         overflow: hidden;
+        transform: scale(1.1);
     }
 
     nav {
@@ -438,13 +442,14 @@ nav .fa-bars {
 
     .nav-name {
         display: block;
+        position: sticky;
         width: 100%;
         /* text-align: left; */
     }
 
     .nav-name a {
         font-size: 1.2em;
-        text-align: left;
+        text-align: center;
     }
 
     .nav-name-details i {
@@ -489,14 +494,6 @@ nav .fa-bars {
         color: black;
     }
 
-    nav .menu-close {
-        display: block;
-        color: black;
-        margin: 10px;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
     .container{
         flex-direction: column;
         gap: 0;
@@ -505,9 +502,11 @@ nav .fa-bars {
     .photo-and-icons {
         display: flex;
         flex-direction: column; /* Stack children vertically */
-        /* text-align: justify; */
-        align-items: center; /* Center children horizontally */
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
         max-width: 100%; /* Set a fixed width for the photo-and-icons */
+        /* aspect-ratio: 1 / 1; */
         flex-shrink: 0; /* Prevents the section from shrinking */
         margin: 5px;
         margin-bottom: 5px;
