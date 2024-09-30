@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="with=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="with=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <title>Jyotishka's Home Page</title>
         <meta name="google-site-verification" content="lLFhq5Fye8DLJsRynzjC8hWz2YQj7RikNk4HZUFowbI" />
         <!-- <META name="description" content="jyotishka"> -->
@@ -33,17 +33,16 @@
     <body>
     <!-- <body oncontextmenu="return false"> -->
         <section class="header">
-            <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a>
             <nav>
-                <!-- <div class="wrap"> -->
-                <div class="nav-name"><a>Jyotishka Ray Choudhury</a></div>
-                <!-- <div class="nav-name-bengali"><a>জ্যোতিষ্ক রায় চৌধুরী </a></div> -->
-
-                
-                <div class="nav-name-details"><a><i class="fa-solid fa-language"></i></a></div>
+                <div class="name-all">
+                    <div class="nav-name"><a>Jyotishka Ray Choudhury</a></div>
+                    <!-- <div class="nav-name-bengali"><a>জ্যোতিষ্ক রায় চৌধুরী </a></div> -->    
+                    <div class="nav-name-details"><a><i class="fa-solid fa-language"></i></a></div>
+                </div>
 
                 <div class="nav-links" id="navLinks">
-                    <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <!-- <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i> -->
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
                         <li><a class="navbar-element" href="index.html">Home</a>
                         <li><a class="navbar-element" href="research.html">Research</a>
@@ -52,13 +51,36 @@
                         </li>
                     </ul>
                 </div>
-                
+                <!-- <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a> -->
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i>
             </nav>
         </section>
 
-
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat eveniet iste, totam modi impedit ipsam minus voluptatibus itaque nobis neque alias magnam? Sed, doloremque repudiandae. Ipsum pariatur consequatur reiciendis cum!
-
+        <section>
+            <ol class="reverse-numbering" reversed>
+                <li>
+                    <div class="publication-card" data-authors="johnDoe*,janeSmith*,aliceBrown" data-venue="Journal of Machine Learning Research" data-alphabetical="true">
+                        <h3>Advances in Machine Learning</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue">Journal of Machine Learning Research</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication-card" data-authors="johnDoe,aliceBrown" data-venue="International Conference on Reinforcement Learning">
+                        <h3>Exploring Reinforcement Learning</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue">International Conference on Reinforcement Learning</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication-card" data-authors="janeSmith" data-venue="Data Science Journal">
+                        <h3>Data Science in Practice</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue">Data Science Journal</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
 
         <footer class="footer">
             <small>&copy 2024 Jyotishka Ray Choudhury. All rights reserved.</small>
@@ -69,11 +91,74 @@
 
             function showMenu() {
                 navLinks.style.right = "0"
+                navLinks.style.height=window.innerHeight;
             }
 
             function hideMenu() {
                 navLinks.style.right = "-200px"
+                navLinks.style.height=window.innerHeight;
             }
+        </script>
+
+        <script>
+            // Define collaborators with their homepage links as variables
+            const collaborators = {
+                johnDoe: '<a href="https://johndoe.com" target="_blank">John Doe</a>',
+                janeSmith: '<a href="https://janesmith.com" target="_blank">Jane Smith</a>',
+                aliceBrown: '<a href="https://alicebrown.com" target="_blank">Alice Brown</a>',
+            };
+
+            // Function to add authors dynamically from data-authors attribute
+            function populateAuthors() {
+                // Get all publication divs
+                const publications = document.querySelectorAll('.publication-card');
+
+                publications.forEach(publication => {
+                    // Extract the data-authors attribute
+                    const authorKeys = publication.getAttribute('data-authors').split(',').map(a => a.trim());
+
+                    // Prepare an array for author links and a set for uniqueness
+                    const authorLinks = [];
+                    const uniqueAuthorsSet = new Set(); // To ensure unique authors
+
+                    // Loop through author keys
+                    authorKeys.forEach(key => {
+                        // Check if the key ends with an asterisk for equal contribution
+                        const isEqualContribution = key.endsWith('*');
+                        const authorKey = isEqualContribution ? key.slice(0, -1).trim() : key; // Remove asterisk if present
+                        
+                        // Get the author link
+                        const link = collaborators[authorKey];
+                        if (link) {
+                            // Only add if not already in the set
+                            if (!uniqueAuthorsSet.has(link)) {
+                                uniqueAuthorsSet.add(link); // Add link to the set
+                                authorLinks.push(isEqualContribution ? link + '*' : link);
+                            }
+                        } else {
+                            // If the author key is a manual note, add it directly
+                            authorLinks.push(key);
+                        }
+                    });
+
+                    // Check for alphabetical order attribute
+                    const isAlphabetical = publication.getAttribute('data-alphabetical') === "true";
+                    
+                    // Construct the authors string
+                    let authorsString = authorLinks.join(", ");
+                    if (isAlphabetical) {
+                        authorsString += " (in alphabetical order)"; // Just append without worrying about commas
+                    }
+
+                    // Set the author list in the HTML
+                    publication.querySelector('.author-list').innerHTML = authorsString;
+                });
+            }
+
+            // Call the function to populate authors
+            populateAuthors();
+
+
         </script>
 
     </body>
