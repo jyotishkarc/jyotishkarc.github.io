@@ -543,12 +543,12 @@ nav .fa-bars {
 .publication-card {
     border: 1px solid #ccc; /* border color */
     border-radius: 8px; /* rounded corners */
-    padding: 10px; /* Padding around the card */
+    padding: 5px; /* Padding around the card */
     padding-left: 22px; /* Increase left padding specifically */
     margin: 10px 0; /* spacing between cards */
     background-color: #f9f9f9; /* background color */
     margin-left: 8px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .publication-card h3 {
@@ -571,7 +571,7 @@ nav .fa-bars {
 }
 
 .publication-venue {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: #777;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -581,6 +581,9 @@ nav .fa-bars {
 ol > li::marker {
     color: red;
 }
+
+
+
 
 /* Old Publications layout */
 
