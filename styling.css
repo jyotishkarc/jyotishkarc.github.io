@@ -538,27 +538,6 @@ nav .fa-bars {
 
 /* AUTHORS & PUBLICATIONS */
 
-.publication-list {
-    list-style-type: none; /* Remove default numbering */
-    padding-left: 0; /* Remove left padding */
-}
-
-.publication-list li {
-    position: relative; /* Position relative for absolute positioning of numbers */
-    margin-bottom: 10px; /* Space between list items */
-    padding-left: 30px; /* Space for the number */
-}
-
-.publication-list li::before {
-    content: counter(item) ". "; /* Display the counter */
-    counter-increment: item; /* Increment the counter */
-    position: absolute; /* Position the number */
-    left: 0; /* Position at the left */
-    font-weight: bold; /* Make the number bold */
-    color: #007BFF; /* Color of the number */
-    font-size: 1.2rem; /* Slightly larger font size for the number */
-}
-
 .publication-card {
     border: 1px solid #ccc; /* border color */
     border-radius: 8px; /* rounded corners */
@@ -566,6 +545,7 @@ nav .fa-bars {
     padding-left: 22px; /* Increase left padding specifically */
     margin: 10px 0; /* spacing between cards */
     background-color: #f9f9f9; /* background color */
+    margin-left: 8px;
 }
 
 .publication-card h3 {
