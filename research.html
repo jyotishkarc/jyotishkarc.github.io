@@ -57,31 +57,60 @@
             </nav>
         </section>
 
-        <section>
+        <section class="text-content" id="published">
+            <h2><i class="fa-solid fa-book"></i> &nbsp;Published articles</h2>
             <ol class="reverse-numbering" reversed>
                 <li>
-                    <div class="publication-card" data-authors="johnDoe*,janeSmith*,aliceBrown" data-venue="Journal of Machine Learning Research" data-alphabetical="true">
-                        <h3>Advances in Machine Learning blah blah blah blah blah</h3>
+                    <div class="publication-card" data-authors="jrc*,aytijhya_saha*,sarbojit_roy,subhajit_dutta" data-venue="Journal of Machine Learning Research" data-alphabetical="false">
+                        <h3>Robust Classification of High-Dimensional Data Using Data-Adaptive Energy Distance</h3>
                         <p class="author-list"></p>
-                        <p class="publication-venue">Journal of Machine Learning Research</p>
+                        <p class="publication-venue">European Conference on Machine Learning (ECML-PKDD), 2023</p>
                     </div>
                 </li>
                 <li>
-                    <div class="publication-card" data-authors="johnDoe,aliceBrown" data-venue="International Conference on Reinforcement Learning">
-                        <h3>Exploring Reinforcement Learning</h3>
+                    <div class="publication-card" data-authors="sarbojit_roy,jrc,subhajit_dutta" data-venue="International Conference on Reinforcement Learning">
+                        <h3>On some fast and robust classifiers for high dimension, low sample size data</h3>
                         <p class="author-list"></p>
-                        <p class="publication-venue">International Conference on Reinforcement Learning</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="publication-card" data-authors="janeSmith" data-venue="Data Science Journal">
-                        <h3>Data Science in Practice</h3>
-                        <p class="author-list"></p>
-                        <p class="publication-venue">Data Science Journal</p>
+                        <p class="publication-venue">International Conference on Artificial Intelligence and Statistics (AISTATS), 2022</p>
                     </div>
                 </li>
             </ol>
         </section>
+
+        <section class="text-content" id="unpublished">
+            <h2><i class="fa-solid fa-book-open"></i> &nbsp;Preprints (Unpublished / Submitted articles)</h2>
+            <ol class="reverse-numbering" reversed>
+                <li>
+                    <div class="publication-card" data-authors="ziang_niu,jrc,eugene_katsevich" data-venue="Journal of Machine Learning Research" data-alphabetical="false">
+                        <h3>Computationally efficient and statistically accurate conditional independence testing with spaCRT</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue"> </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication-card" data-authors="ziang_niu,jrc,eugene_katsevich" data-venue="International Conference on Reinforcement Learning">
+                        <h3>The saddlepoint approximation for averages of conditionally independent random variables</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue"> </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication-card" data-authors="supratik_basu*,jrc*,debolina_paul,swagatam_das" data-venue="Data Science Journal">
+                        <h3>Robust and Automatic Data Clustering: Dirichlet Process meets Median-of-Means</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue"> </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication-card" data-authors="sarbajit_mazumdar,jrc" data-venue="Data Science Journal">
+                        <h3>Partition Function: Some Properties & A New Bound on p(n)</h3>
+                        <p class="author-list"></p>
+                        <p class="publication-venue"> </p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+        
 
         <footer class="footer">
             <small>&copy 2024 Jyotishka Ray Choudhury. All rights reserved.</small>
@@ -107,9 +136,16 @@
         <script>
             // Define collaborators with their homepage links as variables
             const collaborators = {
-                johnDoe: '<a href="https://johndoe.com" target="_blank">John Doe</a>',
-                janeSmith: '<a href="https://janesmith.com" target="_blank">Jane Smith</a>',
-                aliceBrown: '<a href="https://alicebrown.com" target="_blank">Alice Brown</a>',
+                jrc: '<a href=" " target="_blank" style="color: #4500b6">Jyotishka Ray Choudhury</a>',
+                aytijhya_saha: '<a href="" target="_blank">Aytijhya Saha</a>',
+                sarbojit_roy: '<a href="" target="_blank">Sarbojit Roy</a>',
+                subhajit_dutta: '<a href="" target="_blank">Subhajit Dutta</a>',
+                ziang_niu: '<a href="" target="_blank">Ziang Niu</a>',
+                eugene_katsevich: '<a href="" target="_blank">Eugene Katsevich</a>',
+                supratik_basu: '<a href="" target="_blank">Supratik Basu</a>',
+                debolina_paul: '<a href="" target="_blank">Debolina Paul</a>',
+                swagatam_das: '<a href="" target="_blank">Swagatam Das</a>',
+                sarbajit_mazumdar: '<a href="" target="_blank">Sarbajit Mazumdar</a>'
             };
 
             // Function to add authors dynamically from data-authors attribute
