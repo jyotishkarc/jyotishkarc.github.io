@@ -57,7 +57,7 @@
                     </ul>
                 </div>
                 <!-- <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a> -->
-                <i class="fa-solid fa-bars" onclick="showMenu(); adjustHeight()"></i>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i>
             </nav>
         </section>
 
@@ -128,18 +128,16 @@
 
             function showMenu() {
                 navLinks.style.right = "0"
-                navLinks.style.height=window.innerHeight;
+
+                // navLinks.style.height = document.body.scrollHeight;
+                navLinks.style.height = window.innerHeight;
+                // navLinks.style.height = document.documentElement.scrollHeight;
             }
 
             function hideMenu() {
                 navLinks.style.right = "-200px"
                 navLinks.style.height=window.innerHeight;
-            }
-
-            function adjustHeight() {
-                // document.getElementById('navLinks').style.height = document.defaultView.getComputedStyle(document.getElementById('div1'), "").getPropertyValue("height");
-                // document.getElementById('navLinks').style.height = document.body.scrollHeight();
-                document.getElementById('navLinks').style.height = document.body.getBoundingClientRect()
+                // navLinks.style.height = document.body.scrollHeight;
             }
         </script>
 
