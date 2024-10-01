@@ -9,7 +9,7 @@
 body {
     margin: 60px auto;
     width: 80%;
-    opacity: 0;
+    /* opacity: 0; */
     transition: opacity 2s;
     -webkit-transition: opacity 2s; /* Safari */
 }
