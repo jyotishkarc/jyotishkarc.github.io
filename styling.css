@@ -545,6 +545,21 @@ nav .fa-bars {
 
 /* AUTHORS & PUBLICATIONS */
 
+.publication-content {
+    /* font-family: "Roboto Slab", serif; */
+    /* margin-top: 20px; */
+    /* margin-right: 30px; */
+    padding-top: 0px;
+    padding-bottom: auto;
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+    flex-grow: 0.8; /* Allow text content to take up remaining space */
+    /* text-align: justify; */
+    /* text-justify: inter-word; */
+    /* text-justify: newspaper; */
+    /* text-justify: distribute-all-lines; */
+}
+
 .publication-card {
     border: 1px solid #ccc; /* border color */
     border-radius: 8px; /* rounded corners */
@@ -574,6 +589,7 @@ nav .fa-bars {
 .author-list a {
     color: #007BFF;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .publication-venue {
@@ -598,6 +614,10 @@ ol > li::marker {
     margin-top: 40px;
     margin-bottom: 20px;
 }
+
+
+
+
 
 
 /* Old Publications layout */
