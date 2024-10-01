@@ -467,22 +467,13 @@ nav .fa-bars {
         transform: translateY(100%);
     }
 
-    .nav-links ul {
-        margin-top: 60px;
-    }
-
-    .nav-links ul li {
-        display: block;
-        margin-top: 5px;
-    }
-
     .nav-links {
         position: absolute;
         /* background: green; */
         backdrop-filter: blur(40px);
         opacity: 100%;
         /* height: 100%; */
-        height: 180vh;
+        height: 150vh;
         width: 180px;
         top: 0;
         right: -200px;
@@ -492,10 +483,31 @@ nav .fa-bars {
         /* overflow-y: hidden; */
     }
 
-    /* .nav-links::before {
-        opacity: .1; 
-        z-index: -1;
-    } */
+    .nav-links ul {
+        margin-top: 60px;
+    }
+
+    .nav-links ul li {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .nav-links ul li::after {
+        content: '';
+        width: 0%;
+        height: 3px;
+        background: none;
+        display: block;
+        margin: auto;
+        /* transform: scale(1.1); */
+        transition: 0.5s;
+    }
+    
+    .nav-links ul li:hover::after {
+        width: 100%;
+        /* transform: scale(1.1); */
+        background: none;
+    }
 
     .navbar-element {
         color: black;
@@ -556,10 +568,6 @@ nav .fa-bars {
     padding-left: 15px;
     /* padding-right: 20px; */
     flex-grow: 0.8; /* Allow text content to take up remaining space */
-    /* text-align: justify; */
-    /* text-justify: inter-word; */
-    /* text-justify: newspaper; */
-    /* text-justify: distribute-all-lines; */
 }
 
 .publication-card {
@@ -568,9 +576,9 @@ nav .fa-bars {
     padding: 5px; /* Padding around the card */
     padding-left: 22px; /* Increase left padding specifically */
     margin: 10px 0; /* spacing between cards */
-    background-color: #f9f9f9; /* background color */
     margin-left: 8px;
     margin-right: 20px;
+    background-color: #f9f9f9; /* background color */
 }
 
 .publication-card h3 {
@@ -607,18 +615,46 @@ ol > li::marker {
 }
 
 #published {
-    margin-left: 10px;
     margin-bottom: 20px;
+    margin-left: 10px;
 }
 
 #unpublished {
-    margin-left: 10px;
     margin-top: 40px;
     margin-bottom: 20px;
+    margin-left: 10px;
 }
 
 
+@media(max-width: 700px){
 
+    .publication-content {
+        /* margin-left: 5px; */
+        flex-shrink: 0.8;
+    }
+
+    .publication-content h2 {
+        font-size: 1.0em;
+    }
+
+    .reverse-numbering {
+        margin-left: -20px;
+    }
+
+    .publication-card {
+        padding-left: 12px; /* Increase left padding specifically */
+        margin-left: 4px;
+    }
+    .publication-card h3 {
+        font-size: 0.9em;
+        margin: 8px 0; /* Set margin to 10px above and below title */
+    }
+
+    .publication-venue {
+        font-size: 0.7em;
+    }
+
+}
 
 
 
