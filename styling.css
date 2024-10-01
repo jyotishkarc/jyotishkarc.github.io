@@ -480,7 +480,7 @@ nav .fa-bars {
         backdrop-filter: blur(40px);
         opacity: 100%;
         /* height: 100%; */
-        height: 180vh;
+        /* height: 180vh; */
         width: 180px;
         top: 0;
         right: -200px;
