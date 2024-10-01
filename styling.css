@@ -6,6 +6,10 @@
      font-weight: bold;
 }
 
+html {
+    scroll-behavior: smooth;
+}  
+
 body {
     margin: 60px auto;
     width: 80%;
@@ -646,7 +650,7 @@ ol > li::marker {
         margin-left: 4px;
     }
     .publication-card h3 {
-        font-size: 0.9em;
+        font-size: 0.85em;
         margin: 8px 0; /* Set margin to 10px above and below title */
     }
 
