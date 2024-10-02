@@ -483,7 +483,7 @@ nav .fa-bars {
         right: -200px;
         text-align: left;
         z-index: 2;
-        transition: 0.6s;
+        transition: 0.4s ease-in;
         /* overflow-y: hidden; */
     }
 
@@ -504,12 +504,11 @@ nav .fa-bars {
         display: block;
         margin: auto;
         /* transform: scale(1.1); */
-        transition: 0.5s;
+        transition: 0.3s ease-out;
     }
     
     .nav-links ul li:hover::after {
         width: 100%;
-        /* transform: scale(1.1); */
         background: none;
     }
 
@@ -533,9 +532,14 @@ nav .fa-bars {
         /* aspect-ratio: 1 / 1; */
         flex-shrink: 0; /* Prevents the section from shrinking */
         margin: 5px;
-        margin-bottom: 5px;
+        margin-bottom: -30px;
+        scale: 0.8;
         /* flex: 1; */
     }
+
+    /* .photo {
+        transform: scale(0.7);
+    } */
 
     .social-icons {
         transform: scale(0.7);
