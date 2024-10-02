@@ -228,11 +228,11 @@ p {
     gap: 15px;
 }
 
-/* .clearfix::after {
+.clearfix::after {
     content: "";
     display: table;
     clear: both;
-} */
+}
 
 .photo-and-icons {
     display: flex;
