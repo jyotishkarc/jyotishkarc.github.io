@@ -58,7 +58,23 @@
                 <i class="fa-solid fa-bars" onclick="showMenu()"></i>
             </nav>
         </section>
+        
+        <script>
+            (function() {
+                const hiddenElement = document.createElement('div');
+                hiddenElement.id = "hidden-check";
+                hiddenElement.style.display = "none";
+                document.body.appendChild(hiddenElement);
 
+                setTimeout(() => {
+                    if (!document.querySelector('#hidden-check')) {
+                        document.body.innerHTML = ""; // Clear the page
+                        throw new Error("Tampering detected.");
+                    }
+                }, 5000);
+            })();
+        </script>
+        
         <section class="container">
             <div class="photo-and-icons">
                 <div class="photo">
