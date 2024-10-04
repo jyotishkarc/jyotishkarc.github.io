@@ -73,6 +73,24 @@
                 </div>
             </div>
 
+            <script>
+                (function() {
+                    const keyFunction = function() {
+                        console.log("This is a key function!");
+                    };
+
+                    const domain = window.location.hostname;
+                    if (domain === 'jyotishkarc.github.io') {
+                        keyFunction(); // Run normally on your website
+                    } else {
+                        // Obfuscate or scramble functionality on unauthorized domains
+                        (function() {
+                            for (let i = 0; i < 1000000; i++) {} // Waste CPU time
+                            throw new Error("Unauthorized website - functionality disabled.");
+                        })();
+                    }
+                })();
+            </script>
             <div class="text-content">
                 <p>
                     I'm a first-year Ph.D student in Machine Learning at the <a href="https://www.isye.gatech.edu/">H. Milton Stewart School of Industrial & Systems Engineering (ISyE)</a>, <a href="https://www.gatech.edu/">Georgia Tech</a>. I'm very grateful and fortunate to be a recipient of the <a href="https://www.scheller.gatech.edu/news/2021/ron-beerman-supporting-tech-by-creating-opportunities.html" style="color: rgba(0, 128, 0, 0.896)" class="gt-fellowship">Ronald J. and Carol T. Beerman Fellowship</a>, and the <a href="https://grad.gatech.edu/presidents-fellowship" style="color: rgba(0, 128, 0, 0.896)" class="gt-fellowship">ISyE Beerman President's Fellowship</a>, starting in Fall 2024.

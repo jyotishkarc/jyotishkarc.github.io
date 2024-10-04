@@ -537,10 +537,6 @@ nav .fa-bars {
         /* flex: 1; */
     }
 
-    /* .photo {
-        transform: scale(0.7);
-    } */
-
     .social-icons {
         transform: scale(0.7);
     }
@@ -557,7 +553,6 @@ nav .fa-bars {
         padding-right: 10px;
         flex-grow: 0.8; /* Allow text content to take up remaining space */
         text-align: justify;
-        /* text-justify: none; */
         text-justify: distribute-all-lines;
     }
 
@@ -609,7 +604,7 @@ ol > li::marker {
 }
 
 .author-list a {
-    color: #007BFF;
+    color: #005eff;
     text-decoration: none;
     flex-shrink: 0;
 }
