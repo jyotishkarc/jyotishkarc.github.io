@@ -686,8 +686,9 @@ ol > li::marker {
 
 /* Old Publications layout */
 
+/*
 .authors{
-    /*display: inline;*/
+    /~display: inline;~/
     font-size: 0.9em;
     margin-left: 25pt;
     margin-top: -3pt;
@@ -743,7 +744,7 @@ ol > li::marker {
     width: 85%;
     background-color: #FCF3CF;
     border: none;
-  /*  box-shadow: 1px 1px 2px #bbbbbb;*/
+  /~  box-shadow: 1px 1px 2px #bbbbbb;~/
     cursor: pointer;
     font-size: 1. 1em;
   }
@@ -752,7 +753,7 @@ ol > li::marker {
     font-family: 'Helvetica' , 'Sans-Serif', 'Avenir';
     margin-left: 50pt;
     padding: 4px;
-    /*box-shadow: 1px 1px 2px #bbbbbb;*/
+    /~box-shadow: 1px 1px 2px #bbbbbb;~/
   }
   
   ul.topic-publication-list-style li{
@@ -764,7 +765,7 @@ ol > li::marker {
       margin-left: 20pt;
   }
   
-  /*  */
+  /~  ~/
   
   footer {
       margin-top: 100px;
@@ -774,13 +775,13 @@ ol > li::marker {
       font-weight:lighter;
   }
   
-  /* ul.header-style li{
+  /~ ul.header-style li{
       font-family: 'Helvetica' , 'Sans-Serif', 'Avenir';
       font-weight: lighter;
       font-size:1.1em;
       line-height: 1.4em;
       list-style-type: square;
-  } */
+  } ~/
   
   ul.my-list-style li{
       font-family: 'Helvetica' , 'Sans-Serif', 'Avenir';
@@ -813,7 +814,7 @@ ol > li::marker {
   }
   
   
-  /*for responsive square grid*/
+  /~for responsive square grid~/
   
   .c-container{
       height:100%;
@@ -823,11 +824,11 @@ ol > li::marker {
       font-size:0;
   }
   
-  /*.c-squares{
+  /~.c-squares{
       width:30vh;
       height:30vh;
       display:inline;
-  }*/
+  }~/
   
   .c-link{
       position:relative;
@@ -846,13 +847,13 @@ ol > li::marker {
       z-index:5;
       background-color:#14277D;
       opacity:0;
-      /* cosmetic */ color:#FFF;font-size:2em;transition:opacity 500ms;
+      /~ cosmetic ~/ color:#FFF;font-size:2em;transition:opacity 500ms;
   }
   .c-name2{
       z-index:5;
       background-color:#000;
       opacity:0;
-      /* cosmetic */ color:#FFF;font-size:2em;transition:opacity 500ms;
+      /~ cosmetic ~/ color:#FFF;font-size:2em;transition:opacity 500ms;
   }
   
   .c-link:hover .c-name{
@@ -865,7 +866,7 @@ ol > li::marker {
   
   
   
-  /* used class from site css */
+  /~ used class from site css ~/
   br.empty{
       display:block;
       font-size:0;margin:0;padding:0;height:0;line-height:0;
@@ -876,3 +877,4 @@ ol > li::marker {
       top:0;right:0;bottom:0;left:0;
       margin:0;
   }
+*/
