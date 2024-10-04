@@ -504,7 +504,7 @@ nav .fa-bars {
         display: block;
         margin: auto;
         /* transform: scale(1.1); */
-        transition: 0.3s ease-out;
+        /* transition: 0.3s ease-out; */
     }
     
     .nav-links ul li:hover::after {
@@ -578,6 +578,10 @@ nav .fa-bars {
     flex-grow: 0.8; /* Allow text content to take up remaining space */
 }
 
+ol > li::marker {
+    color: black;
+}
+
 .publication-card {
     border: 1px solid #ccc; /* border color */
     border-radius: 8px; /* rounded corners */
@@ -591,7 +595,7 @@ nav .fa-bars {
 
 .publication-card h3 {
     color: #333;
-    margin: 8px 0; /* Set margin to 10px above and below title */
+    margin: 6px 0; /* Set margin to 10px above and below title */
 }
 
 .publication-authors {
@@ -618,8 +622,27 @@ nav .fa-bars {
     font-style: italic; /* Italics for emphasis */
 }
 
-ol > li::marker {
-    color: black;
+.publication-access {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* font-size: 1rem; Match author list font size */
+    color: #333;
+}
+
+.publication-access a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: normal;
+    /* font-size: 0.9rem; */
+    font-weight: 500;
+    color: rgb(1, 102, 1);
+    text-decoration: underline dotted; 
+    text-underline-position: under;
+}
+
+.publication-access strong {
+    font-weight: bolder;
+    color: #333; /* Bold and black color for the word "Access:" */
 }
 
 #published {
