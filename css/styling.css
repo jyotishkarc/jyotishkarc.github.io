@@ -380,10 +380,18 @@ p {
 }
 
 .visitor {
+    /* display: flex; */
     text-align: center;
     transform: scale(0.8);
     margin-bottom: -60px;
 }
+
+/* .visitor a {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+} */
 
 
 /* FOOTER */
@@ -585,6 +593,11 @@ nav .fa-bars {
         flex-grow: 0.8; /* Allow text content to take up remaining space */
         text-align: justify;
         text-justify: distribute-all-lines;
+    }
+
+    .visitor {
+        /* display: flex; */
+        text-align: center;
     }
 
     .footer {
