@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Homemade+Apple&family=Kaushan+Script&family=Marck+Script&display=swap');
+
 *{
     /* margin: 0; */
     /* padding: 0; */
@@ -14,7 +17,7 @@ body {
     margin: 60px auto;
     width: 80%;
     opacity: 0;
-    transition: opacity 3s;
+    transition: opacity 2s;
     -webkit-transition: opacity 3s; /* Safari */
 }
 
@@ -378,6 +381,9 @@ p {
 /* FOOTER */
 
 footer {
+    /* position: fixed;
+    width: 80%;
+    text-align: center; */
     margin-top: 70px;
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
@@ -406,6 +412,17 @@ nav .fa-xmark {
 nav .fa-bars {
     display: none;
 }
+
+.under-construction p {
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    /* font-family: "Homemade Apple", cursive; */
+    /* font-family: "Almendra", serif; */
+    /* font-family: "Marck Script", cursive; */
+    font-size: 1.5em;
+    font-weight: 550;
+}
+
 
 @media(max-width: 900px){
     
