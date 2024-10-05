@@ -228,14 +228,15 @@ p {
     display: flex;
     align-items: flex-start; /* Align items at the top */
     margin: 0px; /* Add some margin around the container */
+    margin-bottom: 30px;
     gap: 15px;
 }
 
-.clearfix::after {
+/* .clearfix::after {
     content: "";
     display: table;
     clear: both;
-}
+} */
 
 .photo-and-icons {
     display: flex;
@@ -377,6 +378,13 @@ p {
 .collaborator {
     color: rgb(159, 68, 4);
 }
+
+.visitor {
+    text-align: center;
+    transform: scale(0.8);
+    margin-bottom: -60px;
+}
+
 
 /* FOOTER */
 
@@ -556,6 +564,12 @@ nav .fa-bars {
 
     .social-icons {
         transform: scale(0.7);
+    }
+
+    .social-icons a:hover {
+        /* transform: translateY(10px); */
+        transform: none;
+        border-radius: 50%;
     }
 
     .text-content {
