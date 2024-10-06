@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Homemade+Apple&family=Kaushan+Script&family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap');
 
 *{
     /* margin: 0; */
@@ -148,12 +149,17 @@ nav {
     margin-bottom: 5px; /* Space between bullets */
 }
 
-
 .fa-language {
     position: absolute;
     transform: translateY(50%);
     /* transition: 0.4s; */
 }
+
+#name-bengali {
+    font-family: "Noto Serif Bengali", system-ui;
+}
+
+
 
 .nav-links {
     flex: 1;
