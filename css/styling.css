@@ -112,7 +112,11 @@ nav {
 }
 
 .info-box {
-    display: none; /* Hidden by default */
+    /* display: none; Hidden by default */
+    visibility: hidden;
+    opacity: 0; /* Start with invisible */
+    /* transform: translateY(-10px); Start slightly above */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.5s ease; /* Smooth transition */
     width: auto;
     text-align: left;
     position: absolute;
@@ -124,8 +128,15 @@ nav {
     z-index: 1000; /* Ensure it appears above other elements */
     margin-left: 60px; /* Space between icon and info box */
     /* transform: translateY(-30px); */
-    transition: 0.5s;
-    transform: translateY(-4px);
+    /* transition: 0.5s; */
+    transform: translateY(-4px) translateX(-15px);
+}
+
+.info-box.show {
+    /* display: block; Change to block to allow opacity to take effect */
+    visibility: visible;
+    opacity: 1; /* Make it fully visible */
+    transform: translateY(-4px); /* Move it back to its original position */
 }
 
 .info-box ul {
