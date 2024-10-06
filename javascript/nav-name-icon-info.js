@@ -41,7 +41,7 @@
 
 const infoIcon = document.getElementById("info-icon");
 const infoBox = document.getElementById("info-box");
-const icon = infoIcon.querySelector("i"); // Select the icon element
+const icon = infoIcon.querySelector("a"); // Select the icon element
 
 // Toggle the info box and style the icon when the icon is clicked
 infoIcon.addEventListener("click", function(event) {
