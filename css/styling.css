@@ -277,7 +277,7 @@ p {
     display: flex;
     align-items: flex-start; /* Align items at the top */
     margin: 0px; /* Add some margin around the container */
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     gap: 15px;
 }
 
@@ -601,6 +601,7 @@ nav .fa-bars {
     .container{
         align-items: center;
         flex-direction: column;
+        margin-bottom: 20px;
         gap: 0;
     }
 
