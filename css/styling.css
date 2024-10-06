@@ -414,6 +414,10 @@ p {
     /* text-justify: distribute-all-lines; */
 }
 
+.gt-fellowship {
+    color: rgba(0, 101, 0, 0.753)
+}
+
 .gt-fellowship::before {
     transition: 2s;
 }
