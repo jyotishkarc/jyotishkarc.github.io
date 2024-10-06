@@ -129,14 +129,14 @@ nav {
     margin-left: 60px; /* Space between icon and info box */
     /* transform: translateY(-30px); */
     /* transition: 0.5s; */
-    transform: translateY(-4px) translateX(-15px);
+    transform: translateY(-5px) translateX(-15px);
 }
 
 .info-box.show {
     /* display: block; Change to block to allow opacity to take effect */
     visibility: visible;
     opacity: 1; /* Make it fully visible */
-    transform: translateY(-4px); /* Move it back to its original position */
+    transform: translateY(-5px); /* Move it back to its original position */
 }
 
 .info-box ul {
