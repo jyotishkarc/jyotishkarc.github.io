@@ -536,12 +536,12 @@ nav .fa-bars {
         display: block;
         position: sticky;
         width: 100%;
-        /* text-align: left; */
+        text-align: left;
     }
 
     .nav-name a {
-        font-size: 1.4em;
-        text-align: center;
+        font-size: 1.3em;
+        text-align: left;
     }
 
     .nav-name-details i {
