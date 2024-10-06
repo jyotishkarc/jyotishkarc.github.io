@@ -61,25 +61,6 @@ nav {
     transition: 0.3s;
 }
 
-/* .nav-name-bengali a {
-    font-family: "Noto Serif Bengali", system-ui;
-    font-weight: bold;
-    font-size: 1.99em;
-    text-align:center;
-} */
-
-/* .nav-name, .nav-name-bengali {
-    transition: opacity 0.5s linear;
-    grid-row: 1;
-    grid-column: 1;
-} */
-
-/* .wrap:hover .nav-name {
-    opacity: 0;
-}
-.wrap:hover .nav-name-bengali {
-    opacity: 1;
-} */
 
 .nav-name-details {
     display: flex;
@@ -204,13 +185,6 @@ nav {
     color: #7d0000;
 }
 
-/* .navbar-element:hover {
-    transform: scale(1.4);
-} */
-
-/* a:hover {
-    text-decoration: underline;
-} */
 
 A.class1 {color:#2874A6;}
 A.class1:link  {text-decoration: none; color: #2874A6;}
@@ -663,9 +637,6 @@ nav .fa-bars {
 /* AUTHORS & PUBLICATIONS */
 
 .publication-content {
-    /* font-family: "Roboto Slab", serif; */
-    /* margin-top: 20px; */
-    /* margin-right: 30px; */
     margin-left: 15px;
     padding-top: 0px;
     padding-bottom: auto;
