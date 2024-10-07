@@ -126,6 +126,7 @@ nav {
 
 .info-box li {
     margin-bottom: 5px; /* Space between bullets */
+    font-size: 14px;
 }
 
 .fa-language {
