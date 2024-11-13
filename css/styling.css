@@ -405,6 +405,12 @@ p {
     color: rgb(159, 68, 4);
 }
 
+#phonetic-name {
+    border-bottom: 1px dotted #310f72af;
+    color: blue;
+    /* text-decoration: underline #000 dotted; */
+}
+
 .visitor {
     /* display: flex; */
     text-align: center;
