@@ -643,11 +643,23 @@ nav .fa-bars {
 
 /* AUTHORS & PUBLICATIONS */
 
+#searchInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+
 .publication-content {
-    margin-left: 15px;
+    margin-left: 25px;
     padding-top: 0px;
     padding-bottom: auto;
-    padding-left: 15px;
+    padding-left: 30px;
+    padding-right: 35px;
     /* padding-right: 20px; */
     flex-grow: 0.8; /* Allow text content to take up remaining space */
 }
