@@ -35,6 +35,7 @@ nav {
 
 .name-all {
     display: flex;
+    /* align-items: center; */
     flex-direction: row;
 }
 
@@ -68,11 +69,13 @@ nav {
 
 .nav-name-details i {
     font-size: 2.3em;
+    display: inline-block;
 }
 
 .nav-name-details a {
     /* transition: 0.8s; */
     transition: color 0.4s, transform 0.3s;
+    display: inline-block;
 }
 
 .nav-name-details a:hover {
@@ -89,7 +92,15 @@ nav {
 
 #info-icon {
     cursor: pointer; /* Change cursor to pointer on hover */
+    /* position:relative; */
 }
+
+/* .nav-name,
+.nav-name-details {
+    display: inline-block;
+    vertical-align: middle;
+} */
+
 
 .info-box {
     /* display: none; Hidden by default */
