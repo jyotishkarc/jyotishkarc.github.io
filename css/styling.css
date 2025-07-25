@@ -37,6 +37,7 @@ nav {
     display: flex;
     /* align-items: center; */
     flex-direction: row;
+    padding-left: 15px;
 }
 
 .nav-name {
