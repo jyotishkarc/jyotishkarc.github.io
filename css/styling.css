@@ -31,6 +31,9 @@ nav {
     padding-bottom: 15px;
     margin-bottom: 40px;
     gap: 50px;
+    border: 0px solid black;
+    border-radius: 95px;    /* Rounds all corners with a 15px radius */
+    padding: 10px;
 }
 
 .name-all {
@@ -418,9 +421,14 @@ p {
 
 .gt-fellowship:hover { 
     /* text-shadow: 0 2px 40px #bbff68; */
-    text-shadow: 0 5px 40px #ffff00;
+    text-shadow: 0 5px 40px #ffff00eb;
     transition: 0.8s ease-in-out;
 }
+
+/* .gt-fellowship:hover::after {
+    text-shadow: none;
+    transition: 1s ease-out;
+} */
 
 .collaborator {
     color: rgb(159, 68, 4);
