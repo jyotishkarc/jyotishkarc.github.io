@@ -185,17 +185,18 @@ nav {
     content: '';
     width: 0%;
     height: 3px;
-    background: #f44336;
+    background: #e5ff00;
     display: block;
     margin: auto;
     /* transform: scale(1.1); */
-    transition: 0.5s;
+    transition: 0.64s;
 }
 
 .nav-links ul li:hover::after {
     width: 100%;
     /* transform: scale(1.1); */
-    background: #f44336;
+    /* background: #f44336; */
+    background: #3840d1;
 }
 
 .navbar-element {
@@ -408,11 +409,11 @@ p {
 
 .gt-fellowship {
     color: rgba(0, 101, 0, 0.753);
-    transition: 2s ease-out;
+    transition: 1s ease-out;
 }
 
 .gt-fellowship::before {
-    transition: 2s ease-in;
+    transition: 1s ease-in;
 }
 
 .gt-fellowship:hover { 
