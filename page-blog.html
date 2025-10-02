@@ -45,66 +45,15 @@
 
     <body onload="document.body.style.opacity='1'">
     <!-- <body> -->
-    <!-- <body oncontextmenu="return false"> -->
-        <section class="header">
-            <nav>
-                <div class="name-all">
-                    <div class="nav-name">
-                        <a href="index.html">Jyotishka Ray Choudhury</a>
-                    </div>
-                    <!-- <div class="nav-name-bengali"><a>জ্যোতিষ্ক রায় চৌধুরী </a></div> -->
-
-                    <div class="nav-name-details" id="info-icon">
-                        <a>
-                            <i class="fa-solid fa-language"></i>
-                        </a>
-                        
-                        <div class="info-box" id="info-box">
-                            <ul>
-                                <li>
-                                    <strong>Pronunciation:</strong> 
-                                    <a id="name-pronunciation">Joe-tish-ko</a>
-                                </li>
-                                <li>
-                                    <strong>Name in Bengali:</strong> 
-                                    <a id="name-bengali">জ্যোতিষ্ক রায় চৌধুরী</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nav-links" id="navLinks">
-                    <!-- <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i> -->
-                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
-                    <ul>
-                        <li><a class="navbar-element" href="index.html">Home</a>
-                        <li><a class="navbar-element" href="research.html">Research</a>
-                        <li><a class="navbar-element" href="blog.html">Blog</a>
-                        <li><a class="navbar-element" href="random.html">Random</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a> -->
-                <i class="fa-solid fa-bars" onclick="showMenu()"></i>
-            </nav>
-        </section>
+        <div id="header-placeholder"></div>
         
-        <!-- <script>
-            (function() {
-                const hiddenElement = document.createElement('div');
-                hiddenElement.id = "hidden-check";
-                hiddenElement.style.display = "none";
-                document.body.appendChild(hiddenElement);
-
-                setTimeout(() => {
-                    if (!document.querySelector('#hidden-check')) {
-                        document.body.innerHTML = ""; // Clear the page
-                        throw new Error("Tampering detected.");
-                    }
-                }, 5000);
-            })();
-        </script> -->
+        <script>
+        fetch("/common-elements/site-header.html")
+            .then(r => r.text())
+            .then(html => {
+            document.getElementById("header-placeholder").innerHTML = html;
+            });
+        </script>
 
         <section>
             <div class="under-construction">

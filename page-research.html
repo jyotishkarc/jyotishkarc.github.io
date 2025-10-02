@@ -14,6 +14,7 @@
         
         <!-- link to main stylesheet -->
         <link rel="stylesheet" type="text/css" href="css/styling.css">
+        <link rel="stylesheet" type="text/css" href="css/research.css">
         
         <!-- Font Awesome symbols -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -45,54 +46,15 @@
 
     <body onload="document.body.style.opacity='1'">
     <!-- <body> -->
-    <!-- <body oncontextmenu="return false"> -->
-        <section class="header">
-            <nav>
-                <div class="name-all">
-                    <div class="nav-name">
-                        <a href="index.html">Jyotishka Ray Choudhury</a>
-                    </div>
-                    <!-- <div class="nav-name-bengali"><a>জ্যোতিষ্ক রায় চৌধুরী </a></div> -->
-
-                    <div class="nav-name-details" id="info-icon">
-                        <a>
-                            <i class="fa-solid fa-language"></i>
-                        </a>
-                        
-                        <div class="info-box" id="info-box">
-                            <ul>
-                                <li>
-                                    <strong><a href="https://en.wikipedia.org/wiki/Help:IPA/Bengali">IPA</a> transcription:</strong> 
-                                    <a href="https://itinerarium.github.io/phoneme-synthesis/?w=/dʒʊˈtɪʃˈkʊ/" id="phonetic-name">/dʒʊˈtɪʃˈkʊ/</a>
-                                </li>
-                                <li>
-                                    <strong>Simplified pronunciation:</strong> 
-                                    <a id="name-pronunciation">joe-TISH-ko</a>
-                                </li>
-                                <li>
-                                    <strong>Full name in Bengali:</strong> 
-                                    <a id="name-bengali">জ্যোতিষ্ক রায় চৌধুরী</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nav-links" id="navLinks">
-                    <!-- <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i> -->
-                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
-                    <ul>
-                        <li><a class="navbar-element" href="index.html">Home</a>
-                        <li><a class="navbar-element" href="research.html">Research</a>
-                        <li><a class="navbar-element" href="blog.html">Blog</a>
-                        <li><a class="navbar-element" href="random.html">Random</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a> -->
-                <i class="fa-solid fa-bars" onclick="showMenu()"></i>
-            </nav>
-        </section>
+        <div id="header-placeholder"></div>
+        
+        <script>
+        fetch("/common-elements/site-header.html")
+            .then(r => r.text())
+            .then(html => {
+            document.getElementById("header-placeholder").innerHTML = html;
+            });
+        </script>
 
         <!-- <input type="text" id="searchInput" placeholder="Search publications..." /> -->
 
@@ -100,7 +62,7 @@
             A complete list of my publications can be found below. My research interests include <em>machine learning theory</em>, <em>high-dimensional statistics</em>, and <em>robust inference</em>. I am particularly drawn to problems that combine statistical rigor with algorithmic insight. For the most up-to-date list of my publications, please visit my <a href="https://scholar.google.com/citations?hl=en&user=NhTxu3MAAAAJ&view_op=list_works" target="_blank">Google Scholar profile</a>.
         </p> -->
         
-
+        <main class="content-narrow">
         <section class="publication-content" id="published">
             <h2><i class="fa-solid fa-book"></i> &nbsp;Published articles</h2>
             <ol class="reverse-numbering" reversed>
@@ -195,7 +157,7 @@
                 </li>
             </ol>
         </section>
-        
+        </main>
 
         <footer class="footer">
             <small>&copy 2024 Jyotishka Ray Choudhury. Licensed under the <a href="" style="text-decoration:underline dotted; text-underline-position: under;">MIT License</a>.</small>
