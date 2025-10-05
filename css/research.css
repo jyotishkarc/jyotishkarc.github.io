@@ -11,3 +11,16 @@
 .content-narrow code {
   overflow-wrap: anywhere;
 }
+
+.pub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.equal-contribution-note {
+    font-size: 0.9em;
+    /* font-style: italic; */
+    color: #550; /* tweak color if you want it lighter */
+    margin-left: 1rem;
+}

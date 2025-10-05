@@ -12,6 +12,45 @@ html {
     scroll-behavior: smooth;
 }  
 
+/* ===== Preloader Overlay ===== */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--preloader-bg, #0b0b12);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+
+#preloader .loader svg {
+  width: 52px;
+  height: 52px;
+  animation: spin 1.1s linear infinite;
+}
+#preloader .loader circle {
+  stroke: #fff;
+  stroke-linecap: round;
+  opacity: .85;
+}
+
+/* Hide animation if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #preloader .loader svg { animation: none; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* When we’re done loading, fade it out */
+#preloader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
 body {
     margin: 60px auto;
     width: 80%;
@@ -34,6 +73,26 @@ nav {
     border: 0px solid black;
     border-radius: 95px;    /* Rounds all corners with a 15px radius */
     padding: 10px;
+}
+
+/* Fixed header */
+.site-header {
+  position: fixed;
+  top: 0px;
+  left: 30px;
+  right: 30px;
+  bottom: 745px;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+/* Prevent content from hiding under the fixed header */
+:root {
+  --site-header-height: 64px;   /* adjust to your actual header height */
+}
+body {
+  padding-top: var(--site-header-height);
 }
 
 .name-all {
@@ -271,8 +330,9 @@ p {
 .container {
     display: flex;
     align-items: flex-start; /* Align items at the top */
-    margin: 0px; /* Add some margin around the container */
+    margin: 5px; /* Add some margin around the container */
     margin-bottom: 60px;
+    padding-top: 15px;
     gap: 15px;
 }
 
