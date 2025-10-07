@@ -150,6 +150,10 @@ ol > li::marker {
       margin: 0 auto;
     }
 
+    .pub-header .equal-contribution-note {
+      font-size: 0.7em;
+    }
+
     .publication-content {
         flex-shrink: 0.8;
         margin-left: 0;

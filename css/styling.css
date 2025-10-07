@@ -688,7 +688,7 @@ nav .fa-bars {
     }
 
     .nav-name a {
-        font-size: 1.3em;
+        font-size: 2em;
         text-align: left;
     }
 
@@ -763,6 +763,7 @@ nav .fa-bars {
         /* aspect-ratio: 1 / 1; */
         flex-shrink: 0; /* Prevents the section from shrinking */
         margin: 5px;
+        margin-top: -50px;
         margin-bottom: -30px;
         scale: 0.8;
         /* flex: 1; */
@@ -848,6 +849,14 @@ nav .fa-bars {
 
   /* Make sure the rainbow border follows the new radius */
   .site-header::before { border-radius: inherit; }
+
+
+  .site-header nav .name-all .nav-name a {
+        font-size: 1.16em;
+        text-align: left;
+    }
+
+
 }
 
 /* =========================
