@@ -149,7 +149,7 @@ a {
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform;
 
-  inset: -2px;                              /* outward nudge (gap between the header border and the rainbow border */
+  inset: -3px;                              /* outward nudge (gap between the header border and the rainbow border */
   padding: calc(var(--rainbow-size) * 1.1);   /* rainbow ring thickness (>= 1 : thicker ; <= 1 : leaner) */
 }
 
