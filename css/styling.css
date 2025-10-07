@@ -160,7 +160,7 @@ a {
   position: absolute;
   left: -1px;
   right: -1px;
-  top: calc(100% + 4px);          /* sits slightly below header */
+  top: calc(100% + 3px);          /* sits slightly below header */
   height: 4px;
 
   border-bottom-left-radius: inherit;
@@ -169,7 +169,7 @@ a {
   opacity: 0;                     /* hidden initially */
 
   /* Prepare transition for a smooth reveal */
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Visible only after scrolling */
@@ -180,6 +180,7 @@ body.scrolled .site-header::after {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+  /* background: #ffffff; or var(--page-bg-color); */
 }
 
 
