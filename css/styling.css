@@ -642,7 +642,7 @@ nav .fa-bars {
     body {
         width: 100%;
         /* overflow: hidden; */
-        overflow-x: hidden;
+        overflow-x: hidden;padding-bottom: 10px;
     }
 
     p {

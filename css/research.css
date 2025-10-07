@@ -130,9 +130,31 @@ ol > li::marker {
 
 @media(max-width: 900px){
 
+    body {
+      margin: 30px 10px;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 1s;
+      -webkit-transition: opacity 1s; /* Safari */
+    }
+
+    .content-narrow {
+      max-width: 900px;     /* tweak to taste */
+      margin: 0 auto;       /* center the block */
+      padding: 1rem 1rem;      /* comfortable side padding */
+      line-height: 1.6;
+    }
+    
+    .pub-header {
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .publication-content {
-        /* margin-left: 5px; */
         flex-shrink: 0.8;
+        margin-left: 0;
+        padding-left: 0px;
+        padding-right: 5px;
     }
 
     .publication-content h2 {
