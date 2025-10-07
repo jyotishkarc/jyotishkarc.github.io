@@ -24,3 +24,136 @@
     color: #550; /* tweak color if you want it lighter */
     margin-left: 1rem;
 }
+
+
+/* AUTHORS & PUBLICATIONS */
+
+#searchInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+
+.publication-content {
+    margin-left: 25px;
+    padding-top: 0px;
+    padding-bottom: auto;
+    padding-left: 30px;
+    padding-right: 35px;
+    /* padding-right: 20px; */
+    flex-grow: 0.8; /* Allow text content to take up remaining space */
+}
+
+ol > li::marker {
+    color: black;
+}
+
+.publication-card {
+    border: 1px solid #ccc; /* border color */
+    border-radius: 8px; /* rounded corners */
+    padding: 5px; /* Padding around the card */
+    padding-left: 22px; /* Increase left padding specifically */
+    margin: 10px 0; /* spacing between cards */
+    margin-left: 8px;
+    margin-right: 20px;
+    background-color: #f9f9f9; /* background color */
+}
+
+.publication-card h3 {
+    color: #333;
+    margin: 6px 0; /* Set margin to 10px above and below title */
+}
+
+.publication-authors {
+    font-size: 1rem;
+    color: #555;
+}
+
+.author-list {
+    margin: 5px 0; /* Decrease gap above and below authors */
+    margin-bottom: 6px;
+}
+
+.author-list a {
+    color: #2005ec;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.publication-venue {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-style: italic; /* Italics for emphasis */
+}
+
+.publication-access {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* font-size: 1rem; Match author list font size */
+    color: #333;
+}
+
+.publication-access a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: normal;
+    /* font-size: 0.9rem; */
+    font-weight: 500;
+    color: rgb(1, 102, 1);
+    text-decoration: underline dotted; 
+    text-underline-position: under;
+}
+
+.publication-access strong {
+    font-weight: bolder;
+    color: #333; /* Bold and black color for the word "Access:" */
+}
+
+#published {
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#unpublished {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+
+@media(max-width: 900px){
+
+    .publication-content {
+        /* margin-left: 5px; */
+        flex-shrink: 0.8;
+    }
+
+    .publication-content h2 {
+        font-size: 1.0em;
+    }
+
+    .reverse-numbering {
+        margin-left: -20px;
+    }
+
+    .publication-card {
+        padding-left: 12px; /* Increase left padding specifically */
+        margin-left: 4px;
+    }
+    .publication-card h3 {
+        font-size: 0.85em;
+        margin: 8px 0; /* Set margin to 10px above and below title */
+    }
+
+    .publication-venue {
+        font-size: 0.7em;
+    }
+
+}
