@@ -143,6 +143,7 @@ ol > li::marker {
       margin: 0 auto;       /* center the block */
       padding: 1rem 1rem;      /* comfortable side padding */
       line-height: 1.6;
+      margin-left: -20px;
     }
     
     .pub-header {
@@ -156,7 +157,7 @@ ol > li::marker {
 
     .publication-content {
         flex-shrink: 0.8;
-        margin-left: 0;
+        margin-left: 0px;
         padding-left: 0px;
         padding-right: 5px;
     }

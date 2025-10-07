@@ -153,6 +153,38 @@ a {
   padding: calc(var(--rainbow-size) * 1.1);   /* rainbow ring thickness (>= 1 : thicker ; <= 1 : leaner) */
 }
 
+
+/* Default state — hidden when at the top */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: calc(100% + 4px);          /* sits slightly below header */
+  height: 4px;
+
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  pointer-events: none;
+  opacity: 0;                     /* hidden initially */
+
+  /* Prepare transition for a smooth reveal */
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Visible only after scrolling */
+body.scrolled .site-header::after {
+  opacity: 1;
+
+  /* The blur + gradient only activate on scroll for performance */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+}
+
+
+
+
 /* on scroll: fade in + one-time slide-down */
 body.scrolled .site-header::before {
   opacity: 1;
@@ -168,6 +200,22 @@ body.scrolled .site-header::before {
 
 body {
   padding-top: var(--site-header-height);
+}
+
+/* Blurred top background strip behind the header */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;                     /* slightly taller than the gap */
+  z-index: 999;                    /* just below your header (1000) */
+  backdrop-filter: blur(8px);      /* blur the content beneath */
+  /* backdrop-filter: blur(6px); */
+  /* background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); */
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 
 
@@ -852,8 +900,9 @@ nav .fa-bars {
 
 
   .site-header nav .name-all .nav-name a {
-        font-size: 1.16em;
+        font-size: 1.18em;
         text-align: left;
+        margin-left: -10px;
     }
 
 
