@@ -81,11 +81,21 @@ a {
   top: 5px;
   left: 40px;
   right: 40px;
+  /* left: 50%; */
+  /* transform: translateX(-50%);  centers horizontally */
+  /* width: calc(100% - 80px);     maintain your 40px margins on smaller screens */
+  /* max-width: 1400px;            limit width on very large monitors */
+
   z-index: 1000;
 
   background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); */
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); */
+  box-shadow:
+  0 1px 3px rgba(0, 0, 0, 0.32),
+  0 4px 6px rgba(0, 0, 0, 0.18);
 
+  border: var(--rainbow-size) solid transparent; 
   border-radius: 95px;          /* optional: gives a subtle rounded look */
   box-sizing: border-box;
   overflow: visible;
@@ -109,19 +119,13 @@ a {
 /* Prevent page content from hiding under fixed header */
 :root {
   --site-header-height: 58px;   /* fine-tuned to match actual visual height */
-  --rainbow-size: 4px;
+  --rainbow-size: 4px;          /* Do not change this. Change the padding instead. */
   --rainbow-gradient: conic-gradient(
     from 0deg,
     #ff0057, #ff9a00, #f8ff00, #00ff6a, #00c2ff, #7a00ff, #ff00aa, #ff0057
   );
 }
 
-/* Ensure the header can have rounded gradient borders and never fills */
-.site-header {
-  border: var(--rainbow-size) solid transparent; 
-  border-radius: 95px;                  /* keep your existing radius */
-  /* background-clip: padding-box;      header background stays inside, doesn’t mix with border */
-}
 
 /* rounded rainbow BORDER ONLY (enter from top, fade out on exit) */
 .site-header::before {
@@ -149,8 +153,8 @@ a {
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform;
 
-  inset: -3px;                              /* outward nudge (gap between the header border and the rainbow border */
-  padding: calc(var(--rainbow-size) * 1.1);   /* rainbow ring thickness (>= 1 : thicker ; <= 1 : leaner) */
+  inset: -4px;                              /* outward nudge (gap between the header border and the rainbow border */
+  padding: calc(var(--rainbow-size) * 1.12);   /* rainbow ring thickness (>= 1 : thicker ; <= 1 : leaner) */
 }
 
 
@@ -174,7 +178,7 @@ a {
 
 /* Visible only after scrolling */
 body.scrolled .site-header::after {
-  opacity: 1;
+  opacity: 0;   /* Set this to 1 if want a blurring strip just below the header. */
 
   /* The blur + gradient only activate on scroll for performance */
   backdrop-filter: blur(8px);

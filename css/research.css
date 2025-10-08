@@ -4,6 +4,7 @@
   margin: 0 auto;       /* center the block */
   padding: 0 1rem;      /* comfortable side padding */
   line-height: 1.6;
+  gap: 50px;
 }
 
 /* Optional: make long code/links wrap nicely */
@@ -16,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: -12px;
 }
 
 .equal-contribution-note {
@@ -117,12 +119,13 @@ ol > li::marker {
 }
 
 #published {
+    margin-top: 35px;
     margin-bottom: 20px;
     margin-left: 10px;
 }
 
 #unpublished {
-    margin-top: 40px;
+    margin-top: 38px;
     margin-bottom: 20px;
     margin-left: 10px;
 }
