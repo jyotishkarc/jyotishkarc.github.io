@@ -147,11 +147,14 @@ ol > li::marker {
       padding: 1rem 1rem;      /* comfortable side padding */
       line-height: 1.6;
       margin-left: -20px;
+      margin-top: -30px;
     }
     
     .pub-header {
       width: 100%;
       margin: 0 auto;
+      /* margin-top: 50px; */
+      margin-bottom: -15px;
     }
 
     .pub-header .equal-contribution-note {

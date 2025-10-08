@@ -126,6 +126,13 @@ a {
   );
 }
 
+/* Enable smooth animation of a custom angle variable */
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 
 /* rounded rainbow BORDER ONLY (enter from top, fade out on exit) */
 .site-header::before {
@@ -135,9 +142,14 @@ a {
   border-radius: inherit;
   padding: var(--rainbow-size);
   background: var(--rainbow-gradient);
-  /* inside .site-header::before */
   background-size: 300% 300%;
   background-position: 0% 50%;
+
+  /* conic rainbow that will rotate via --ring-angle */
+  background: conic-gradient(
+    from var(--ring-angle),
+    #ff0057, #ff9a00, #f8ff00, #00ff6a, #00c2ff, #7a00ff, #ff00aa, #ff0057
+  );
 
 
   /* cut out the center so only the ring shows */
@@ -191,16 +203,21 @@ body.scrolled .site-header::after {
   /* background: #ffffff; or var(--page-bg-color); */
 }
 
-
-
-
 /* on scroll: fade in + one-time slide-down */
 body.scrolled .site-header::before {
   opacity: 1;
-  animation: borderDropIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  /* This is for static rainbow. */
+  /* animation: borderDropIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both; */
+
+  /* Moving rainbow, but violet comes first, then rainbow, then yellow, and repeat. */
+  /* animation:
+    borderDropIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both,
+    rainbow-pan 30s linear infinite; */
+
+  /* Moving rainbow, continuous rotation. */
   animation:
     borderDropIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both,
-    rainbow-pan 30s linear infinite;
+    ringSpin 8s linear infinite;  /* slow, continuous rotation */
 
 }
 
@@ -210,9 +227,15 @@ body.scrolled .site-header::before {
   to   { transform: translateY(0); }
 }
 
-@keyframes rainbow-pan {
+/* @keyframes rainbow-pan {
   to { background-position: 300% 50%; }
+} */
+
+/* Continuous rotation by animating the angle variable */
+@keyframes ringSpin {
+  to { --ring-angle: 360deg; }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   body.scrolled .site-header::before {
@@ -220,7 +243,6 @@ body.scrolled .site-header::before {
     /* no rainbow-pan when reduced motion is requested */
   }
 }
-
 
 
 body {
@@ -480,9 +502,10 @@ p {
     display: flex;
     align-items: flex-start; /* Align items at the top */
     margin: 5px; /* Add some margin around the container */
+    margin-top: 20px;
     margin-bottom: 60px;
     padding-top: 15px;
-    gap: 15px;
+    gap: 20px;
 }
 
 /* .clearfix::after {
@@ -822,6 +845,7 @@ nav .fa-bars {
     .container{
         align-items: center;
         flex-direction: column;
+        margin-top: 0px;
         margin-bottom: 20px;
         gap: 0;
     }
