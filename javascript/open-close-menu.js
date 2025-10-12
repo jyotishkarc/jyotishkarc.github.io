@@ -1,110 +1,81 @@
-// mobile-menu.js
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('mobileMenuToggle');
-  const panel = document.getElementById('navLinks');
-  const header = document.querySelector('.site-header');
-  if (!btn || !panel || !header) return;
+// open-close-menu.js
+(function () {
+  let wired = false; // prevent double-wiring
 
-  // Toggle whether opening should push content (false = overlay below header)
-  const PUSH_CONTENT = false;
+  function wire() {
+    if (wired) return; // idempotent
+    const header = document.querySelector('.site-header');
+    const pane   = document.getElementById('navLinks');
+    const btn    = document.getElementById('mobileMenuToggle');
+    if (!header || !pane || !btn) return; // header not injected yet
 
-  let isOpen = false;
-  let animating = false;
+    wired = true;
 
-  function setPanelTop() {
-    // Place the panel right below the header, even if header height changes
-    const h = header.getBoundingClientRect().height;
-    panel.style.top = `${Math.max(0, Math.round(h))}px`;
-  }
+    let isOpen = false, animating = false;
+    const EXTRA_OFFSET = 24.5; // your tuned gap
 
-  function setBodyPush(heightPx) {
-    if (!PUSH_CONTENT) return;
-    document.documentElement.style.setProperty('--menu-push-offset', `${heightPx}px`);
-    document.body.style.marginTop = `${heightPx}px`;
-  }
+    function setPaneTop() {
+      const rs = getComputedStyle(document.documentElement);
+      const off = parseFloat(rs.getPropertyValue('--header-offset')) || 0;
+      const hh  = parseFloat(rs.getPropertyValue('--site-header-height')) || 0;
+      pane.style.top = `calc(${off}px + ${hh}px + ${EXTRA_OFFSET}px)`;
+    }
 
-  function openPanel() {
-    if (animating || isOpen) return;
-    animating = true;
+    function openPane() {
+      if (animating || isOpen) return;
+      animating = true;
+      setPaneTop();
+      pane.classList.add('is-open');
+      pane.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-expanded', 'true');
+      pane.style.maxHeight = pane.scrollHeight + 'px';
+      pane.addEventListener('transitionend', function onEnd(e){
+        if (e.propertyName === 'max-height') {
+          pane.style.maxHeight = 'none';
+          pane.removeEventListener('transitionend', onEnd);
+          animating = false; isOpen = true;
+        }
+      });
+    }
 
-    setPanelTop(); // compute exact offset below header
+    function closePane() {
+      if (animating || !isOpen) return;
+      animating = true;
+      pane.style.maxHeight = pane.scrollHeight + 'px';
+      void pane.offsetHeight;
+      pane.classList.remove('is-open');
+      pane.setAttribute('aria-hidden', 'true');
+      btn.setAttribute('aria-expanded', 'false');
+      pane.style.maxHeight = '0px';
+      pane.addEventListener('transitionend', function onEnd(e){
+        if (e.propertyName === 'max-height') {
+          pane.removeEventListener('transitionend', onEnd);
+          animating = false; isOpen = false;
+        }
+      });
+    }
 
-    panel.classList.add('is-open');
-    panel.setAttribute('aria-hidden', 'false');
-    btn.setAttribute('aria-expanded', 'true');
+    btn.addEventListener('click', () => (isOpen ? closePane() : openPane()));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) closePane(); });
 
-    // Animate to content height
-    panel.style.maxHeight = panel.scrollHeight + 'px';
-    setBodyPush(panel.scrollHeight);
-
-    panel.addEventListener('transitionend', function onEnd(e) {
-      if (e.propertyName === 'max-height') {
-        panel.style.maxHeight = 'none'; // allow internal changes without snapping
-        panel.removeEventListener('transitionend', onEnd);
-        animating = false; isOpen = true;
-      }
+    // Click outside (not header, not pane, not toggle)
+    document.addEventListener('click', (e) => {
+      if (!isOpen) return;
+      const inHeader = e.target.closest('.site-header');
+      const inPane   = e.target.closest('#navLinks');
+      const isToggle = e.target.closest('#mobileMenuToggle');
+      if (!inHeader && !inPane && !isToggle) closePane();
     });
+
+    // Keep top aligned on resize/orientation
+    const recalc = () => { if (isOpen) setPaneTop(); };
+    window.addEventListener('resize', recalc);
+    window.addEventListener('orientationchange', recalc);
   }
 
-  function closePanel() {
-    if (animating || !isOpen) return;
-    animating = true;
+  // Expose an init you can call after you inject the header
+  window.initMobileMenu = wire;
 
-    // Lock to current height then animate to 0
-    const currentHeight = panel.scrollHeight;
-    panel.style.maxHeight = currentHeight + 'px';
-    void panel.offsetHeight; // reflow
-
-    panel.classList.remove('is-open');
-    panel.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-expanded', 'false');
-
-    panel.style.maxHeight = '0px';
-    setBodyPush(0);
-
-    panel.addEventListener('transitionend', function onEnd(e) {
-      if (e.propertyName === 'max-height') {
-        panel.removeEventListener('transitionend', onEnd);
-        animating = false; isOpen = false;
-      }
-    });
-  }
-
-  btn.addEventListener('click', () => {
-    isOpen ? closePanel() : openPanel();
-  });
-
-  // Recalculate when resizing or changing orientation
-  const onViewportChange = () => { if (isOpen) setPanelTop(); };
-  window.addEventListener('resize', onViewportChange);
-  window.addEventListener('orientationchange', onViewportChange);
-
-  // Close on ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) closePanel();
-  });
-
-  // Close when clicking outside header + panel
-  document.addEventListener('click', (e) => {
-    if (!isOpen) return;
-    const inHeader = e.target.closest('.site-header');
-    const inPanel  = e.target.closest('#navLinks');
-    if (!inHeader && !inPanel) closePanel();
-  });
-
-  // Close after selecting a link
-  panel.addEventListener('click', (e) => {
-    if (e.target.closest('a')) closePanel();
-  });
-
-  // Reset across breakpoint
-  const mq = window.matchMedia('(min-width: 900px)');
-  mq.addEventListener('change', () => {
-    panel.style.maxHeight = '';
-    panel.classList.remove('is-open');
-    panel.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-expanded', 'false');
-    animating = false; isOpen = false;
-    setBodyPush(0);
-  });
-});
+  // Also try to wire on DOM ready (works for pages that inline the header)
+  document.addEventListener('DOMContentLoaded', wire);
+})();

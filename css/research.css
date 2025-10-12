@@ -141,6 +141,8 @@ ol > li::marker {
       -webkit-transition: opacity 1s; /* Safari */
     }
 
+    #preloader[aria-hidden="true"] { pointer-events: none !important; }
+
     .content-narrow {
       max-width: 900px;     /* tweak to taste */
       margin: 0 auto;       /* center the block */

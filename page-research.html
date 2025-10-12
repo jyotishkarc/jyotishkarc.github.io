@@ -48,13 +48,28 @@
     <body onload="document.body.style.opacity='1'">
     <!-- <body> -->
         <div id="header-placeholder"></div>
-        
+
+        <script src="../javascript/open-close-menu.js" defer></script>
+
+        <!-- Load and insert the header -->
         <script>
         fetch("/common-elements/site-header.html")
             .then(r => r.text())
             .then(html => {
-            document.getElementById("header-placeholder").innerHTML = html;
-            });
+                // inject the header HTML
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // now that the header exists, wire up the mobile menu
+                if (window.initMobileMenu) window.initMobileMenu();
+
+                // finally, hide the preloader (so it doesn't block clicks)
+                const pre = document.getElementById('preloader');
+                if (pre) {
+                pre.classList.add('is-hidden');
+                pre.setAttribute('aria-hidden', 'true');
+                }
+            })
+            .catch(err => console.error("Header load failed:", err));
         </script>
 
         <!-- <input type="text" id="searchInput" placeholder="Search publications..." /> -->
@@ -188,15 +203,13 @@
         </script>
 
         <script src="javascript/preloader.js"></script>
-        <script src="javascript/nav-name-icon-info.js" defer></script>
-        <script src="javascript/menu-bar.js" defer></script>
+        <!-- <script src="javascript/nav-name-icon-info.js" defer></script> -->
+        <!-- <script src="javascript/menu-bar.js"></script> -->
         <!-- <script type="text/javascript" src="javascript/allowed-domain.js"></script> -->
         
-        <script src="javascript/search-publications.js"></script>
+        <!-- <script src="javascript/search-publications.js"></script> -->
         <script src="javascript/scroll-rainbow.js"></script>
-        <script src="javascript/open-close-menu.js"></script>
-
-        <!-- <script src="/javascript/site-header.js" defer></script> -->
+        <script src="../javascript/open-close-menu.js" defer></script>
 
 
     </body>
