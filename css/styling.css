@@ -732,49 +732,34 @@ nav .fa-bars {
     font-weight: 550;
 }
 
+/* Hide the mobile toggle on desktop */
+@media (min-width: 899px) {
+  #mobileMenuToggle {
+    display: none !important;
+  }
+}
 
-@media(max-width: 900px){
+
+@media(max-width: 899px){
     
     body {
         width: 100%;
         /* overflow: hidden; */
-        overflow-x: hidden;padding-bottom: 10px;
+        overflow-x: hidden;
+        padding-bottom: 10px;
     }
 
     p {
         font-size: 12px;
     }
+
     
-    nav .fa-xmark {
-        display: block;
-        cursor: pointer;
-        scale: 1.3;
-        /* text-align: right; */
-        margin-top: 20px;
-        margin-left: 40px;
-        /* padding-right: 10px; */
-    }
-
-    nav .fa-bars {
-        display: inline-block;
-        margin: auto;
-        margin-right: 7%;
-        padding-top: 1px;
-        right: 0;
-        /* padding-right: 22px; */
-        overflow: hidden;
-        transform: scale(1.1);
-    }
-
-    nav {
-        /* display: flex;
-        flex-direction: row; */
-        /* position: relative; */
+    /* nav {
         align-items: right;
         padding-top: 0px;
         padding-bottom: 10px;
         margin-bottom: 5px;
-    }
+    } */
 
     .nav-name {
         display: block;
@@ -784,6 +769,8 @@ nav .fa-bars {
     }
 
     .nav-name a {
+        display: flex;
+        position: sticky;
         font-size: 2em;
         text-align: left;
     }
@@ -797,51 +784,14 @@ nav .fa-bars {
         transform: translateY(100%);
     }
 
-    .nav-links {
-        position: absolute;
-        /* background: green; */
-        backdrop-filter: blur(40px);
-        opacity: 100%;
-        /* height: 100%; */
-        height: 150vh;
-        width: 180px;
-        top: 0;
-        right: -200px;
-        text-align: left;
-        z-index: 2;
-        transition: 0.4s ease-in;
-        /* overflow-y: hidden; */
-    }
-
-    .nav-links ul {
-        margin-top: 60px;
-    }
-
-    .nav-links ul li {
-        display: block;
-        margin-top: 5px;
-    }
-
-    .nav-links ul li::after {
-        content: '';
-        width: 0%;
-        height: 3px;
-        background: none;
-        display: block;
-        margin: auto;
-        /* transform: scale(1.1); */
-        /* transition: 0.3s ease-out; */
-    }
     
-    .nav-links ul li:hover::after {
-        width: 100%;
-        background: none;
-    }
 
     .navbar-element {
         color: black;
     }
+}
 
+@media(max-width: 899px){
     .container{
         align-items: center;
         flex-direction: column;
@@ -901,13 +851,16 @@ nav .fa-bars {
     }
 }
 
-
+/* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+    #navLinks { transition: none; }
+    }
 
 
 /* =========================
    MOBILE TWEAKS (≤ 640px)
    ========================= */
-@media (max-width: 800px) {
+@media (max-width: 899px) {
   /* Match the fixed header's real height on mobile */
   :root {
     --site-header-height: 52px;   /* adjust to 50–56px if needed */
@@ -980,3 +933,133 @@ nav .fa-bars {
   .site-header nav img { height: 1em; }
 }
 
+/* Pane offset helpers */
+:root {
+  --header-offset: 5px;          /* matches .site-header { top: 5px; } on desktop */
+}
+
+/* On mobile, header's top changes; reflect that here */
+@media (max-width: 899px) {
+  :root {
+    --header-offset: calc(env(safe-area-inset-top, 0px) + 6px); /* matches your mobile .site-header top */
+    /* You already set --site-header-height: 52px in your mobile block; that’s fine */
+  }
+}
+
+
+/* ===== Mobile: independent pane under the header (overlay) ===== */
+@media (max-width: 899px) {
+  /* Keep header on its own layer */
+  .site-header { position: fixed; z-index: 1000; }
+
+  /* Toggle button stays above the pane edge if they touch */
+  #mobileMenuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    padding: 8px;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    z-index: 1002;
+  }
+  .icon-button { all: unset; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  .icon-button i { font-size: 22px; line-height: 1; }
+  .fa-bars { display: inline-block !important; }  /* override earlier rule that hides it */
+
+  /* The menu pane overlays the page and anchors JUST BELOW the header */
+  #navLinks {
+    position: fixed;
+    left: max(8px, env(safe-area-inset-left, 0px));   /* align with your mobile header edges */
+    right: max(8px, env(safe-area-inset-right, 0px));
+    /* top: calc(var(--header-offset) + var(--site-header-height)); */
+    top: calc(var(--header-offset) + var(--site-header-height) + 24.5px) !important;
+    width: auto;
+
+    z-index: 1001;         /* above page, under the toggle */
+    overflow: hidden;
+
+    /* collapsed state */
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      max-height 300ms ease,
+      opacity 240ms ease,
+      transform 240ms ease;
+
+    background: var(--menu-bg, #fff);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-radius: 12px;   /* optional: softer bottom corners */
+  }
+
+  /* expanded state (JS will add .is-open) */
+  #navLinks.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* List styling inside the pane */
+  #navLinks ul { 
+    /* list-style: none;  */
+    margin: 0; padding: 10px 16px 16px; 
+    display: flex;
+    justify-content: center;     /* center the group as a whole */
+    gap: 28px;                   /* consistent space between items */
+    margin: 0 auto;              /* keep ul centered */
+    list-style: none;
+  }
+
+  #navLinks ul li {
+    padding: 0;                  /* remove extra per-li padding */
+  }
+
+  #navLinks a {
+    display: inline-block;       /* horizontal layout */
+    padding: 8px 4px;            /* tighter vertical padding */
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+  }
+
+  #navLinks a:hover, #navLinks a:focus { background: rgba(0,0,0,0.05); }
+
+  /* If the preloader remains in DOM, ignore clicks when hidden */
+  #preloader[aria-hidden="true"] { pointer-events: none !important; }
+}
+
+/* Keep the toggle hidden on desktop */
+@media (min-width: 900px) {
+  #mobileMenuToggle { display: none !important; }
+}
+
+
+/* === Subtle alignment fixes without changing header height === */
+@media (max-width: 899px) {
+  /* Keep existing height; just refine internal spacing */
+  .site-header nav {
+    justify-content: center;     /* restore your original centering */
+    padding-block: 8px;          /* same as before */
+    padding-inline: 40px;        /* restore original horizontal padding */
+  }
+
+  /* Nudge name slightly left (cancel extra left padding in .name-all) */
+  .name-all {
+    padding-left: 0;
+    margin-left: -22px;           /* tiny left shift */
+  }
+
+  /* Tidy the toggle position and size */
+  #mobileMenuToggle {
+    position: relative;
+    right: -22px;                 /* nudge slightly right */
+    padding: 8px;                /* keep button footprint same as desktop */
+  }
+  #mobileMenuToggle i,
+  .icon-button i {
+    font-size: 20px;             /* between old 22px and too-small 18px */
+  }
+}

@@ -38,17 +38,34 @@
             </div>
         </div>
 
-        <div class="nav-links" id="navLinks">
-            <!-- <i class="menu-close fa-solid fa-xmark" onclick="hideMenu()"></i> -->
-            <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
-            <ul>
-                <li><a class="navbar-element" href="/ ">Home</a>
-                <li><a class="navbar-element" href="page-research.html">Research</a>
-                <li><a class="navbar-element" href="page-miscellanea.html">Miscellanea</a>
-                </li>
-            </ul>
+        <!-- Collapsing panel (we'll animate this in CSS/JS) -->
+        <div
+        class="nav-links"
+        id="navLinks"
+        role="navigation"
+        aria-hidden="true"
+        aria-labelledby="mobileMenuToggle"
+        >
+        <!-- REMOVED: the X close icon
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+        -->
+        <ul>
+            <li><a class="navbar-element" href="/ ">Home</a></li>
+            <li><a class="navbar-element" href="page-research.html">Research</a></li>
+            <li><a class="navbar-element" href="page-miscellanea.html">Miscellanea</a></li>
+        </ul>
         </div>
-        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
-        <!-- <a><i class="menu-open fa-solid fa-bars" onclick="showMenu()"></i></a> -->
+
+        <!-- REPLACED: the bare <i> with an accessible button that controls #navLinks -->
+        <button
+        id="mobileMenuToggle"
+        class="icon-button"
+        aria-controls="navLinks"
+        aria-expanded="false"
+        aria-label="Open menu"
+        type="button"
+        >
+        <i class="fa-solid fa-bars"></i>
+        </button>
     </nav>
 </header>
