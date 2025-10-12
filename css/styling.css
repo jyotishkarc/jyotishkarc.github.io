@@ -946,6 +946,8 @@ nav .fa-bars {
   :root { --pane-gap: 1.85px; }    /* tweak here (e.g., 10–16) if you like */
 }
 
+
+
 /* On mobile, header's top changes; reflect that here */
 @media (max-width: 1000px) {
   :root {
@@ -1120,4 +1122,46 @@ nav .fa-bars {
     font-size: 20px;
     padding-top: 4px;
   }
+}
+
+
+@media (max-width: 1000px) {
+
+    /* smooth, springy ease */
+    :root { --menu-ease: cubic-bezier(.22,.61,.36,1); }
+
+    #navLinks {
+    /* subtle pre-open state */
+    transform: translateY(-8px) scale(.985);
+    opacity: 0;
+    filter: saturate(.98) blur(.2px);
+
+    /* upgraded transitions */
+    transition:
+        max-height 420ms var(--menu-ease),
+        transform 360ms var(--menu-ease),
+        opacity 260ms ease-out,
+        box-shadow 360ms var(--menu-ease),
+        filter 300ms var(--menu-ease);
+
+    will-change: max-height, transform, opacity, box-shadow, filter;
+    }
+
+    #navLinks.is-open {
+    transform: translateY(0) scale(1);
+    opacity: 0.98;
+    filter: none;
+
+    /* gentle elevation growth */
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.10),
+        0 3px 10px rgba(0,0,0,.06);
+    }
+
+    /* respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+    #navLinks { transition: none; filter: none; transform: none; }
+    }
+
+
 }

@@ -111,6 +111,8 @@
     });
   }
 
+
+
   // Expose an init to call AFTER injecting header HTML
   window.initMobileMenu = wire;
 
