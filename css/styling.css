@@ -996,7 +996,12 @@ nav .fa-bars {
     transition:
       max-height 300ms ease,
       opacity 240ms ease,
-      transform 240ms ease;
+      transform 240ms ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      opacity 240ms ease,
+      transform 240ms ease,
+      max-height 300ms ease;
 
     background: var(--menu-bg, #fff);
     border-bottom: 1px solid rgba(0,0,0,0.06);
@@ -1008,27 +1013,49 @@ nav .fa-bars {
   #navLinks.is-open {
     opacity: 1;
     transform: translateY(0);
+    border: 1px solid rgba(0, 0, 0, 0.228);   /* thin neutral line */
+    border-top: none;                        /* prevent double line under header */
+    border-radius: 12px;            /* smooth bottom corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* soft depth */
   }
 
   /* List styling inside the pane */
   #navLinks ul { 
     /* list-style: none;  */
-    margin: 0; 
-    padding: 16px 16px 16px; 
+    margin: 0 14px; 
+    padding: 16px;
     display: flex;
     justify-content: center;     /* center the group as a whole */
-    gap: 28px;                   /* consistent space between items */
-    margin: 0 auto;              /* keep ul centered */
+    align-items: center;
+    /* gap: 28px;                   consistent space between items */
+    gap: 0;
     list-style: none;
   }
 
   #navLinks ul li {
-    padding: 0;                  /* remove extra per-li padding */
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    padding: 0;
   }
+
+  /* Dot separator perfectly centered between items */
+  #navLinks ul li:not(:last-child)::after {
+    /* content: "•"; */
+    color: brown;
+    opacity: 0.8;
+    font-size: 1.1em;
+    margin: 0 14px; /* perfectly symmetrical spacing left/right */
+    display: inline-block;
+    line-height: 1;
+    transform: translateY(-1px); /* visually centers with text baseline */
+  }
+
+
 
   #navLinks a {
     display: inline-block;       /* horizontal layout */
-    padding: 8px 4px;            /* tighter vertical padding */
+    padding: 8px 0;            /* tighter vertical padding */
     text-decoration: none;
     color: inherit;
     border-radius: 8px;
