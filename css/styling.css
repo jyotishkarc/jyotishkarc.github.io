@@ -940,6 +940,12 @@ nav .fa-bars {
   --header-offset: 5px;          /* matches .site-header { top: 5px; } on desktop */
 }
 
+:root { --pane-gap: 12px; }      /* visual gap below the header */
+
+@media (max-width: 1000px) {
+  :root { --pane-gap: 1.85px; }    /* tweak here (e.g., 10–16) if you like */
+}
+
 /* On mobile, header's top changes; reflect that here */
 @media (max-width: 1000px) {
   :root {
@@ -977,7 +983,7 @@ nav .fa-bars {
     left: max(8px, env(safe-area-inset-left, 0px));   /* align with your mobile header edges */
     right: max(8px, env(safe-area-inset-right, 0px));
     /* top: calc(var(--header-offset) + var(--site-header-height)); */
-    top: calc(var(--header-offset) + var(--site-header-height) + 11px) !important;
+    /* top: calc(var(--header-offset) + var(--site-header-height) + 11px) !important; */
     width: auto;
 
     z-index: 1001;         /* above page, under the toggle */
@@ -1007,7 +1013,8 @@ nav .fa-bars {
   /* List styling inside the pane */
   #navLinks ul { 
     /* list-style: none;  */
-    margin: 0; padding: 10px 16px 16px; 
+    margin: 0; 
+    padding: 16px 16px 16px; 
     display: flex;
     justify-content: center;     /* center the group as a whole */
     gap: 28px;                   /* consistent space between items */
