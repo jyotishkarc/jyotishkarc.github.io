@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Homemade+Apple&family=Kaushan+Script&family=Marck+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..1000&display=swap');
 
 *{
     /* font-family: "PT Serif", serif; */
@@ -733,14 +733,14 @@ nav .fa-bars {
 }
 
 /* Hide the mobile toggle on desktop */
-@media (min-width: 899px) {
+@media (min-width: 1000px) {
   #mobileMenuToggle {
     display: none !important;
   }
 }
 
 
-@media(max-width: 899px){
+@media(max-width: 1000px){
     
     body {
         width: 100%;
@@ -791,7 +791,7 @@ nav .fa-bars {
     }
 }
 
-@media(max-width: 899px){
+@media(max-width: 1000px){
     .container{
         align-items: center;
         flex-direction: column;
@@ -860,11 +860,13 @@ nav .fa-bars {
 /* =========================
    MOBILE TWEAKS (≤ 640px)
    ========================= */
-@media (max-width: 899px) {
+@media (max-width: 1000px) {
   /* Match the fixed header's real height on mobile */
   :root {
-    --site-header-height: 52px;   /* adjust to 50–56px if needed */
+    /* --site-header-height: 52px;   adjust to 50–56px if needed */
     --rainbow-size: 2px;          /* thinner border looks cleaner on small screens */
+    --mobile-header-height: 50px;     /* ← set this to your *old* header height (e.g., 50/52/56) */
+    --site-header-height: var(--mobile-header-height); /* keep pane positioning in sync */
   }
 
   /* Keep the “inset” look but closer to the edges; respect notches */
@@ -913,7 +915,7 @@ nav .fa-bars {
 /* =========================
    VERY NARROW (≤ 380px)
    ========================= */
-@media (max-width: 380px) {
+@media (max-width: 350px) {
   :root { --site-header-height: 50px; }    /* keep body offset tight */
 
   .site-header {
@@ -939,7 +941,7 @@ nav .fa-bars {
 }
 
 /* On mobile, header's top changes; reflect that here */
-@media (max-width: 899px) {
+@media (max-width: 1000px) {
   :root {
     --header-offset: calc(env(safe-area-inset-top, 0px) + 6px); /* matches your mobile .site-header top */
     /* You already set --site-header-height: 52px in your mobile block; that’s fine */
@@ -948,7 +950,7 @@ nav .fa-bars {
 
 
 /* ===== Mobile: independent pane under the header (overlay) ===== */
-@media (max-width: 899px) {
+@media (max-width: 1000px) {
   /* Keep header on its own layer */
   .site-header { position: fixed; z-index: 1000; }
 
@@ -975,7 +977,7 @@ nav .fa-bars {
     left: max(8px, env(safe-area-inset-left, 0px));   /* align with your mobile header edges */
     right: max(8px, env(safe-area-inset-right, 0px));
     /* top: calc(var(--header-offset) + var(--site-header-height)); */
-    top: calc(var(--header-offset) + var(--site-header-height) + 24.5px) !important;
+    top: calc(var(--header-offset) + var(--site-header-height) + 11px) !important;
     width: auto;
 
     z-index: 1001;         /* above page, under the toggle */
@@ -1032,34 +1034,56 @@ nav .fa-bars {
 }
 
 /* Keep the toggle hidden on desktop */
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   #mobileMenuToggle { display: none !important; }
 }
 
-
-/* === Subtle alignment fixes without changing header height === */
-@media (max-width: 899px) {
-  /* Keep existing height; just refine internal spacing */
+/* === Mobile header alignment: name left, bars right === */
+@media (max-width: 1000px) {
+  /* Ensure nav stretches full width of header */
   .site-header nav {
-    justify-content: center;     /* restore your original centering */
-    padding-block: 8px;          /* same as before */
-    padding-inline: 40px;        /* restore original horizontal padding */
+    min-height: var(--mobile-header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* pushes name left, button right */
+    width: 100%;
+    padding-block: 8px;
+    padding-inline: 20px;           /* horizontal breathing room */
+    /* box-sizing: border-box; */
   }
 
-  /* Nudge name slightly left (cancel extra left padding in .name-all) */
+  /* Keep name snug on the left */
   .name-all {
-    padding-left: 0;
-    margin-left: -22px;           /* tiny left shift */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 4px;              /* small lefst cushion */
+    flex: 1;                        /* allow it to occupy left side */
   }
 
-  /* Tidy the toggle position and size */
-  #mobileMenuToggle {
-    position: relative;
-    right: -22px;                 /* nudge slightly right */
-    padding: 8px;                /* keep button footprint same as desktop */
+  /* Reset any leftover margins on the text itself */
+  .nav-name a {
+    margin: 0;
+    padding: 8px;
+    text-align: left;
   }
+
+  /* Keep the button flush right with even spacing */
+  #mobileMenuToggle {
+    margin-left: auto;              /* force to the right edge */
+    padding: 8px;
+    /* padding-bottom: 4px; */
+    position: relative;
+    right: 0;                       /* undo earlier right:-22px tweak */
+  }
+
+  /* Standard icon size for visual balance */
   #mobileMenuToggle i,
   .icon-button i {
-    font-size: 20px;             /* between old 22px and too-small 18px */
+    font-size: 20px;
+    padding-top: 4px;
   }
 }
