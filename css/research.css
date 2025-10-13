@@ -133,6 +133,13 @@ ol > li::marker {
 
 @media(max-width: 900px){
 
+    /* in your CSS (near the top) */
+    html {
+    -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+
     body {
       margin: 30px 10px;
       width: 100%;

@@ -732,12 +732,6 @@ nav .fa-bars {
     font-weight: 550;
 }
 
-/* Hide the mobile toggle on desktop */
-@media (min-width: 1000px) {
-  #mobileMenuToggle {
-    display: none !important;
-  }
-}
 
 
 @media(max-width: 1000px){
