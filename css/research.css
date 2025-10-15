@@ -1,3 +1,16 @@
+/* 1) Prevent horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+}
+
+/* 2) Make sizing predictable so padding/borders don’t exceed 100% */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
 /* Narrow the research page body while keeping the header full width */
 .content-narrow {
   max-width: 1100px;     /* tweak to taste */
@@ -136,12 +149,12 @@ ol > li::marker {
     /* in your CSS (near the top) */
     html {
     -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
+            text-size-adjust: 100%;
     }
 
 
     body {
-      margin: 30px 10px;
+      /* margin: 30px 10px; */
       width: 100%;
       opacity: 0;
       transition: opacity 1s;
@@ -151,30 +164,34 @@ ol > li::marker {
     #preloader[aria-hidden="true"] { pointer-events: none !important; }
 
     .content-narrow {
-      max-width: 900px;     /* tweak to taste */
+      /* max-width: 900px;     tweak to taste */
+      max-width: 100%;
       margin: 0 auto;       /* center the block */
       padding: 1rem 1rem;      /* comfortable side padding */
       line-height: 1.6;
-      margin-left: -20px;
-      margin-top: -30px;
     }
     
     .pub-header {
       width: 100%;
-      margin: 0 auto;
+      margin: 0 auto -15px auto;
+      margin-left: -15px;
       /* margin-top: 50px; */
       margin-bottom: -15px;
     }
 
-    .pub-header .equal-contribution-note {
+
+    .equal-contribution-note {
       font-size: 0.7em;
+      margin-left: 0;
+      margin-right: -15px;
+      padding: 0;
     }
 
     .publication-content {
         flex-shrink: 0.8;
-        margin-left: 0px;
-        padding-left: 0px;
-        padding-right: 5px;
+        margin-left: 0;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     .publication-content h2 {
@@ -182,12 +199,15 @@ ol > li::marker {
     }
 
     .reverse-numbering {
-        margin-left: -20px;
+        /* margin-left: -20px; */
+        margin-left: 0;
+        padding-left: 0; /* optional: make it flush */
     }
 
     .publication-card {
         padding-left: 12px; /* Increase left padding specifically */
-        margin-left: 4px;
+        margin-left: 2px;
+        margin-right: 0px;
     }
     .publication-card h3 {
         font-size: 0.85em;
@@ -198,4 +218,12 @@ ol > li::marker {
         font-size: 0.7em;
     }
 
+}
+
+
+
+/* 4) (Optional but helpful) Media elements never overflow */
+img, video, canvas, svg { 
+  max-width: 100%; 
+  height: auto; 
 }
