@@ -358,7 +358,8 @@ body::before {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Ensure it appears above other elements */
     margin-left: 60px; /* Space between icon and info box */
-    /* transform: translateY(-30px); */
+    margin-top: -9px;
+    /* transform: translateY(-50px); */
     /* transition: 0.5s; */
     transform: translateY(-5px) translateX(-15px);
 }
@@ -738,7 +739,6 @@ nav .fa-bars {
     
     body {
         width: 100%;
-        /* overflow: hidden; */
         overflow-x: hidden;
         padding-bottom: 10px;
     }
@@ -746,14 +746,6 @@ nav .fa-bars {
     p {
         font-size: 12px;
     }
-
-    
-    /* nav {
-        align-items: right;
-        padding-top: 0px;
-        padding-bottom: 10px;
-        margin-bottom: 5px;
-    } */
 
     .nav-name {
         display: block;
@@ -771,12 +763,17 @@ nav .fa-bars {
 
     .nav-name-details i {
         display: none;
+        /* display: inline-flex; */
         font-size: 1.3em;
     }
 
-    .fa-language {
+    /* #info-box {
+      display: none;
+    } */
+
+    /* .fa-language {
         transform: translateY(100%);
-    }
+    } */
 
     
 
