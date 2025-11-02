@@ -561,11 +561,14 @@ p {
 /* Style for the social icons container */
 :root {
   --icon-size: 50px;
-  --icon-gap: 24px;       /* 1) increase spacing between icons */
-  --hover-scale: 1.12;    /* 2) subtle overall enlargement on hover */
+  --icon-gap: 24px;
+  --hover-scale: 1.12;
+  --ring: 2px;
+  --ring-color: #5cb6f3;
+  --ring-color-hover: #000;
 }
 
-/* Container spacing */
+/* Container */
 .social-icons {
   display: flex;
   justify-content: center;
@@ -576,7 +579,7 @@ p {
   transform: scale(0.85);
 }
 
-/* Fixed footprint per icon */
+/* Button */
 .social-icons a {
   display: grid;
   place-items: center;
@@ -584,56 +587,67 @@ p {
   height: var(--icon-size);
   flex: 0 0 var(--icon-size);
   box-sizing: border-box;
-
-  text-decoration: none;
-  color: #000;
-
-  border: 2px solid #5cb6f3;
-  border-radius: 30%;
-  box-shadow: 0 0 20px 10px rgba(0,0,0,0.05);
   position: relative;
   overflow: hidden;
+  border-radius: 30%;
+  background: transparent; /* ensure base isn't the gradient */
 
-  /* allow smooth, non-layout-affecting hover grow */
-  transition: border-color .2s ease, border-radius .2s ease, transform .2s ease;
-  transform: translateZ(0); /* promote to its own layer */
+  /* Fake border as an inner ring — prevents seam */
+  box-shadow:
+    inset 0 0 0 var(--ring) var(--ring-color),
+    0 0 20px 10px rgba(0, 0, 0, 0.05);
+
+  transition:
+    border-radius .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+  transform: translateZ(0);
+  text-decoration: none;
+  color: #000;
+  z-index: 0; /* base layer */
 }
 
-/* Icon glyph stays crisply sized */
+/* Glyph */
 .social-icons a .fab,
 .social-icons a .ai,
 .social-icons a .fas {
   font-size: 170%;
   line-height: 1;
   position: relative;
-  z-index: 2;
+  z-index: 2; /* above overlay */
   transition: color .2s ease;
 }
 
-/* 3) Fix the gradient-to-border gap by fully covering the box and inheriting radius */
-.social-icons a::after{
+/* Gradient overlay (hidden by default via translate) */
+.social-icons a::before {
   content: "";
   position: absolute;
-  inset: 0;                     /* cover the entire button */
-  border-radius: inherit;       /* match border rounding exactly */
+  inset: 0;
+  border-radius: inherit;
   background: linear-gradient(-55deg, #ea860b, #1908ff, #00712f43);
-  transform: translateY(-100%); /* start fully above */
+  transform: translateY(-101%);   /* fully off canvas */
   transition: transform .25s ease;
-  z-index: 1;                   /* below the glyph, above background */
+  z-index: 1;                      /* under glyph, over base */
   pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;     /* reduce AA shimmer */
 }
 
-/* Hover states */
+/* Hover */
 .social-icons a:hover {
-  transform: scale(var(--hover-scale)); /* 2) grow whole button slightly; neighbors stay put */
-  border-color: #000;
+  transform: scale(var(--hover-scale));
   border-radius: 50%;
-  z-index: 3;                           /* ensure it overlays neighbors cleanly */
+  box-shadow:
+    inset 0 0 0 var(--ring) var(--ring-color-hover),
+    0 0 20px 10px rgba(0, 0, 0, 0.05);
+  z-index: 3;
 }
-.social-icons a:hover::after { transform: translateY(0); }
+
+.social-icons a:hover::before { transform: translateY(0); }
 .social-icons a:hover .fab,
 .social-icons a:hover .ai,
 .social-icons a:hover .fas { color: #fff; }
+
 
 
 .text-content {
