@@ -419,18 +419,21 @@ body::before {
     content: '';
     width: 0%;
     height: 3px;
-    background: #e5ff00;
+    /* background: #e5ff00; */
+    background: #641fed;
     display: block;
     margin: auto;
+    margin-top: 2px;
     /* transform: scale(1.1); */
-    transition: 0.64s;
+    transition: 0.3s;
 }
 
 .nav-links ul li:hover::after {
     width: 100%;
     /* transform: scale(1.1); */
     /* background: #f44336; */
-    background: #3840d1;
+    background: #0043565e;
+    transition: 0.35s;
 }
 
 .navbar-element {
