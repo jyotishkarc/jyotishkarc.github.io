@@ -576,7 +576,7 @@ p {
   gap: var(--icon-gap);
   margin: 0;
   padding: 2px 0;
-  transform: scale(0.85);
+  transform: scale(0.90);
 }
 
 /* Button */
@@ -621,12 +621,12 @@ p {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(-55deg, #ea860b, #1908ff, #00712f43);
+  background: linear-gradient(-55deg, #f32500, #3024d6, #00ff6a);
 
   /* Hidden by default; also participates in the inner scale */
   transform: translateY(var(--grad-offset)) scale(var(--inner-scale));
   transform-origin: center center;
-  transition: transform .28s ease;
+  transition: transform .18s ease;
   z-index: 1;
   pointer-events: none;
   backface-visibility: hidden;
@@ -644,7 +644,7 @@ p {
 
   transform: scale(var(--inner-scale));
   transform-origin: center center;
-  transition: transform .28s ease, color .25s ease;
+  transition: transform .15s ease, color .50s ease;
   will-change: transform;
 }
 
@@ -657,6 +657,7 @@ p {
   z-index: 3;
   --inner-scale: var(--hover-scale);
   --grad-offset: 0%;
+  /* transform: scale(115%); */
 }
 
 .social-icons a:hover .fab,
