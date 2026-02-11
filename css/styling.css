@@ -4,7 +4,8 @@
 
 *{
     /* font-family: "PT Serif", serif; */
-     font-family: "Roboto Slab", serif;
+     /* font-family: "Roboto Slab", serif; */
+     font-family: Optima, Candara, Calibri, Arial, sans-serif;
      font-weight: bold;
 }
 
@@ -498,8 +499,10 @@ h6 {
 p {
     /* font-family: 'Helvetica' , 'Sans-Serif', 'Avenir'; */
     /*font-family: "Times New Roman", Times, serif;*/
-    font-family: "Roboto Slab", serif;
-    font-weight: normal;
+    /* font-family: "Roboto Slab", serif; */
+    font-family: Optima, Candara, Calibri, Arial, sans-serif;
+    /* font-weight: normal; */
+    font-weight: 570;
     font-size: 14px;
     line-height: 1.5em;
     color: #333;
@@ -885,6 +888,7 @@ nav .fa-bars {
 
     .text-content {
         /* font-family: "Roboto Slab", serif; */
+        font-family: Optima, Candara, Calibri, Arial, sans-serif;
         /* margin-top: 20px; */
         font-size: 11px;
         margin-left: 15px;
