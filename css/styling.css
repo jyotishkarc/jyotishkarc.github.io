@@ -815,6 +815,8 @@ nav .fa-bars {
 
     p {
         font-size: 12px;
+        font-family: Optima, Candara, Calibri, Arial, sans-serif;
+        font-weight: normal;
     }
 
     .nav-name {
