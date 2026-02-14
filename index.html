@@ -138,9 +138,19 @@
         </div>
         
 
-        <footer class="footer">
+        <div id="footer-placeholder"></div>
+        
+        <script>
+        fetch("/common-elements/site-footer.html")
+            .then(r => r.text())
+            .then(html => {
+            document.getElementById("footer-placeholder").innerHTML = html;
+            });
+        </script>
+
+        <!-- <footer class="footer">
             <small>&copy 2026 Jyotishka Ray Choudhury. Licensed under the <a href="" style="text-decoration:underline dotted; text-underline-position: under;">MIT License</a>.</small>
-        </footer>
+        </footer> -->
 
         <script src="javascript/nav-name-icon-info.js"></script>
         <!-- <script type="text/javascript" src="javascript/menu-bar.js"></script> -->

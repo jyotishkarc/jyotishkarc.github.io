@@ -411,7 +411,7 @@ body::before {
 
 .nav-links ul li {
     list-style: none;
-    font-size: 1.1em;
+    font-size: 1.25em;
     font-weight: bold;
     color: #440000;
     display: inline-block;
@@ -504,7 +504,7 @@ p {
     font-family: Optima, Candara, Calibri, Arial, sans-serif;
     /* font-weight: normal; */
     font-weight: 570;
-    font-size: 14px;
+    font-size: 14.5px;
     line-height: 1.5em;
     color: #333;
 }
@@ -514,7 +514,7 @@ p {
     align-items: flex-start; /* Align items at the top */
     margin: 5px; /* Add some margin around the container */
     margin-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     padding-top: 15px;
     gap: 20px;
 }
@@ -546,7 +546,7 @@ p {
 .profile_image {
     display: block;
     margin: 0 auto; /* Center image horizontally within its container */
-    border-radius: 10%;
+    border-radius: 15%;
     width: 80%; /* Allow image to fill its container */
     max-width: 370px;
     min-width: 200px;
