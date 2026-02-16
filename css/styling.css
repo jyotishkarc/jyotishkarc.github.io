@@ -584,7 +584,7 @@ p {
 }
 
 .photo:hover + .icon-stack {
-    transform: translateY(10px);
+    transform: translateY(10px) scale(0.92);
 }
 
 
