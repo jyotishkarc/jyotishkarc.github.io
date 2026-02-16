@@ -508,7 +508,7 @@ p {
     /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
     font-family: Optima, "Source Sans 3", Candara, Calibri, Arial, sans-serif;
     /* font-weight: normal; */
-    font-weight: 570;
+    font-weight: 580;
     font-size: 14.5px;
     line-height: 1.5em;
     color: #333;
@@ -822,7 +822,8 @@ nav .fa-bars {
         font-size: 12px;
         /* font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; */
         /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
-        font-weight: normal;
+        /* font-weight: normal; */
+        font-weight: 550;
     }
 
     .nav-name {
