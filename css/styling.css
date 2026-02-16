@@ -1,6 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Homemade+Apple&family=Kaushan+Script&family=Marck+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 
 *{
     /* font-family: "PT Serif", serif; */
@@ -806,7 +808,7 @@ nav .fa-bars {
 
 
 @media(max-width: 1000px){
-    
+
     body {
         width: 100%;
         overflow-x: hidden;
@@ -815,6 +817,7 @@ nav .fa-bars {
 
     p {
         font-size: 12px;
+        /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
         font-family: Optima, Candara, Calibri, Arial, sans-serif;
         font-weight: normal;
     }
@@ -891,7 +894,8 @@ nav .fa-bars {
 
     .text-content {
         /* font-family: "Roboto Slab", serif; */
-        font-family: Optima, Candara, Calibri, Arial, sans-serif;
+        /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
+        font-family: Optima, -apple-system, Candara, Calibri, Arial, sans-serif;
         /* margin-top: 20px; */
         font-size: 11px;
         margin-left: 15px;
