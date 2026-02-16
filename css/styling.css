@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Homemade+Apple&family=Kaushan+Script&family=Marck+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&display=swap');
 
 
@@ -920,18 +920,7 @@ nav .fa-bars {
     .footer {
         font-size: 0.45em;
     }
-}
 
-/* Reduce motion preference */
-    @media (prefers-reduced-motion: reduce) {
-    #navLinks { transition: none; }
-    }
-
-
-/* =========================
-   MOBILE TWEAKS (≤ 640px)
-   ========================= */
-@media (max-width: 1000px) {
   /* Match the fixed header's real height on mobile */
   :root {
     /* --site-header-height: 52px;   adjust to 50–56px if needed */
@@ -982,6 +971,12 @@ nav .fa-bars {
 
 
 }
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  #navLinks { transition: none; }
+}
+
 
 /* =========================
    VERY NARROW (≤ 380px)
