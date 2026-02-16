@@ -13,7 +13,7 @@ html, body {
 
 /* Narrow the research page body while keeping the header full width */
 .content-narrow {
-  max-width: 1100px;     /* tweak to taste */
+  max-width: 1150px;     /* tweak to taste */
   margin: 0 auto;       /* center the block */
   padding: 0 1rem;      /* comfortable side padding */
   line-height: 1.6;

@@ -509,7 +509,7 @@ p {
     font-family: Optima, "Source Sans 3", Candara, Calibri, Arial, sans-serif;
     /* font-weight: normal; */
     font-weight: 580;
-    font-size: 14.5px;
+    font-size: 15px;
     line-height: 1.5em;
     color: #333;
 }
@@ -557,21 +557,20 @@ p {
     min-width: 200px;
     height: auto;
     transform: scale(0.92);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 3px;
+
+    transition: transform 0.35s ease, box-shadow 0.25s ease;
     /* flex-shrink: 0.2; */
 }
 
-/* .blur-image {
-    width: 95%;
-    margin: 0 auto;;
-    position: absolute;
-    bottom: 0px;
-    top: 0px;
-    box-shadow: inset 10px 10px 10px 10px rgb(239, 50, 50);
-} */
+.photo:hover .profile_image {
+    transform: scale(0.94);
+
+    box-shadow: 
+        0 0 0 2px white,        /* gap color */
+        0 0 4px 4px #b19de7,      /* actual border color */
+        0 10px 25px rgba(0,0,0,0.12);
+}
 
 
 .icon-stack {
@@ -579,7 +578,13 @@ p {
   flex-direction: column;
   align-items: center;   /* centers the whole stack under the photo */
   width: fit-content;    /* width = width of the social icon row */
+  transition: transform 0.35s ease;
 }
+
+.photo:hover + .icon-stack {
+    transform: translateY(10px);
+}
+
 
 
 
@@ -641,31 +646,21 @@ p {
   z-index: 0;
 }
 
-/* Option 1: Color spreads out from the TOP of the icons [STABLE] */
-/* .social-icons a::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(-55deg, #f32500, #3024d6, #00ff6a);
 
-  transform: translateY(var(--grad-offset)) scale(var(--inner-scale));
-  transform-origin: center center;
-  transition: transform .1s ease;
-  z-index: 1;
-  pointer-events: none;
-  backface-visibility: hidden;
-} */
-
-/* Option 2: Color spreads out from the CENTER of the icons [STABLE] */
 .social-icons a::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(-55deg, #ea860b, #1908ff, #00712f43);
 
-  transform: scale(0) scale(var(--inner-scale));                 
+  /* Option 1: Color spreads out from the CENTER of the icons [STABLE] */
+  background: linear-gradient(-55deg, #ea860b, #1908ff, #00712f43);
+  transform: scale(0) scale(var(--inner-scale));
+  
+  /* Option 2: Color spreads out from the TOP of the icons [STABLE] */
+  /* background: linear-gradient(-55deg, #f32500, #3024d6, #00ff6a);
+  transform: translateY(var(--grad-offset)) scale(var(--inner-scale)); */
+  
   transform-origin: center center;     
   transition: transform .1s ease-out;
   z-index: 1;
@@ -673,12 +668,11 @@ p {
   backface-visibility: hidden;
 }
 
+/* Turn this off if using Option 2 */
 .social-icons a:hover::before {
   transform: scale(1);
 }
-/* Option 2 ends here */
 
-/* Glyph (scales with the overlay, perfectly centered) */
 .social-icons a .fab,
 .social-icons a .ai,
 .social-icons a .fas {
@@ -912,7 +906,7 @@ nav .fa-bars {
         /* font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; */
         /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
         /* font-weight: normal; */
-        font-weight: 520;
+        font-weight: 500;
     }
 
     .nav-name {
@@ -976,13 +970,17 @@ nav .fa-bars {
     }
 
     .social-icons {
-        transform: scale(0.7);
+        transform: scale(0.8);
     }
 
     .social-icons a:hover {
         /* transform: translateY(10px); */
         transform: none;
         border-radius: 50%;
+    }
+
+    .cv-btn {
+      transform: scale(0.9);
     }
 
     .text-content {
