@@ -573,6 +573,16 @@ p {
     box-shadow: inset 10px 10px 10px 10px rgb(239, 50, 50);
 } */
 
+
+.icon-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centers the whole stack under the photo */
+  width: fit-content;    /* width = width of the social icon row */
+}
+
+
+
 /* Style for the social icons container */
 :root {
   --icon-size: 50px;
@@ -588,6 +598,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content;
   gap: var(--icon-gap);
   margin: 0;
   padding: 2px 0;
@@ -692,7 +703,9 @@ p {
   z-index: 3;
   --inner-scale: var(--hover-scale);
   --grad-offset: 0%;
-  transition: transform 0.05s scale(150%);
+  /* transition: transform 0.05s scale(150%); */
+  transition: border-radius .20s ease, box-shadow .50s ease;
+
 }
 
 .social-icons a:hover .fab,
@@ -700,6 +713,82 @@ p {
 .social-icons a:hover .fas {
   color: #fff;
 }
+
+
+/* === CV button: solid fill + hover color change === */
+
+.cv-btn {
+  display: flex;
+  justify-content: center;   /* horizontally centers the child */
+  align-items: center;
+  width: 100%;
+  margin-top: 12px;
+  transform: none;
+  padding: 0;
+}
+
+/* the actual button */
+.cv-btn a {
+  width: 90%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  border-radius: 12px;
+  box-sizing: border-box;
+
+  background: #fbfbfb;
+  color: #1b0000;
+  border: 2px solid #dfd4fd;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+
+  /* smoother motion */
+  transition:
+    background-color 200ms ease,
+    color            250ms ease,
+    border-color     200ms ease,
+    transform        200ms cubic-bezier(.22,.61,.36,1),
+    box-shadow       200ms cubic-bezier(.22,.61,.36,1);
+
+  will-change: transform;
+  transform: translateZ(0);   /* helps some browsers render transform smoothly */
+}
+
+/* hover / focus */
+.cv-btn a:hover,
+.cv-btn a:focus-visible {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+
+  /* pick ONE of these — translate feels smoother than scale */
+  transform: scale(1.05);
+  /* transform: scale(1.02); */
+
+  box-shadow: 0 14px 30px rgba(0,0,0,0.16);
+}
+
+/* pressed */
+.cv-btn a:active {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* icon micro-motion */
+.cv-btn a i {
+  transition: transform 220ms cubic-bezier(.22,.61,.36,1);
+}
+.cv-btn a:hover i {
+  transform: scale(1.06);
+}
+
 
 
 
