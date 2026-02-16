@@ -817,8 +817,8 @@ nav .fa-bars {
 
     p {
         font-size: 12px;
-        /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
-        font-family: Optima, Candara, Calibri, Arial, sans-serif;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
         font-weight: normal;
     }
 
@@ -895,7 +895,7 @@ nav .fa-bars {
     .text-content {
         /* font-family: "Roboto Slab", serif; */
         /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
-        font-family: Optima, -apple-system, Candara, Calibri, Arial, sans-serif;
+        /* font-family: Optima, -apple-system, Candara, Calibri, Arial, sans-serif; */
         /* margin-top: 20px; */
         font-size: 11px;
         margin-left: 15px;
