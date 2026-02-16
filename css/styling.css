@@ -786,7 +786,7 @@ p {
   transition: transform 220ms cubic-bezier(.22,.61,.36,1);
 }
 .cv-btn a:hover i {
-  transform: scale(1.06);
+  transform: scale(1.3);
 }
 
 
