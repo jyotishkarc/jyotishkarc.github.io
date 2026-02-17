@@ -15,6 +15,8 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
 }  
 
 /* ===== Preloader Overlay ===== */
@@ -710,6 +712,28 @@ p {
   color: #fff;
 }
 
+
+.email-reveal {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.35s ease;
+    margin-top: 8px;
+}
+
+.email-reveal img {
+    width: 220px; /* adjust if needed */
+    display: block;
+}
+
+.email-reveal.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+
+
+
 /* CV button */
 
 :root{
@@ -993,9 +1017,7 @@ nav .fa-bars {
     .navbar-element {
         color: black;
     }
-}
 
-@media(max-width: 1000px){
     .container{
         align-items: center;
         flex-direction: column;
@@ -1327,46 +1349,42 @@ nav .fa-bars {
     font-size: 20px;
     padding-top: 4px;
   }
-}
 
+  /* smooth, springy ease */
+  :root { --menu-ease: cubic-bezier(.22,.61,.36,1); }
 
-@media (max-width: 1000px) {
+  #navLinks {
+  /* subtle pre-open state */
+  transform: translateY(-8px) scale(.985);
+  opacity: 0;
+  filter: saturate(.98) blur(.2px);
 
-    /* smooth, springy ease */
-    :root { --menu-ease: cubic-bezier(.22,.61,.36,1); }
+  /* upgraded transitions */
+  transition:
+      max-height 420ms var(--menu-ease),
+      transform 360ms var(--menu-ease),
+      opacity 260ms ease-out,
+      box-shadow 360ms var(--menu-ease),
+      filter 300ms var(--menu-ease);
 
-    #navLinks {
-    /* subtle pre-open state */
-    transform: translateY(-8px) scale(.985);
-    opacity: 0;
-    filter: saturate(.98) blur(.2px);
+  will-change: max-height, transform, opacity, box-shadow, filter;
+  }
 
-    /* upgraded transitions */
-    transition:
-        max-height 420ms var(--menu-ease),
-        transform 360ms var(--menu-ease),
-        opacity 260ms ease-out,
-        box-shadow 360ms var(--menu-ease),
-        filter 300ms var(--menu-ease);
+  #navLinks.is-open {
+  transform: translateY(0) scale(1);
+  opacity: 0.98;
+  filter: none;
 
-    will-change: max-height, transform, opacity, box-shadow, filter;
-    }
+  /* gentle elevation growth */
+  box-shadow:
+      0 10px 28px rgba(0,0,0,.10),
+      0 3px 10px rgba(0,0,0,.06);
+  }
 
-    #navLinks.is-open {
-    transform: translateY(0) scale(1);
-    opacity: 0.98;
-    filter: none;
-
-    /* gentle elevation growth */
-    box-shadow:
-        0 10px 28px rgba(0,0,0,.10),
-        0 3px 10px rgba(0,0,0,.06);
-    }
-
-    /* respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-    #navLinks { transition: none; filter: none; transform: none; }
-    }
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+  #navLinks { transition: none; filter: none; transform: none; }
+  }
 
 
 }
