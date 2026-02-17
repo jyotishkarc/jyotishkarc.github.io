@@ -1,9 +1,3 @@
-// document.getElementById("email-icon").addEventListener("click", function (e) {
-//     e.preventDefault();
-//     document.getElementById("email-reveal").classList.toggle("show");
-// });
-
-
 const emailIcon   = document.getElementById("email-icon");
 const emailReveal = document.getElementById("email-reveal");
 const emailImg    = emailReveal.querySelector("img");
@@ -24,3 +18,12 @@ emailImg.addEventListener("click", (e) => {
 document.addEventListener("click", () => {
   emailReveal.classList.remove("show");
 });
+
+
+// Close email reveal on Escape key
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        document.getElementById("email-reveal").classList.remove("show");
+    }
+});
+
