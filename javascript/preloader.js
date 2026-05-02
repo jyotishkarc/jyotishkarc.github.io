@@ -13,13 +13,18 @@
         setTimeout(() => pre.remove(), 700);
     }
 
-    // Safety: if load never fires (CDN hiccup), bail out anyway
-    const failSafe = setTimeout(finishPreload, 5000);
+    // Safety: if any event never fires, bail out anyway.
+    const failSafe = setTimeout(finishPreload, 2500);
 
-    window.addEventListener('load', function() {
+    function revealSoon() {
         clearTimeout(failSafe);
-        // A tiny delay feels nicer than an abrupt cut
-        setTimeout(finishPreload, 150);
-    });
-})();
+        // Small delay to avoid abrupt flash
+        setTimeout(finishPreload, 120);
+    }
 
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', revealSoon, { once: true });
+    } else {
+        revealSoon();
+    }
+})();

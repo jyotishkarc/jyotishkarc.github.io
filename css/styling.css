@@ -61,7 +61,7 @@ html {
 body {
     margin: 60px auto;
     width: 80%;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 1s;
     -webkit-transition: opacity 1s; /* Safari */
 }
