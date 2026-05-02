@@ -1,3 +1,5 @@
+// Preloader intentionally disabled.
+// Keeping this file as a no-op to avoid breaking any references/bookmarks.
 (function() {
     // Prevent scroll while preloading (optional)
     document.documentElement.classList.add('is-preloading');

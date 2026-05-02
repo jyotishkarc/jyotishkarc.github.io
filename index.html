@@ -149,9 +149,27 @@
             </div>
         </section>
 
-        <div class="visitor">
-            <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1243980/t/9"></script>
-        </div>
+        <div class="visitor" id="visitor-counter-container"></div>
+        <script>
+            (function loadVisitorCounterLazily() {
+                const loadCounter = () => {
+                    const container = document.getElementById("visitor-counter-container");
+                    if (!container || container.dataset.loaded === "true") return;
+                    const script = document.createElement("script");
+                    script.src = "https://www.freevisitorcounters.com/en/home/counter/1243980/t/9";
+                    script.async = true;
+                    script.type = "text/javascript";
+                    container.dataset.loaded = "true";
+                    container.appendChild(script);
+                };
+
+                if ("requestIdleCallback" in window) {
+                    requestIdleCallback(loadCounter, { timeout: 2500 });
+                } else {
+                    window.addEventListener("load", () => setTimeout(loadCounter, 1200), { once: true });
+                }
+            })();
+        </script>
         
 
         <div id="footer-placeholder"></div>
@@ -169,7 +187,6 @@
         </footer> -->
 
         <script src="javascript/nav-name-icon-info.js" defer></script>
-        <script src="javascript/preloader.js"></script>
         <script src="javascript/scroll-rainbow.js" defer></script>
         <script src="javascript/open-close-menu.js" defer></script>
         <script src="javascript/remote-cv-button-trigger.js" defer></script>
