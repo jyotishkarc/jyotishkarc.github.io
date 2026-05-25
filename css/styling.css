@@ -1103,6 +1103,14 @@ nav .fa-bars {
         text-justify: distribute-all-lines;
     }
 
+    .text-content a,
+    .publication-content p a {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+    }
+
     .visitor {
         /* display: flex; */
         text-align: center;
