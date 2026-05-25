@@ -68,6 +68,9 @@
             .then(html => {
                 document.getElementById("header-placeholder").innerHTML = html;
 
+                // Wire the mobile menu after the async header is inserted
+                if (window.initMobileMenu) window.initMobileMenu();
+                
                 /* --- attach hover bridge AFTER header loads --- */
                 const navCV  = document.getElementById("nav-cv");
                 const mainCV = document.getElementById("main-cv-btn");

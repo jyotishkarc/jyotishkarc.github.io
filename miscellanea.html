@@ -51,7 +51,9 @@
         fetch("/common-elements/site-header.html")
             .then(r => r.text())
             .then(html => {
-            document.getElementById("header-placeholder").innerHTML = html;
+                if (window.initMobileMenu) window.initMobileMenu();
+                
+                document.getElementById("header-placeholder").innerHTML = html;
             });
         </script>
 
@@ -69,7 +71,7 @@
         </footer>
 
         <script src="javascript/nav-name-icon-info.js" defer></script>
-        <script type="text/javascript" src="javascript/menu-bar.js"></script>
+        <script src="javascript/open-close-menu.js" defer></script>
         <!-- <script type="text/javascript" src="javascript/allowed-domain.js"></script> -->
         <script src="javascript/preloader.js"></script>
 
