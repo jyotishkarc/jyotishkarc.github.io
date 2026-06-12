@@ -6,18 +6,27 @@
 
 
 
-*{
+/* *{ */
     /* font-family: "PT Serif", serif; */
      /* font-family: "Roboto Slab", serif; */
-     font-family: Optima, Candara, Calibri, Arial, sans-serif;
-     font-weight: bold;
+     /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
+     /* font-weight: bold; */
+/* } */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 html {
+    /* font-family: Optima, "Source Sans 3", Candara, Calibri, Arial, sans-serif; */
+    font-family: Optima, Candara, Calibri, "Avenir Next", "Segoe UI", Arial, sans-serif;
+    font-weight: 400;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     overflow-y: scroll;
-}  
+}
 
 /* ===== Preloader Overlay ===== */
 #preloader {
@@ -287,6 +296,8 @@ body::before {
 }
 
 .nav-name a {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 800;
     display: flex;
     width: 100%;
     font-size: 1.9em;
@@ -503,18 +514,27 @@ h6 {
     text-align: center;
 }
 
-p {
+/* p { */
     /* font-family: 'Helvetica' , 'Sans-Serif', 'Avenir'; */
     /*font-family: "Times New Roman", Times, serif;*/
     /* font-family: "Roboto Slab", serif; */
     /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
-    font-family: Optima, "Source Sans 3", Candara, Calibri, Arial, sans-serif;
-    /* font-weight: normal; */
+    /* font-family: Optima, "Source Sans 3", Candara, Calibri, Arial, sans-serif;
     font-weight: 580;
+    font-size: 15px;
+    line-height: 1.5em;
+    color: #333; */
+/* } */
+
+
+p {
+    font-family: inherit;
+    font-weight: 500;   /* try 400 first; use 450 or 500 only if too light */
     font-size: 15px;
     line-height: 1.5em;
     color: #333;
 }
+
 
 .container {
     display: flex;
@@ -904,6 +924,17 @@ p {
     /* text-justify: inter-word; */
     text-justify: newspaper;
     /* text-justify: distribute-all-lines; */
+}
+
+.text-content p {
+    /* font-family: "Source Sans 3", Optima, Candara, Calibri, Arial, sans-serif; */
+    /* font-weight: 520; */
+    font-weight: 500;
+    color: #000000;
+}
+
+.text-content a {
+  font-weight: 510;
 }
 
 .gt-fellowship {
