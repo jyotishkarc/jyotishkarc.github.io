@@ -935,6 +935,11 @@ p {
 
 .text-content a {
   font-weight: 510;
+  font-size: 14px;
+}
+
+.text-content b {
+  font-size: 14px;
 }
 
 .gt-fellowship {
