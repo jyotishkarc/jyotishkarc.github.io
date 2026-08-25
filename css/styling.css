@@ -1147,6 +1147,10 @@ nav .fa-bars {
       font-weight: inherit;
     }
 
+    .text-content b {
+      font-size: 12px;
+    }
+
     .visitor {
         /* display: flex; */
         text-align: center;
