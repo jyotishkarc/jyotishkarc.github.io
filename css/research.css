@@ -90,8 +90,9 @@ ol > li::marker {
 }
 
 .author-list {
-    margin: 5px 0; /* Decrease gap above and below authors */
+    margin: 3px 0; /* Decrease gap above and below authors */
     margin-bottom: 6px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .author-list a {
@@ -102,10 +103,11 @@ ol > li::marker {
 
 .publication-venue {
     font-size: 0.9rem;
-    color: #777;
+    color: #5c5b5b;
     margin-top: 5px;
     margin-bottom: 5px;
-    font-style: italic; /* Italics for emphasis */
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 500;
 }
 
 .publication-access {
