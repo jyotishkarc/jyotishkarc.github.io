@@ -1,74 +1,40 @@
 // nav-name-icon-info.js
+// Toggles the name-pronunciation box next to the name in the header.
+// The header is injected asynchronously (fetch + innerHTML), so the elements
+// usually don't exist yet when this script runs. Event delegation on the
+// document makes this work no matter when the header arrives.
 
-// const infoIcon = document.getElementById("info-trigger");
-// const infoBox = document.getElementById("info-box");
-// const icon = infoIcon.querySelector("a"); // Select the icon element
+(function () {
+  function parts() {
+    return {
+      box: document.getElementById("info-box"),
+      icon: document.getElementById("info-icon"),
+      trigger: document.querySelector(".info-trigger"),
+    };
+  }
 
-// // Toggle the info box and style the icon when the icon is clicked
-// infoIcon.addEventListener("click", function(event) {
-//     event.stopPropagation(); // Prevent the document click event from firing
+  function setOpen(open) {
+    const { box, icon, trigger } = parts();
+    if (!box) return;
+    box.classList.toggle("show", open);
+    if (icon) icon.classList.toggle("active", open);
+    if (trigger) trigger.setAttribute("aria-expanded", String(open));
+  }
 
-//     // Check if the info box is currently visible
-//     const isVisible = infoBox.classList.contains("show");
-    
-//     // If the info box is not visible, show it
-//     if (!isVisible) {
-//         infoBox.classList.add("show"); // Show the info box
-//         icon.classList.add('active'); // Add active class to apply styles
-//     } else {
-//         infoBox.classList.remove("show"); // Hide the info box
-//         icon.classList.remove('active'); // Remove active class if box is closed
-//     }
-// });
-
-// // Close the info box and reset icon style when clicking outside of it
-// document.addEventListener("click", function(event) {
-//     // Check if the click is outside the info box
-//     if (!infoBox.contains(event.target) && !infoIcon.contains(event.target)) {
-//         infoBox.classList.remove("show"); // Hide the info box
-//         icon.classList.remove('active'); // Remove active class
-//     }
-// });
-
-// // Prevent the info box from closing when clicked inside it
-// infoBox.addEventListener("click", function(event) {
-//     event.stopPropagation(); // Prevent click from bubbling up to the document
-// });
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const root = document.querySelector(".nav-name-details"); // or whatever your first selector is
-//   if (!root) return; // fails silently instead of crashing
-
-//   const icon = root.querySelector("i");          // example
-//   const box  = document.querySelector("#info-box"); // example
-//   if (!icon || !box) return;
-
-//   icon.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     box.classList.toggle("open");
-//   });
-// });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const trigger = document.querySelector(".info-trigger");
-  const box = document.getElementById("info-box");
-  const icon = document.getElementById("info-icon");
-
-  if (!trigger || !box || !icon) return;
-
-  trigger.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const isOpen = box.classList.toggle("show");
-    icon.classList.toggle("active", isOpen);
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest(".info-trigger");
+    if (trigger) {
+      e.preventDefault();
+      const { box } = parts();
+      setOpen(!(box && box.classList.contains("show")));
+      return;
+    }
+    // Clicks inside the box keep it open; anywhere else closes it.
+    if (e.target.closest("#info-box")) return;
+    setOpen(false);
   });
 
-  box.addEventListener("click", (e) => e.stopPropagation());
-
-  document.addEventListener("click", () => {
-    box.classList.remove("show");
-    icon.classList.remove("active");
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
   });
-});
+})();
