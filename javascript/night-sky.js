@@ -36,16 +36,18 @@
     var k = dpr < 1.5 ? 1.35 : 1;                     // ordinary (1x) screens: slightly larger, or they vanish
     stars = [];
     for (var i = 0; i < n; i++) {
-      var bright = rand() < 0.035;                     // a few slightly brighter stars
+      var tier = rand();                               // ~3% bright, ~11% medium, the rest dim
+      var bright = tier < 0.03, medium = !bright && tier < 0.14;
       var tint = rand();
       stars.push({
         x: rand() * W,
         y: rand() * H * FIELD,
-        r: k * (bright ? 0.95 + rand() * 0.5 : 0.5 + rand() * 0.5),
-        a: bright ? 0.75 + rand() * 0.2 : 0.22 + rand() * 0.4,
+        r: k * (bright ? 1.3 + rand() * 0.55 : medium ? 0.9 + rand() * 0.35 : 0.5 + rand() * 0.5),
+        a: bright ? 0.92 + rand() * 0.08 : medium ? 0.6 + rand() * 0.2 : 0.22 + rand() * 0.4,
+        h: bright ? 0.2 : medium ? 0.08 : 0,             // soft halo strength
         // mostly white, some faintly blue or warm
         c: tint < 0.15 ? "200,214,255" : tint < 0.25 ? "255,230,205" : "236,234,248",
-        tw: 0.2 + rand() * 0.35,                         // twinkle depth
+        tw: bright ? 0.12 + rand() * 0.18 : 0.2 + rand() * 0.35,   // twinkle depth (bright ones stay bright)
         sp: (2 * Math.PI) / (4000 + rand() * 7000),      // 4–11 s per twinkle
         ph: rand() * 2 * Math.PI
       });
@@ -75,8 +77,8 @@
       ctx.beginPath();
       ctx.arc(s.x, y, s.r, 0, 2 * Math.PI);
       ctx.fill();
-      if (s.r > 0.94 * (dpr < 1.5 ? 1.35 : 1)) {                                   // soft halo on the brighter ones
-        ctx.fillStyle = "rgba(" + s.c + "," + (a * 0.12).toFixed(3) + ")";
+      if (s.h) {                                         // soft halo on the brighter ones
+        ctx.fillStyle = "rgba(" + s.c + "," + (a * s.h).toFixed(3) + ")";
         ctx.beginPath();
         ctx.arc(s.x, y, s.r * 3.2, 0, 2 * Math.PI);
         ctx.fill();
@@ -118,7 +120,7 @@
       dx: dir * Math.cos(ang), dy: Math.sin(ang),
       dist: dist,                                          // px travelled
       len: Math.min(dist * 0.45, 55 + Math.random() * 45), // tail length
-      t0: now, dur: 650 + Math.random() * 400
+      t0: now, dur: 1700 + Math.random() * 700           // a leisurely 1.7–2.4 s
     };
   }
 
@@ -128,7 +130,7 @@
     ctx.clearRect(0, 0, HW, HH);
     var t = (now - meteor.t0) / meteor.dur;
     if (t >= 1) { meteor = null; nextMeteor = now + between(METEOR_GAP); return; }
-    var e = 1 - Math.pow(1 - t, 2);                        // eases out
+    var e = 1 - Math.pow(1 - t, 1.6);                      // eases out gently
     var hx = meteor.x + meteor.dx * meteor.dist * e;
     var hy = meteor.y + meteor.dy * meteor.dist * e;
     var len = meteor.len * Math.min(1, t * 3);             // tail grows, then fades
