@@ -43,11 +43,11 @@
 .news-gallery {
   grid-column: 2;
   display: grid;
-  grid-template-rows: 0fr;
+  grid-template-rows: 0fr 0fr;
   opacity: 0;
   transition: grid-template-rows 0.35s ease, opacity 0.25s ease, margin 0.35s ease;
 }
-.news-gallery.is-open { grid-template-rows: 1fr; opacity: 1; margin: 8px 0 4px; }
+.news-gallery.is-open { grid-template-rows: 1fr auto; opacity: 1; margin: 8px 0 4px; }
 /* photos share one row at the same height, each at its own shape (no cropping):
    each takes width in proportion to its aspect ratio --ar (set inline) */
 .news-gallery-inner {
@@ -70,6 +70,8 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .news-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* a single photo shouldn't stretch across the whole box */
+.news-gallery-inner:has(> .news-thumb:only-child) { max-width: 360px; }
 .news-thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(40, 20, 90, 0.18); }
 .news-thumb:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
 
@@ -89,6 +91,7 @@
   transition: opacity 0.25s ease, visibility 0s linear 0.25s;
 }
 .photo-viewer.is-open { opacity: 1; visibility: visible; transition: opacity 0.25s ease; }
+.photo-viewer:not(.is-open) { pointer-events: none; }   /* clicks pass through while it fades out */
 .photo-viewer figure { margin: 0; text-align: center; }
 .photo-viewer img {
   display: block;
@@ -151,3 +154,33 @@ html.pv-lock, html.pv-lock body { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .news-gallery, .photo-viewer, .photo-viewer img, .news-thumb, .news-photos-btn::after { transition: none; }
 }
+
+/* photo credits: under the row, and in the viewer */
+.news-credit,
+.text-content p.news-credit {
+  min-height: 0;
+  overflow: hidden;
+  margin: 5px 0 0;
+  font-size: 11.5px;
+  font-style: italic;
+  font-weight: 500;
+  color: #8a8799;
+  text-align: left;
+}
+.news-gallery:not(.is-open) .news-credit { margin: 0; height: 0; }
+.text-content .news-credit a,
+.pv-credit a {
+  color: inherit;
+  font-size: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+.text-content .news-credit a:hover { color: #5b3cc4; }
+.pv-credit {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.72);
+}
+.pv-credit:empty { display: none; }
+.pv-credit a:hover { color: #fff; }
