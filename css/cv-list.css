@@ -38,7 +38,7 @@
 
 .cv-item {
   display: grid;
-  grid-template-columns: 44px 1fr;
+  grid-template-columns: 56px 1fr;
   align-items: center;
   column-gap: 16px;
   padding: 10px 12px;
@@ -55,8 +55,8 @@
 /* ---- logo / monogram ---- */
 .cv-logo {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   overflow: hidden;
 }
 
@@ -114,7 +114,7 @@
   margin-top: 1px;
 }
 
-.cv-note-strong {
+.cv-label {
   font-weight: 600;
   color: #4f4f5a;
 }
@@ -139,13 +139,13 @@
   .cv-sections { margin-top: 24px; gap: 20px; }
   .cv-heading { font-size: 11px; }
   .cv-item {
-    grid-template-columns: 36px 1fr;
+    grid-template-columns: 44px 1fr;
     column-gap: 12px;
     align-items: start;
     padding: 8px;
     margin: 0 -8px;
   }
-  .cv-logo { width: 36px; height: 36px; }
+  .cv-logo { width: 44px; height: 44px; }
   .cv-mono { font-size: 10px; }
   .cv-title { font-size: 13px; }
   .cv-org { font-size: 12px; }
