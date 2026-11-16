@@ -3,7 +3,9 @@
    A faint, slowly twinkling field of stars behind the page, a quiet nod to
    "Jyotiṣka" (a luminary). Invisible in light mode. Stars drift very slightly
    as you scroll. Static (no twinkle, no drift) for visitors who prefer reduced
-   motion; paused when the tab is hidden.
+   motion; paused when the tab is hidden. Once in a while (every 30–70 s) a
+   faint shooting star crosses the upper part of the sky; none for visitors
+   who prefer reduced motion.
    ========================================================================== */
 (function () {
   "use strict";
@@ -20,6 +22,9 @@
   var W = 0, H = 0, dpr = 1, stars = [], raf = 0, last = 0;
   var FIELD = 1.6;            // star field is taller than the screen, for the scroll drift
   var DRIFT = 0.04;           // how far stars move per pixel scrolled
+  var METEOR_FIRST = [15000, 35000];   // first shooting star after 15–35 s
+  var METEOR_GAP = [30000, 70000];     // then one every 30–70 s
+  var meteor = null, nextMeteor = 0;
 
   // Deterministic random numbers, so the sky looks the same on every page.
   var seed = 1729;
@@ -78,9 +83,44 @@
     }
   }
 
+  function between(r) { return r[0] + Math.random() * (r[1] - r[0]); }
+
+  function spawnMeteor(now) {
+    var ang = (18 + Math.random() * 22) * Math.PI / 180;  // 18–40° below horizontal
+    var dir = Math.random() < 0.5 ? -1 : 1;
+    meteor = {
+      x: W * (0.15 + Math.random() * 0.7),
+      y: H * (0.04 + Math.random() * 0.36),               // upper part of the sky
+      dx: dir * Math.cos(ang), dy: Math.sin(ang),
+      dist: 220 + Math.random() * 180,                     // px travelled
+      len: 70 + Math.random() * 70,                        // tail length
+      t0: now, dur: 650 + Math.random() * 450
+    };
+  }
+
+  function drawMeteor(now) {
+    var t = (now - meteor.t0) / meteor.dur;
+    if (t >= 1) { meteor = null; nextMeteor = now + between(METEOR_GAP); return; }
+    var e = 1 - Math.pow(1 - t, 2);                        // eases out
+    var hx = meteor.x + meteor.dx * meteor.dist * e;
+    var hy = meteor.y + meteor.dy * meteor.dist * e;
+    var len = meteor.len * Math.min(1, t * 3);             // tail grows, then fades
+    var tx = hx - meteor.dx * len, ty = hy - meteor.dy * len;
+    var a = 0.75 * Math.sin(Math.PI * t);
+    var g = ctx.createLinearGradient(hx, hy, tx, ty);
+    g.addColorStop(0, "rgba(242,240,255," + a.toFixed(3) + ")");
+    g.addColorStop(1, "rgba(242,240,255,0)");
+    ctx.strokeStyle = g;
+    ctx.lineWidth = 1.1;
+    ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(tx, ty); ctx.stroke();
+  }
+
   function loop(now) {
     raf = 0;
-    if (now - last > 40) { draw(now); last = now; }      // ~25 fps is plenty for a twinkle
+    if (!meteor && nextMeteor && now >= nextMeteor) spawnMeteor(now);
+    // ~25 fps is plenty for a twinkle; full frame rate only while a star is falling
+    if (meteor || now - last > 40) { draw(now); if (meteor) drawMeteor(now); last = now; }
     schedule();
   }
   function schedule() {
@@ -88,17 +128,27 @@
   }
   function active() { return root.getAttribute("data-theme") === "dark"; }
 
+  // Restart the shooting-star clock whenever the sky (re)appears, so one never
+  // fires the instant a visitor switches to dark mode or comes back to the tab.
+  function resetMeteors() {
+    meteor = null;
+    nextMeteor = reduce ? 0 : performance.now() + between(METEOR_FIRST);
+  }
+
   function update() {
     var on = active();
     canvas.classList.toggle("is-on", on);
-    if (on) { if (!W) resize(); else draw(performance.now()); schedule(); }
+    if (on) { resetMeteors(); if (!W) resize(); else draw(performance.now()); schedule(); }
   }
 
   function init() {
     document.body.insertBefore(canvas, document.body.firstChild);
     window.addEventListener("resize", function () { if (W) resize(); });
     window.addEventListener("scroll", function () { if (active() && reduce) return; if (active() && !raf) draw(performance.now()); }, { passive: true });
-    document.addEventListener("visibilitychange", schedule);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden && active()) resetMeteors();
+      schedule();
+    });
     document.addEventListener("themechange", update);
     update();
   }
