@@ -188,3 +188,6 @@
   .news-date { font-size: 11px; }
   .news-text { font-size: 12.5px; }
 }
+
+/* a little more room between the "News" heading and its box */
+#news-heading { margin-bottom: 11px; }
