@@ -11,7 +11,9 @@
    schemes, so without this a browser in dark mode would paint its own dark default
    page background behind the (light-mode) dark text. */
 html, html[data-theme="light"] {
-  color-scheme: light;
+  color-scheme: only light;   /* "only": stops browsers' auto-dark features (Brave Night mode,
+                                 Chrome "Auto Dark Mode") from repainting light mode; the
+                                 site has its own dark mode instead */
   background: #fff;
 }
 html[data-theme="light"] body { background: #fff; }
