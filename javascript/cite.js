@@ -103,9 +103,15 @@
     btn.setAttribute("aria-expanded", "false");
     btn.setAttribute("aria-controls", box.id);
     btn.innerHTML = 'Cite <span class="abs-caret" aria-hidden="true">&#9662;</span>';
-    var sep = document.createElement("strong");
-    sep.textContent = " | ";
-    access.appendChild(sep);
+    // No separator between the Abstract and Cite buttons; if there is no
+    // Abstract button, use the same dot that abstracts.js puts before it.
+    if (!access.querySelector(".abs-btn") && access.querySelector("a")) {
+      var dot = document.createElement("span");
+      dot.className = "access-dot";
+      dot.setAttribute("aria-hidden", "true");
+      dot.textContent = "\u2022";
+      access.appendChild(dot);
+    }
     access.appendChild(btn);
 
     btn.addEventListener("click", function () {

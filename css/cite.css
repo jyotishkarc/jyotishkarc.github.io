@@ -60,3 +60,12 @@
 }
 
 .cite-count i { font-size: 0.8em; margin-right: 2px; opacity: 0.8; }
+
+/* Dot between the last link and the Abstract/Cite buttons; small gap between the buttons */
+.access-dot {
+  display: inline-block;
+  margin: 0 7px 0 6px;
+  color: #8a8799;
+  font-weight: 700;
+}
+.publication-access .abs-btn + .abs-btn { margin-left: 6px; }

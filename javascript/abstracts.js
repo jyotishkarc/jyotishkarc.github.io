@@ -78,9 +78,12 @@
     btn.setAttribute("aria-controls", box.id);
     btn.innerHTML = 'Abstract <span class="abs-caret" aria-hidden="true">&#9662;</span>';
 
-    if (access.querySelector("a, span, button")) {
-      var sep = document.createElement("strong");
-      sep.textContent = " | ";
+    // A dot separates the links from the buttons ("… | arXiv • Abstract Cite").
+    if (access.querySelector("a")) {
+      var sep = document.createElement("span");
+      sep.className = "access-dot";
+      sep.setAttribute("aria-hidden", "true");
+      sep.textContent = "\u2022";
       access.appendChild(sep);
     } else {
       access.appendChild(document.createTextNode(" "));
