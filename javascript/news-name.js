@@ -1,8 +1,8 @@
-/* Homepage: "About my name" dropdown, optional name recording, News "Show older". */
+/* Homepage: "What's in my name?" dropdown, optional name recording, News "Show older". */
 (function () {
   "use strict";
 
-  /* ---- About my name ---- */
+  /* ---- What's in my name? ---- */
   var btn = document.querySelector(".name-btn");
   var box = document.getElementById("name-box");
   if (btn && box) {

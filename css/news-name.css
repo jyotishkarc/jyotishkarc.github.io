@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Homepage: "About my name" dropdown and the News list
+   Homepage: "What's in my name?" dropdown and the News list
    ========================================================================== */
 
-/* ---- About my name ---- */
+/* ---- What's in my name? ---- */
 .name-line { margin-top: 4px; }
 
 .name-btn {
@@ -59,6 +59,7 @@
   grid-template-columns: max-content 1fr;
   column-gap: 18px;
   row-gap: 10px;
+  align-items: baseline;            /* labels sit on the same line as their text */
   margin: 0;
   padding: 14px 18px;
   text-align: left;
@@ -70,7 +71,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #6a4fd6;
-  padding-top: 3px;
 }
 
 .name-list dd {
@@ -78,6 +78,11 @@
   font-size: 14.5px;
   line-height: 1.55;
   color: #2b2b33;
+}
+
+.name-deva {
+  font-family: "Noto Serif Devanagari", "Noto Sans Devanagari", "Kohinoor Devanagari", "Mangal", serif;
+  font-size: 1.05em;
 }
 
 .name-bengali {
