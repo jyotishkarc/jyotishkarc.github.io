@@ -1,6 +1,6 @@
 /* Light/dark theme toggle.
    The initial theme is set by a tiny inline script in each page's <head>
-   (saved choice, else the system setting) so the page never flashes.
+   (light, unless the visitor chose dark) so the page never flashes.
    The toggle button lives in the injected header, so we use delegation. */
 (function () {
   "use strict";
@@ -31,17 +31,6 @@
     apply(next, true);
   });
 
-  // Follow the system setting until the visitor picks one themselves.
-  if (window.matchMedia) {
-    var mq = window.matchMedia("(prefers-color-scheme: dark)");
-    var onChange = function (ev) {
-      var saved = null;
-      try { saved = localStorage.getItem(KEY); } catch (err) {}
-      if (!saved) apply(ev.matches ? "dark" : "light", true);
-    };
-    if (mq.addEventListener) mq.addEventListener("change", onChange);
-    else if (mq.addListener) mq.addListener(onChange);
-  }
 
   // Sync the button's label once the header has been injected.
   var sync = function () { apply(root.getAttribute("data-theme") || "light", false); };
