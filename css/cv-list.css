@@ -152,3 +152,43 @@
   .cv-note { font-size: 11.5px; }
   .cv-date { font-size: 10.5px; margin-left: 6px; }
 }
+
+/* ---- Current affiliation (ISyE lockup) under the photo ----
+   Official vector logos: full colour on a white card in light mode, the
+   all-white version on a dark card in dark mode (as Georgia Tech's guide prefers). */
+.affiliation {
+  display: block;
+  box-sizing: border-box;
+  align-self: center;
+  width: 90%;                               /* the icon row and CV button are drawn at 90%: match them */
+  margin: 2px 0 18px;
+  padding: 13px 16px;
+  background: #fff;
+  border: 1px solid #e4dff0;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(40, 25, 100, 0.05), 0 6px 16px rgba(40, 25, 100, 0.07);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+/* width:0 + min-width:100% keeps the logo's own 640px width from widening the column */
+.affiliation img { width: 0; min-width: 100%; height: auto; }
+.affiliation .aff-light { display: block; }
+.affiliation .aff-dark { display: none; }
+.affiliation:hover {
+  border-color: #b19de7;
+  box-shadow: 0 1px 2px rgba(40, 25, 100, 0.06), 0 10px 22px rgba(70, 40, 160, 0.13);
+  transform: translateY(-1px);
+}
+.affiliation:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 3px; }
+html[data-theme="dark"] .affiliation {
+  background: #1a1923;
+  border-color: #34304a;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+html[data-theme="dark"] .affiliation .aff-light { display: none; }
+html[data-theme="dark"] .affiliation .aff-dark { display: block; }
+html[data-theme="dark"] .affiliation:hover { border-color: #b9a8ff; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 0 1px #b9a8ff; }
+@media (prefers-reduced-motion: reduce) { .affiliation { transition: none; } .affiliation:hover { transform: none; } }
+@media (max-width: 1000px) {
+  /* the social icons are drawn at 80% on phones; match their width */
+  .affiliation { align-self: center; width: calc(0.8 * (4 * var(--icon-size, 50px) + 3 * var(--icon-gap, 24px))); margin-bottom: 6px; }
+}
