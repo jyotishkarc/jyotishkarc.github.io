@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script>
+            /* Set light/dark before first paint: saved choice, else the system setting. */
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t !== "dark" && t !== "light") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                    document.documentElement.setAttribute("data-theme", t);
+                } catch (e) {}
+            })();
+        </script>
+        <meta name="color-scheme" content="light dark">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
         <title>Teaching | Jyotishka Ray Choudhury</title>
@@ -22,6 +33,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../css/dark.css">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1PHQE8C8N"></script>
@@ -35,6 +47,7 @@
         </script>
 
         <script src="../javascript/scroll-rainbow.js" defer></script>
+        <script src="../javascript/theme.js" defer></script>
     </head>
 
     <body onload="document.body.style.opacity='1'">
