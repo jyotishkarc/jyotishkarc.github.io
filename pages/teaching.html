@@ -2,16 +2,16 @@
 <html lang="en">
     <head>
         <script>
-            /* Set light/dark before first paint: saved choice, else the system setting. */
+            /* Set light/dark before first paint: light unless the visitor chose dark. */
             (function () {
                 try {
                     var t = localStorage.getItem("theme");
-                    if (t !== "dark" && t !== "light") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                    if (t !== "dark") t = "light";
                     document.documentElement.setAttribute("data-theme", t);
                 } catch (e) {}
             })();
         </script>
-        <meta name="color-scheme" content="light dark">
+        <meta name="color-scheme" content="light">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
         <title>Teaching | Jyotishka Ray Choudhury</title>
