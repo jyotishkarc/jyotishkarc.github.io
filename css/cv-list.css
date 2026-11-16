@@ -167,7 +167,7 @@
   border: 1px solid #e4dff0;
   border-radius: 14px;
   box-shadow: 0 1px 2px rgba(40, 25, 100, 0.05), 0 6px 16px rgba(40, 25, 100, 0.07);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 /* width:0 + min-width:100% keeps the logo's own 640px width from widening the column */
 .affiliation img { width: 0; min-width: 100%; height: auto; }
@@ -176,7 +176,6 @@
 .affiliation:hover {
   border-color: #b19de7;
   box-shadow: 0 1px 2px rgba(40, 25, 100, 0.06), 0 10px 22px rgba(70, 40, 160, 0.13);
-  transform: translateY(-1px);
 }
 .affiliation:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 3px; }
 html[data-theme="dark"] .affiliation {
@@ -187,7 +186,7 @@ html[data-theme="dark"] .affiliation {
 html[data-theme="dark"] .affiliation .aff-light { display: none; }
 html[data-theme="dark"] .affiliation .aff-dark { display: block; }
 html[data-theme="dark"] .affiliation:hover { border-color: #b9a8ff; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 0 1px #b9a8ff; }
-@media (prefers-reduced-motion: reduce) { .affiliation { transition: none; } .affiliation:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .affiliation { transition: none; } }
 @media (max-width: 1000px) {
   /* the social icons are drawn at 80% on phones; match their width */
   .affiliation { align-self: center; width: calc(0.8 * (4 * var(--icon-size, 50px) + 3 * var(--icon-gap, 24px))); margin-bottom: 6px; }
