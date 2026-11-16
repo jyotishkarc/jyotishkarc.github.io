@@ -1466,3 +1466,16 @@ nav .fa-bars {
 
 
 }
+
+/* "Last updated" line added to the footer by javascript/last-updated.js */
+.footer:has(.last-updated) { flex-wrap: wrap; }
+.last-updated {
+  display: block;
+  flex-basis: 100%;
+  text-align: center;
+  font-weight: normal;
+  margin-top: 4px;
+  font-size: 0.78em;
+  color: #8a8799;
+}
+html[data-theme="dark"] .last-updated { color: #908ca3; }
