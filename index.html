@@ -29,6 +29,7 @@
         <!-- link to main stylesheet -->
         <link rel="stylesheet" type="text/css" href="css/styling.css">
         <link rel="stylesheet" type="text/css" href="css/cv-list.css">
+        <link rel="stylesheet" type="text/css" href="css/globe.css">
         
         <!-- Font Awesome symbols -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -129,6 +130,16 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Visitor globe. Put the Cloudflare Worker URL in data-stats (see worker/README.md). -->
+                <figure class="visitor-globe" id="visitor-globe" data-stats="">
+                    <div class="globe-stage">
+                        <canvas role="img" aria-label="Globe showing where visitors to this site come from"></canvas>
+                        <div class="globe-tip" hidden></div>
+                    </div>
+                    <figcaption hidden></figcaption>
+                    <p class="globe-credit">Globe inspired by <a href="https://bo-dai.github.io/" target="_blank" rel="noopener">Bo Dai</a></p>
+                </figure>
             </div>
 
 
@@ -237,6 +248,8 @@
         <script src="javascript/open-close-menu.js" defer></script>
         <script src="javascript/remote-cv-button-trigger.js" defer></script>
         <script src="javascript/email-button.js" defer></script>
+        <script src="javascript/globe-land.js" defer></script>
+        <script src="javascript/globe.js" defer></script>
 
         <!-- <script src="javascript/open-close-menu.js"></script> -->
         <!-- <script src="/javascript/site-header.js" defer></script> -->
