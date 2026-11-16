@@ -24,7 +24,7 @@
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext("2d");
 
-  var C = {
+  var LIGHT = {
     orbHi: "rgba(255,255,255,0.98)",
     orbMid: "rgba(246,244,252,0.9)",
     orbLo: "rgba(222,216,240,0.95)",
@@ -36,6 +36,24 @@
     marker: "#5b3cc4",
     markerHalo: "rgba(91,60,196,0.22)"
   };
+  var DARK = {
+    orbHi: "rgba(52,47,82,0.98)",
+    orbMid: "rgba(33,30,52,0.96)",
+    orbLo: "rgba(20,18,32,0.98)",
+    rim: "rgba(190,178,240,0.55)",
+    graticule: "rgba(190,178,240,0.10)",
+    equator: "rgba(185,168,255,0.38)",
+    coastHalo: "rgba(185,168,255,0.10)",
+    coast: "rgba(232,228,245,0.78)",
+    marker: "#c4b5ff",
+    markerHalo: "rgba(196,181,255,0.25)"
+  };
+  function isDark() { return document.documentElement.getAttribute("data-theme") === "dark"; }
+  var C = isDark() ? DARK : LIGHT;
+  document.addEventListener("themechange", function () {
+    C = isDark() ? DARK : LIGHT;
+    draw(performance.now());
+  });
 
   var reduceMotion = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -122,7 +140,7 @@
       ctx.fillStyle = C.markerHalo;
       ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 2 + pulse * 6, 0, 2 * Math.PI); ctx.fill();
       ctx.globalAlpha = a;
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = isDark() ? "#121119" : "#fff";
       ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 1.2, 0, 2 * Math.PI); ctx.fill();
       ctx.fillStyle = C.marker;
       ctx.beginPath(); ctx.arc(o.sx, o.sy, s, 0, 2 * Math.PI); ctx.fill();
