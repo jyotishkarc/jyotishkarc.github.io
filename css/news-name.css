@@ -148,9 +148,9 @@
 }
 .news-list.has-more::after { opacity: 1; }
 /* a slim pill scrollbar, kept clear of the corners (Chrome, Edge, Safari) */
-.news-list::-webkit-scrollbar { width: 8px; }
+.news-list::-webkit-scrollbar { width: 6px; }
 .news-list::-webkit-scrollbar-track { background: transparent; margin: 7px 0; }
-.news-list::-webkit-scrollbar-thumb { background: #cfc4ef; background-clip: padding-box; border: 2px solid transparent; border-radius: 8px; }
+.news-list::-webkit-scrollbar-thumb { background: #cfc4ef; background-clip: padding-box; border: 1.5px solid transparent; border-radius: 6px; }
 .news-list::-webkit-scrollbar-thumb:hover { background-color: #a996e6; }
 /* Firefox */
 @supports not selector(::-webkit-scrollbar) {
