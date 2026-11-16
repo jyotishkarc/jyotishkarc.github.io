@@ -8,8 +8,5 @@ is shown instead, so nothing looks broken.
 |---------------|------------------------------------------------------|
 | `gatech.png`  | Georgia Institute of Technology                      |
 | `isi.png`     | Indian Statistical Institute                         |
-| `penn.png`    | The Wharton School / University of Pennsylvania      |
-| `iimb.png`    | Indian Institute of Management Bangalore             |
-| `iitk.png`    | Indian Institute of Technology Kanpur                |
 
 To use an SVG instead, change the matching `src="images/logos/…"` in `index.html`.

@@ -114,6 +114,11 @@
   margin-top: 1px;
 }
 
+.cv-note-strong {
+  font-weight: 600;
+  color: #4f4f5a;
+}
+
 .cv-date {
   font-size: 13px;
   font-weight: 600;
