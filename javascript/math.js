@@ -43,7 +43,7 @@
   function run() {
     var root = document.querySelector("main") || document.body;
     if (!hasMath(root)) return;
-    load("link", FILES.css);
+    load("link", FILES.css).catch(function () {});
     var st = document.createElement("style");             // KaTeX's default (1.21em) runs large beside body text
     st.textContent = ".katex { font-size: 1.08em; }";
     document.head.appendChild(st);
