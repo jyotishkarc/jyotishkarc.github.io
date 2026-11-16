@@ -301,4 +301,8 @@ html[data-theme="dark"] .text-content .news-credit a:hover { color: var(--dm-acc
 /* the page colour stays on <html>; the body is transparent so the stars show
    through, while cards, header and boxes keep their own surfaces */
 html[data-theme="dark"] body { background: transparent; }
-@media print { #night-sky { display: none; } }
+/* shooting stars: a clipped layer inside the header, behind its contents */
+.header-sky { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; z-index: -1; }
+.header-sky canvas { display: block; width: 100%; height: 100%; }
+html:not([data-theme="dark"]) .header-sky { display: none; }
+@media print { #night-sky, .header-sky { display: none; } }
