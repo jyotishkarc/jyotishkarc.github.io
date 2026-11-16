@@ -147,7 +147,7 @@
 
 .news-list li {
   display: grid;
-  grid-template-columns: 82px 1fr;
+  grid-template-columns: 116px 1fr;   /* fits "September 2026" */
   column-gap: 14px;
   align-items: baseline;
   padding: 6px 0;
@@ -184,7 +184,7 @@
   .name-list dd { font-size: 12.5px; margin-bottom: 8px; }
   .name-bengali { font-size: 15px !important; }
   .news-list { max-height: 300px; padding: 2px 10px; }
-  .news-list li { grid-template-columns: 64px 1fr; column-gap: 10px; }
+  .news-list li { grid-template-columns: 1fr; row-gap: 1px; }   /* date above the text on phones */
   .news-date { font-size: 11px; }
   .news-text { font-size: 12.5px; }
 }
