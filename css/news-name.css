@@ -112,9 +112,38 @@
 .news-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 2px 14px 2px 14px;
   text-align: left;
+  /* a box that shows ~5 items and scrolls for the rest */
+  max-height: 262px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #e6e1f4;
+  border-radius: 10px;
+  --news-bg: #fcfbff;
+  background: var(--news-bg);
+  scrollbar-width: thin;
+  scrollbar-color: #cfc4ef transparent;
 }
+.news-list:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
+/* soft fade at the bottom while there is more to scroll */
+.news-list::after {
+  content: "";
+  position: sticky;
+  bottom: 0;
+  display: block;
+  height: 34px;
+  margin: -34px -14px 0;
+  background: linear-gradient(to bottom, rgba(252, 251, 255, 0), var(--news-bg, #fcfbff));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.news-list.has-more::after { opacity: 1; }
+.news-list::-webkit-scrollbar { width: 8px; }
+.news-list::-webkit-scrollbar-track { background: transparent; }
+.news-list::-webkit-scrollbar-thumb { background: #cfc4ef; border-radius: 8px; border: 2px solid #fcfbff; }
+.news-list::-webkit-scrollbar-thumb:hover { background: #a996e6; }
 
 .news-list li {
   display: grid;
@@ -144,30 +173,17 @@
 
 .text-content .news-text a { font-size: inherit; }
 
-.news-more {
-  margin-top: 6px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: #5b4a9e;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
 
-.news-more span { display: inline-block; font-size: 0.75em; transition: transform 0.3s ease; }
-.news-more[aria-expanded="true"] span { transform: rotate(180deg); }
-.news-more:hover { color: #4a2fb0; text-decoration: underline; }
 
 @media (prefers-reduced-motion: reduce) {
-  .name-box, .name-caret, .news-more span { transition: none; }
+  .name-box, .name-caret { transition: none; }
 }
 
 @media (max-width: 1000px) {
   .name-list { grid-template-columns: 1fr; row-gap: 2px; padding: 10px 12px; }
   .name-list dd { font-size: 12.5px; margin-bottom: 8px; }
   .name-bengali { font-size: 15px !important; }
+  .news-list { max-height: 300px; padding: 2px 10px; }
   .news-list li { grid-template-columns: 64px 1fr; column-gap: 10px; }
   .news-date { font-size: 11px; }
   .news-text { font-size: 12.5px; }
