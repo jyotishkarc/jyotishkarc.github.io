@@ -120,6 +120,8 @@ html[data-theme="dark"] .cv-label { color: var(--dm-muted); }
 html[data-theme="dark"] .cv-date { background: var(--dm-accent-bg); color: var(--dm-accent); }
 /* logos keep their own colours on a light square */
 html[data-theme="dark"] .cv-logo { background: #f3f1f8; }
+/* round seals (white inside, transparent outside) need no tile */
+html[data-theme="dark"] .cv-logo--round:has(img) { background: transparent; }
 
 /* ---- globe ---- */
 html[data-theme="dark"] .visitor-globe canvas { filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55)); }
