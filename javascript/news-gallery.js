@@ -37,11 +37,13 @@
   viewer.innerHTML =
     '<button type="button" class="pv-btn pv-close" aria-label="Close">' + ICON.close + "</button>" +
     '<button type="button" class="pv-btn pv-prev" aria-label="Previous photo">' + ICON.prev + "</button>" +
-    "<figure><img alt=\"\"><figcaption></figcaption></figure>" +
+    "<figure><img alt=\"\"><figcaption></figcaption><p class=\"pv-credit\"></p></figure>" +
     '<button type="button" class="pv-btn pv-next" aria-label="Next photo">' + ICON.next + "</button>";
   document.body.appendChild(viewer);
   var vImg = viewer.querySelector("img");
   var vCap = viewer.querySelector("figcaption");
+  var vCredit = viewer.querySelector(".pv-credit");
+  var credit = null;
   var list = [], idx = 0, returnFocus = null;
 
   function show(i) {
@@ -50,8 +52,23 @@
     vImg.alt = list[idx].alt;
     vCap.textContent = list.length > 1 ? (idx + 1) + " / " + list.length : "";
   }
-  function openViewer(imgs, i, from) {
+
+  // Credit line: plain text, or a link when the gallery has data-credit-url.
+  function renderCredit(target, c) {
+    target.textContent = "";
+    if (!c || !c.text) return;
+    if (c.url) {
+      var a = document.createElement("a");
+      a.href = c.url; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = c.text;
+      target.appendChild(a);
+    } else {
+      target.textContent = c.text;
+    }
+  }
+  function openViewer(imgs, i, from, c) {
     list = imgs; returnFocus = from;
+    renderCredit(vCredit, c);
     viewer.classList.toggle("single", imgs.length < 2);
     show(i);
     viewer.classList.add("is-open");
@@ -69,7 +86,7 @@
     if (e.target.closest(".pv-prev")) return show(idx - 1);
     if (e.target.closest(".pv-next")) return show(idx + 1);
     if (e.target.closest(".pv-close")) return closeViewer();
-    if (e.target === vImg) return;            // clicking the photo itself does nothing
+    if (e.target === vImg || e.target.closest(".pv-credit a")) return;  // photo / credit link: don't close
     closeViewer();                             // anywhere else closes
   });
 
@@ -89,6 +106,15 @@
     btn.addEventListener("click", function () {
       setGallery(box, btn, !box.classList.contains("is-open"));
     });
+    var c = box.hasAttribute("data-credit")
+      ? { text: box.getAttribute("data-credit"), url: box.getAttribute("data-credit-url") }
+      : null;
+    if (c) {                       // small credit line under the row of photos
+      var line = document.createElement("p");
+      line.className = "news-credit";
+      renderCredit(line, c);
+      box.querySelector(".news-gallery-inner").insertAdjacentElement("afterend", line);
+    }
     var thumbs = Array.prototype.slice.call(box.querySelectorAll(".news-thumb"));
     var imgs = thumbs.map(function (t) {
       var im = t.querySelector("img");
@@ -96,7 +122,7 @@
     });
     thumbs.forEach(function (t, i) {
       t.setAttribute("aria-label", "Open photo " + (i + 1) + " of " + thumbs.length);
-      t.addEventListener("click", function () { openViewer(imgs, i, t); });
+      t.addEventListener("click", function () { openViewer(imgs, i, t, c); });
     });
   });
 
