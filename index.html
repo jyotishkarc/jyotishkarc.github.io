@@ -28,6 +28,7 @@
         
         <!-- link to main stylesheet -->
         <link rel="stylesheet" type="text/css" href="css/styling.css">
+        <link rel="stylesheet" type="text/css" href="css/cv-list.css">
         
         <!-- Font Awesome symbols -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -151,6 +152,103 @@
                 <p>
                     The correct pronunciation of my first name sounds like <strong>jo-TISH-ko</strong>.
                 </p>
+
+                <div class="cv-sections">
+                    <section aria-labelledby="education-heading">
+                        <h2 class="cv-heading" id="education-heading">Education</h2>
+                        <ul class="cv-list">
+                        <li class="cv-item" data-place="atlanta">
+                            <span class="cv-logo" style="--mono-bg: #003057">
+                                <span class="cv-mono" aria-hidden="true">GT</span>
+                                <img src="images/logos/gatech.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Ph.D. in Machine Learning</div>
+                                <div class="cv-org"><a href="https://www.gatech.edu/" target="_blank" rel="noopener">Georgia Institute of Technology</a>, Atlanta, USA</div>
+                                <div class="cv-note">School of Industrial &amp; Systems Engineering (ISyE)</div>
+                            </div>
+                            <span class="cv-date">2024 – present</span>
+                        </li>
+                        <li class="cv-item" data-place="kolkata">
+                            <span class="cv-logo" style="--mono-bg: #7a1f2b">
+                                <span class="cv-mono" aria-hidden="true">ISI</span>
+                                <img src="images/logos/isi.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Master of Statistics (M.Stat)</div>
+                                <div class="cv-org"><a href="https://www.isical.ac.in/" target="_blank" rel="noopener">Indian Statistical Institute</a>, Kolkata, India</div>
+                                <div class="cv-note">Specialization: Theoretical Statistics</div>
+                            </div>
+                            <span class="cv-date">2022 – 2024</span>
+                        </li>
+                        <li class="cv-item" data-place="kolkata">
+                            <span class="cv-logo" style="--mono-bg: #7a1f2b">
+                                <span class="cv-mono" aria-hidden="true">ISI</span>
+                                <img src="images/logos/isi.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Bachelor of Statistics (B.Stat), Honours</div>
+                                <div class="cv-org"><a href="https://www.isical.ac.in/" target="_blank" rel="noopener">Indian Statistical Institute</a>, Kolkata, India</div>
+                            </div>
+                            <span class="cv-date">2019 – 2022</span>
+                        </li>
+                        </ul>
+                    </section>
+
+                    <section aria-labelledby="experience-heading">
+                        <h2 class="cv-heading" id="experience-heading">Experience</h2>
+                        <ul class="cv-list">
+                        <li class="cv-item" data-place="atlanta">
+                            <span class="cv-logo" style="--mono-bg: #003057">
+                                <span class="cv-mono" aria-hidden="true">GT</span>
+                                <img src="images/logos/gatech.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Graduate Teaching Assistant</div>
+                                <div class="cv-org"><a href="https://www.gatech.edu/" target="_blank" rel="noopener">Georgia Institute of Technology</a>, Atlanta, USA</div>
+                                <div class="cv-note">ISyE 6416 &amp; ISyE 7416</div>
+                            </div>
+                            <span class="cv-date">Fall 2025</span>
+                        </li>
+                        <li class="cv-item" data-place="philadelphia">
+                            <span class="cv-logo" style="--mono-bg: #011f5b">
+                                <span class="cv-mono" aria-hidden="true">Penn</span>
+                                <img src="images/logos/penn.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Research Project</div>
+                                <div class="cv-org"><a href="https://www.wharton.upenn.edu/" target="_blank" rel="noopener">The Wharton School, University of Pennsylvania</a></div>
+                                <div class="cv-note">Saddlepoint approximations for the distilled CRT, with Prof. Eugene Katsevich</div>
+                            </div>
+                            <span class="cv-date">Summer 2023</span>
+                        </li>
+                        <li class="cv-item" data-place="bangalore">
+                            <span class="cv-logo" style="--mono-bg: #1f4e8c">
+                                <span class="cv-mono" aria-hidden="true">IIMB</span>
+                                <img src="images/logos/iimb.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Research Intern</div>
+                                <div class="cv-org"><a href="https://www.iimb.ac.in/" target="_blank" rel="noopener">Indian Institute of Management Bangalore</a></div>
+                                <div class="cv-note">Nonparametric multivariate time-series regression</div>
+                            </div>
+                            <span class="cv-date">Summer 2022</span>
+                        </li>
+                        <li class="cv-item" data-place="kanpur">
+                            <span class="cv-logo" style="--mono-bg: #8c2d19">
+                                <span class="cv-mono" aria-hidden="true">IITK</span>
+                                <img src="images/logos/iitk.png" alt="" loading="lazy" onerror="this.remove()">
+                            </span>
+                            <div class="cv-body">
+                                <div class="cv-title">Research Project</div>
+                                <div class="cv-org"><a href="https://www.iitk.ac.in/" target="_blank" rel="noopener">Indian Institute of Technology Kanpur</a></div>
+                                <div class="cv-note">Robust classification of high-dimensional data, with Prof. Subhajit Dutta</div>
+                            </div>
+                            <span class="cv-date">Summer 2021</span>
+                        </li>
+                        </ul>
+                    </section>
+                </div>
             </div>
         </section>
 
