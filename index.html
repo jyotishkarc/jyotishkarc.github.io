@@ -46,6 +46,7 @@
         <link rel="stylesheet" type="text/css" href="css/styling.css">
         <link rel="stylesheet" type="text/css" href="css/cv-list.css">
         <link rel="stylesheet" type="text/css" href="css/news-name.css">
+        <link rel="stylesheet" type="text/css" href="css/news-gallery.css">
         <!-- Devanagari font, subset to the two Sanskrit words in "What's in my name?" -->
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500&text=%E0%A4%95%E0%A4%9C%E0%A4%A4%E0%A4%AF%E0%A4%B7%E0%A4%B8%E0%A4%BF%E0%A5%8B%E0%A5%8D&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/globe.css">
@@ -258,7 +259,15 @@
                         <ul class="news-list" tabindex="0" aria-label="News, newest first">
                             <li>
                                 <span class="news-date">October 2026</span>
-                                <span class="news-text">Won the Best Poster Award at <a href="https://hg.gatech.edu/node/692380" target="_blank" rel="noopener">Georgia Statistics Day 2026</a>.</span>
+                                <span class="news-text">Thrilled to have won the <strong class="news-strong">Best Poster Award</strong> at <a href="https://hg.gatech.edu/node/692380" target="_blank" rel="noopener">Georgia Statistics Day 2026</a>! Here are <button type="button" class="news-photos-btn" aria-expanded="false" aria-controls="gsd-2026-photos">some photos</button> and <a class="news-photos-link" href="https://lnkd.in/p/dKx9J_-5" target="_blank" rel="noopener">some more photos</a>.</span>
+                                <div class="news-gallery" id="gsd-2026-photos" aria-hidden="true" inert>
+                                    <div class="news-gallery-inner">
+                                        <!-- Up to a few photos; each opens in a full-size viewer. Put files in images/news/. -->
+                                        <button type="button" class="news-thumb"><img src="images/news/gsd-2026-1.jpg" alt="Georgia Statistics Day 2026, photo 1" loading="lazy"></button>
+                                        <button type="button" class="news-thumb"><img src="images/news/gsd-2026-2.jpg" alt="Georgia Statistics Day 2026, photo 2" loading="lazy"></button>
+                                        <button type="button" class="news-thumb"><img src="images/news/gsd-2026-3.jpg" alt="Georgia Statistics Day 2026, photo 3" loading="lazy"></button>
+                                    </div>
+                                </div>
                             </li>
                             <li>
                                 <span class="news-date">October 2026</span>
@@ -349,6 +358,7 @@
         <script src="javascript/remote-cv-button-trigger.js" defer></script>
         <script src="javascript/email-button.js" defer></script>
         <script src="javascript/news-name.js" defer></script>
+        <script src="javascript/news-gallery.js" defer></script>
         <script src="javascript/globe-land.js" defer></script>
         <script src="javascript/globe.js" defer></script>
 
