@@ -23,6 +23,19 @@
     });
   }
 
+  /* ---- IPA beside the first name: slides out to the right (or wraps below if there's no room) ---- */
+  var ipaBtn = document.querySelector(".ipa-btn");
+  var ipa = ipaBtn && document.getElementById(ipaBtn.getAttribute("aria-controls"));
+  if (ipaBtn && ipa) {
+    ipaBtn.addEventListener("click", function () {
+      var open = !ipa.classList.contains("is-open");
+      ipa.classList.toggle("is-open", open);
+      ipa.setAttribute("aria-hidden", String(!open));
+      ipa.inert = !open;
+      ipaBtn.setAttribute("aria-expanded", String(open));
+    });
+  }
+
   /* ---- recording: the Listen button appears only once assets/audio/name.mp3 exists ---- */
   var audio = document.querySelector(".name-audio");
   var play = document.querySelector(".name-play");

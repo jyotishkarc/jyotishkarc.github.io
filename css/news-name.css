@@ -192,10 +192,36 @@
 /* a little more room between the "News" heading and its box */
 #news-heading { margin-bottom: 11px; }
 
-/* "How to say it": first name and surname on their own lines, each with its IPA */
+/* "How to say it": first name and surname on their own lines; the first name's IPA slides out from a small pill */
 .name-say { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; }
 .name-say + .name-say { margin-top: 2px; }
 .name-say-part { min-width: 5.6em; font-size: 12.5px; color: #77738a; }
+.ipa-btn {
+  all: unset;
+  align-self: center;
+  padding: 0 8px;
+  border: 1px solid #d9d0f3;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: #4a2fb0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.ipa-btn:hover { background: #f4f0ff; }
+.ipa-btn:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
+.ipa-caret { display: inline-block; font-size: 0.9em; transition: transform 0.3s ease; }
+.ipa-btn[aria-expanded="true"] .ipa-caret { transform: rotate(180deg); }
+.ipa-reveal {
+  display: inline-grid;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  transition: grid-template-columns 0.32s ease, opacity 0.25s ease;
+}
+.ipa-reveal.is-open { grid-template-columns: 1fr; opacity: 1; }
+.ipa-inner { min-width: 0; overflow: hidden; white-space: nowrap; }
 .name-list .name-ipa {
   font-family: "Charis SIL", "Doulos SIL", "Gentium Plus", "Noto Serif", "Times New Roman", serif;
   font-size: 15px;
@@ -206,6 +232,9 @@
   text-underline-offset: 3px;
 }
 .name-list .name-ipa:hover { color: #4a2fb0; text-decoration-color: currentColor; }
+@media (prefers-reduced-motion: reduce) { .ipa-reveal, .ipa-caret { transition: none; } }
 html[data-theme="dark"] .name-say-part { color: #9a96ad; }
+html[data-theme="dark"] .ipa-btn { border-color: #3a3456; color: #c9bcff; }
+html[data-theme="dark"] .ipa-btn:hover { background: #2a2445; }
 html[data-theme="dark"] .name-list .name-ipa { color: #c8c4d6; text-decoration-color: #5d5878; }
 html[data-theme="dark"] .name-list .name-ipa:hover { color: #d4c9ff; }
