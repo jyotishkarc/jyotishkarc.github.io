@@ -80,6 +80,12 @@
   background: var(--mono-bg, #5b4a9e);
 }
 
+/* Once the logo image is there, hide the monogram behind it
+   (the image removes itself if the file is missing, bringing the monogram back). */
+.cv-logo:has(img) .cv-mono {
+  display: none;
+}
+
 /* ---- text ---- */
 .cv-body {
   min-width: 0;
