@@ -161,7 +161,7 @@
   box-sizing: border-box;
   align-self: center;
   width: 90%;                               /* the icon row and CV button are drawn at 90%: match them */
-  margin: 2px 0 18px;
+  margin: 2px 0 10px;
   padding: 13px 16px;
   background: #fff;
   border: 1px solid #e4dff0;
@@ -189,5 +189,5 @@ html[data-theme="dark"] .affiliation:hover { border-color: #b9a8ff; box-shadow: 
 @media (prefers-reduced-motion: reduce) { .affiliation { transition: none; } }
 @media (max-width: 1000px) {
   /* the social icons are drawn at 80% on phones; match their width */
-  .affiliation { align-self: center; width: calc(0.8 * (4 * var(--icon-size, 50px) + 3 * var(--icon-gap, 24px))); margin-bottom: 6px; }
+  .affiliation { align-self: center; width: calc(0.8 * (4 * var(--icon-size, 50px) + 3 * var(--icon-gap, 24px))); margin-bottom: 4px; }
 }
