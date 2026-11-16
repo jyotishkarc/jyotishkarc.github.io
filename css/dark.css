@@ -287,3 +287,18 @@ html[data-theme="dark"] .news-strong { color: var(--dm-strong); }
 html[data-theme="dark"] .news-credit,
 html[data-theme="dark"] .text-content p.news-credit { color: var(--dm-faint); }
 html[data-theme="dark"] .text-content .news-credit a:hover { color: var(--dm-accent); }
+
+/* ---- Night sky (dark mode only; drawn by javascript/night-sky.js) ---- */
+#night-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+#night-sky.is-on { opacity: 1; }
+/* the page colour stays on <html>; the body is transparent so the stars show
+   through, while cards, header and boxes keep their own surfaces */
+html[data-theme="dark"] body { background: transparent; }
+@media print { #night-sky { display: none; } }
