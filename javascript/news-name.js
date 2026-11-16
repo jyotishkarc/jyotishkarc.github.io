@@ -39,16 +39,15 @@
     audio.addEventListener("pause", function () { play.classList.remove("is-playing"); });
   }
 
-  /* ---- News: show / hide older items ---- */
-  var more = document.querySelector(".news-more");
-  var older = document.querySelectorAll(".news-older");
-  if (more) {
-    if (!older.length) { more.remove(); return; }
-    more.addEventListener("click", function () {
-      var open = more.getAttribute("aria-expanded") !== "true";
-      older.forEach(function (li) { li.hidden = !open; });
-      more.setAttribute("aria-expanded", String(open));
-      more.firstChild.textContent = open ? "Show fewer " : "Show older ";
-    });
+
+  /* ---- News box: fade the bottom edge while there is more to scroll ---- */
+  var news = document.querySelector(".news-list");
+  if (news) {
+    var update = function () {
+      news.classList.toggle("has-more", news.scrollTop + news.clientHeight < news.scrollHeight - 4);
+    };
+    news.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
   }
 })();
