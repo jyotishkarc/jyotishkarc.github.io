@@ -70,6 +70,10 @@
     <body onload="document.body.style.opacity='1'">
     <!-- <body> -->
         <div id="header-placeholder"></div>
+        <script>
+            /* Show the header from this visit's saved copy at once (no flash between pages); the fetch below refreshes it. */
+            try { window.__siteHeader = sessionStorage.getItem("site-header"); if (window.__siteHeader) document.getElementById("header-placeholder").innerHTML = window.__siteHeader; } catch (e) {}
+        </script>
 
 
         <!-- Load and insert the header -->
@@ -78,7 +82,8 @@
             .then(r => r.text())
             .then(html => {
                 // inject the header HTML
-                document.getElementById("header-placeholder").innerHTML = html;
+                try { sessionStorage.setItem("site-header", html); } catch (e) {}
+                if (window.__siteHeader !== html) document.getElementById("header-placeholder").innerHTML = html;
 
                 // now that the header exists, wire up the mobile menu
                 if (window.initMobileMenu) window.initMobileMenu();

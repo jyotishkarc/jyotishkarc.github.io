@@ -79,6 +79,10 @@
 
     <body>
         <div id="header-placeholder"></div>
+        <script>
+            /* Show the header from this visit's saved copy at once (no flash between pages); the fetch below refreshes it. */
+            try { window.__siteHeader = sessionStorage.getItem("site-header"); if (window.__siteHeader) document.getElementById("header-placeholder").innerHTML = window.__siteHeader; } catch (e) {}
+        </script>
         
         <!-- <script>
         fetch("/common-elements/site-header.html")
@@ -93,7 +97,8 @@
             fetch("/common-elements/site-header.html")
             .then(r => r.text())
             .then(html => {
-                document.getElementById("header-placeholder").innerHTML = html;
+                try { sessionStorage.setItem("site-header", html); } catch (e) {}
+                if (window.__siteHeader !== html) document.getElementById("header-placeholder").innerHTML = html;
 
                 // Wire the mobile menu after the async header is inserted
                 if (window.initMobileMenu) window.initMobileMenu();
