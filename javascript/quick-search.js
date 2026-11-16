@@ -119,6 +119,16 @@
   function niceName(key) {
     return key.replace(/\*$/, "").split("_").map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(" ");
   }
+  // Title text as written in the HTML, even if KaTeX has already typeset it
+  function rawTitle(h3) {
+    if (h3.hasAttribute("data-qs-title")) return h3.getAttribute("data-qs-title");
+    var c = h3.cloneNode(true);
+    c.querySelectorAll(".katex").forEach(function (k) {
+      var ann = k.querySelector("annotation");
+      k.replaceWith(ann ? "$" + ann.textContent + "$" : k.textContent);
+    });
+    return c.textContent.replace(/\s+/g, " ").trim();
+  }
   function paperSlug(li, title) {
     var abs = li.querySelector(".abstract-box[id^='abs-']");
     return abs ? abs.id.slice(4) : slugify(title);
@@ -133,7 +143,7 @@
         var card = li.querySelector(".publication-card");
         var h3 = card && card.querySelector("h3");
         if (!h3) return;
-        var raw = (h3.getAttribute("data-qs-title") || h3.textContent).replace(/\s+/g, " ").trim();
+        var raw = rawTitle(h3);
         var title = raw.replace(/\$([^$]+)\$/g, "$1");
         var venueEl = card.querySelector(".publication-venue");
         var venue = venueEl ? venueEl.textContent.replace(/\s+/g, " ").trim() : "";
@@ -182,8 +192,9 @@
       var card = li.querySelector(".publication-card"), h3 = card && card.querySelector("h3");
       if (!h3) return;
       // keep the raw title (before any math typesetting rewrites the heading)
-      if (!h3.hasAttribute("data-qs-title")) h3.setAttribute("data-qs-title", h3.textContent.replace(/\s+/g, " ").trim());
-      if (!card.id) card.id = "paper-" + paperSlug(li, h3.textContent.replace(/\s+/g, " ").trim());
+      var t = rawTitle(h3);
+      if (!h3.hasAttribute("data-qs-title")) h3.setAttribute("data-qs-title", t);
+      if (!card.id) card.id = "paper-" + paperSlug(li, t);
     });
   }
   function flashPaper(id) {
