@@ -31,12 +31,22 @@
     return { key: key, name: name, href: a ? a.getAttribute("href") : null };
   }
 
+  // Title as plain text, even if KaTeX has already typeset its math
+  function titleOf(h3) {
+    var c = h3.cloneNode(true);
+    c.querySelectorAll(".katex").forEach(function (k) {
+      var ann = k.querySelector("annotation");
+      k.replaceWith(ann ? ann.textContent : k.textContent);
+    });
+    return c.textContent.replace(/\$/g, "").replace(/\s+/g, " ").trim();
+  }
+
   function collect() {
     var papers = [];
     document.querySelectorAll(".publication-card[data-authors]").forEach(function (card) {
       var keys = card.getAttribute("data-authors").split(",").map(function (k) { return k.trim().replace(/\*$/, ""); }).filter(Boolean);
       var h3 = card.querySelector("h3");
-      papers.push({ keys: keys, title: h3 ? (h3.getAttribute("data-qs-title") || h3.textContent).replace(/\s+/g, " ").replace(/\$/g, "").trim() : "" });
+      papers.push({ keys: keys, title: h3 ? titleOf(h3) : "" });
     });
     var nodes = {}, order = [], pairs = {};
     papers.forEach(function (p) {
