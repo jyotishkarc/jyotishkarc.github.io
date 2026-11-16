@@ -29,6 +29,7 @@
         <!-- link to main stylesheet -->
         <link rel="stylesheet" type="text/css" href="css/styling.css">
         <link rel="stylesheet" type="text/css" href="css/cv-list.css">
+        <link rel="stylesheet" type="text/css" href="css/news-name.css">
         <link rel="stylesheet" type="text/css" href="css/globe.css">
         
         <!-- Font Awesome symbols -->
@@ -160,11 +161,83 @@
                     I was born and raised in <a href="https://en.wikipedia.org/wiki/Birati" target="_blank" class="other-link">Birati</a>, a lively suburb on the north side of <a href="https://en.wikipedia.org/wiki/Kolkata" target="_blank" class="other-link">Kolkata</a>, <a href="https://en.wikipedia.org/wiki/West_Bengal" target="_blank" class="other-link">West Bengal</a>, India. I'm a native <a href="https://en.wikipedia.org/wiki/Bengali_language" target="_blank" class="other-link">Bengali</a> speaker. I do not have a lot of hobbies, but have a firm interest in a bunch of things, including but not limited to science, technology, finance, cooking, football (soccer), table tennis, chess, history, wildlife, languages, high-performance computing, etc. I can read, write, and speak Bengali, Hindi, and English, and I know a little Spanish too.
                 </p>
 
-                <p>
-                    The correct pronunciation of my first name sounds like <strong>jo-TISH-ko</strong>.
+                <p class="name-line">
+                    <button type="button" class="name-btn" aria-expanded="false" aria-controls="name-box">
+                        About my name <span class="name-caret" aria-hidden="true">&#9662;</span>
+                    </button>
                 </p>
+                <div class="name-box" id="name-box" role="region" aria-label="About my name" aria-hidden="true" inert>
+                    <div class="name-inner">
+                        <dl class="name-list">
+                            <dt>In Bengali</dt>
+                            <dd lang="bn" class="name-bengali">জ্যোতিষ্ক রায় চৌধুরী</dd>
+
+                            <dt>How to say it</dt>
+                            <dd>
+                                <strong>jo-TISH-ko</strong> &nbsp;Ray&nbsp; <strong>CHOW-dhu-ree</strong>
+                                <button type="button" class="name-play" hidden aria-label="Play a recording of my name">
+                                    <i class="fa-solid fa-volume-high" aria-hidden="true"></i> Listen
+                                </button>
+                                <audio class="name-audio" preload="none" src="assets/audio/name.mp3"></audio>
+                            </dd>
+
+                            <dt>Family name</dt>
+                            <dd><em>Ray Choudhury</em> is my surname as a whole: <em>Ray</em> is not a middle name. Please cite me as <em>Ray Choudhury, J.</em></dd>
+
+                            <dt>Meaning</dt>
+                            <dd><em>Jyotishka</em> comes from the Sanskrit <em>jyotiṣka</em>: a luminary, i.e. a heavenly body such as a star or a planet. It shares its root with <em>jyotis</em>, &ldquo;light&rdquo;.</dd>
+
+                            <dt>A bit of history</dt>
+                            <dd><em>Ray</em> (from <em>rāja</em>, &ldquo;king&rdquo;) and <em>Choudhury</em> (an honorific often glossed as &ldquo;holder of four&rdquo;) were titles of honour granted to landholding families in Mughal-era Bengal, and over time the pair settled into a single family name. A famous early bearer is Lakshmikanta, who received both titles in 1608; his descendants, the Sabarna Ray Choudhurys, held the villages that later grew into Kolkata.</dd>
+                        </dl>
+                    </div>
+                </div>
 
                 <div class="cv-sections">
+                    <section aria-labelledby="news-heading">
+                        <h2 class="cv-heading" id="news-heading">News</h2>
+                        <!-- Newest first. Items after the first 5 are hidden behind "Show older"; add class="news-older" hidden to older ones. -->
+                        <ul class="news-list">
+                            <li>
+                                <span class="news-date">Oct 2026</span>
+                                <span class="news-text">Our paper <em>Saddlepoint approximations for plug-in resampling</em> has been accepted at <a href="https://doi.org/10.1093/biomet/asag063" target="_blank" rel="noopener">Biometrika</a>.</span>
+                            </li>
+                            <li>
+                                <span class="news-date">Oct 2026</span>
+                                <span class="news-text">New preprint: <a href="https://arxiv.org/abs/2610.07292" target="_blank" rel="noopener"><em>Assumption-lean logistic regression with missing covariates</em></a>, with Kabir Verchand, Richard Samworth and Ashwin Pananjady.</span>
+                            </li>
+                            <li>
+                                <span class="news-date">Jun 2026</span>
+                                <span class="news-text">Gave an invited talk at the International Workshop on Sequential Methodologies (IWSM) 2026 in Washington, D.C., supported by a travel award.</span>
+                            </li>
+                            <li>
+                                <span class="news-date">May 2026</span>
+                                <span class="news-text">New preprint: <a href="https://arxiv.org/abs/2605.25855" target="_blank" rel="noopener"><em>High-dimensional robust change-point detection via angular kernel statistics</em></a>, with Yao Xie.</span>
+                            </li>
+                            <li>
+                                <span class="news-date">Fall 2025</span>
+                                <span class="news-text">Graduate Teaching Assistant for ISyE 6416 and ISyE 7416 at Georgia Tech.</span>
+                            </li>
+                            <li class="news-older" hidden>
+                                <span class="news-date">Aug 2025</span>
+                                <span class="news-text">Our paper on Dirichlet process-based robust clustering appeared at <a href="https://doi.org/10.24963/ijcai.2025/531" target="_blank" rel="noopener">IJCAI 2025</a> in Montreal.</span>
+                            </li>
+                            <li class="news-older" hidden>
+                                <span class="news-date">Aug 2024</span>
+                                <span class="news-text">Started my Ph.D. in Machine Learning at Georgia Tech, with the Ronald J. and Carol T. Beerman President&rsquo;s Fellowship.</span>
+                            </li>
+                            <li class="news-older" hidden>
+                                <span class="news-date">Jul 2024</span>
+                                <span class="news-text">New technical note on the <a href="https://arxiv.org/abs/2407.08915" target="_blank" rel="noopener">saddlepoint approximation for averages of conditionally independent random variables</a>.</span>
+                            </li>
+                            <li class="news-older" hidden>
+                                <span class="news-date">Sep 2023</span>
+                                <span class="news-text">Our paper on robust high-dimensional classification appeared at <a href="https://doi.org/10.1007/978-3-031-43424-2_6" target="_blank" rel="noopener">ECML-PKDD 2023</a> in Turin.</span>
+                            </li>
+                        </ul>
+                        <button type="button" class="news-more" aria-expanded="false">Show older <span aria-hidden="true">&#9662;</span></button>
+                    </section>
+
                     <section aria-labelledby="education-heading">
                         <h2 class="cv-heading" id="education-heading">Education</h2>
                         <ul class="cv-list">
@@ -248,6 +321,7 @@
         <script src="javascript/open-close-menu.js" defer></script>
         <script src="javascript/remote-cv-button-trigger.js" defer></script>
         <script src="javascript/email-button.js" defer></script>
+        <script src="javascript/news-name.js" defer></script>
         <script src="javascript/globe-land.js" defer></script>
         <script src="javascript/globe.js" defer></script>
 
