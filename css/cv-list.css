@@ -38,7 +38,7 @@
 
 .cv-item {
   display: grid;
-  grid-template-columns: 44px 1fr auto;
+  grid-template-columns: 44px 1fr;
   align-items: center;
   column-gap: 16px;
   padding: 10px 12px;
@@ -120,12 +120,18 @@
 }
 
 .cv-date {
-  font-size: 13px;
+  display: inline-block;
+  margin-left: 10px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #f1edfb;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.6;
   color: #5b4a9e;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
-  justify-self: end;
+  vertical-align: 1px;
 }
 
 /* ---- small screens: dates move under the title ---- */
@@ -144,10 +150,5 @@
   .cv-title { font-size: 13px; }
   .cv-org { font-size: 12px; }
   .cv-note { font-size: 11.5px; }
-  .cv-date {
-    grid-column: 2;
-    justify-self: start;
-    font-size: 11.5px;
-    margin-top: 2px;
-  }
+  .cv-date { font-size: 10.5px; margin-left: 6px; }
 }
