@@ -1,5 +1,6 @@
 /* ==========================================================================
    Visitor globe
+   Idea and look inspired by Bo Dai's homepage (https://bo-dai.github.io/).
    A line-drawn orthographic globe that turns continuously and marks the
    cities visitors have opened the site from.
 

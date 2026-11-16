@@ -43,6 +43,22 @@
   color: #6b6b76;
 }
 
+.globe-credit {
+  margin: 4px 0 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #a19fb0;
+}
+
+.globe-credit a {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-underline-position: under;
+}
+
+.globe-credit a:hover { color: #5b3cc4; }
+
 /* Desktop-only decoration: on phones it would push the bio further down. */
 @media (max-width: 1000px) {
   .visitor-globe { display: none; }

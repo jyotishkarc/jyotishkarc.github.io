@@ -1,5 +1,7 @@
 /* Cloudflare Worker for the homepage visitor globe (javascript/globe.js).
  *
+ * Same approach as the visitor globe on Bo Dai's homepage (https://bo-dai.github.io/).
+ *
  *   POST /hit    count the current visit, using Cloudflare's city-level geolocation
  *   GET  /stats  { points: [{ city, country, lat, lon, count }] }
  *
