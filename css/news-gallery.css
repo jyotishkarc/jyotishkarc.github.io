@@ -70,6 +70,8 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .news-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* a single photo shouldn't stretch across the whole box */
+.news-gallery-inner:has(> .news-thumb:only-child) { max-width: 360px; }
 .news-thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(40, 20, 90, 0.18); }
 .news-thumb:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
 
