@@ -65,15 +65,7 @@ html[data-theme="dark"] .nav-name a:hover { color: var(--dm-accent); }
 html[data-theme="dark"] .navbar-element,
 html[data-theme="dark"] .nav-links ul li { color: var(--dm-rose); }
 html[data-theme="dark"] .nav-links ul li::after { background: var(--dm-accent); }
-html[data-theme="dark"] #info-icon,
-html[data-theme="dark"] .info-trigger,
 html[data-theme="dark"] #mobileMenuToggle { color: var(--dm-text); }
-html[data-theme="dark"] .info-box {
-  background-color: var(--dm-surface-2);
-  border-color: var(--dm-border);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-}
-html[data-theme="dark"] #phonetic-name { border-bottom-color: var(--dm-accent); }
 /* phone dropdown menu */
 @media (max-width: 1000px) {
   html[data-theme="dark"] #navLinks {

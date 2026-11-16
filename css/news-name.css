@@ -191,3 +191,21 @@
 
 /* a little more room between the "News" heading and its box */
 #news-heading { margin-bottom: 11px; }
+
+/* "How to say it": first name and surname on their own lines, each with its IPA */
+.name-say { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; }
+.name-say + .name-say { margin-top: 2px; }
+.name-say-part { min-width: 5.6em; font-size: 12.5px; color: #77738a; }
+.name-list .name-ipa {
+  font-family: "Charis SIL", "Doulos SIL", "Gentium Plus", "Noto Serif", "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #5f5b6b;
+  text-decoration: underline dotted;
+  text-decoration-color: #b9b2d6;
+  text-underline-offset: 3px;
+}
+.name-list .name-ipa:hover { color: #4a2fb0; text-decoration-color: currentColor; }
+html[data-theme="dark"] .name-say-part { color: #9a96ad; }
+html[data-theme="dark"] .name-list .name-ipa { color: #c8c4d6; text-decoration-color: #5d5878; }
+html[data-theme="dark"] .name-list .name-ipa:hover { color: #d4c9ff; }
