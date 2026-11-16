@@ -281,6 +281,33 @@
       .catch(function () {});
   }
 
+  /* ---- phones: move the globe to the bottom of the page, behind a button ---- */
+  var slot = document.querySelector(".visitor-slot");
+  var panel = document.getElementById("visitor-panel");
+  var vbtn = document.querySelector(".visitor-btn");
+  if (slot && panel && vbtn && window.matchMedia) {
+    var home = mount.parentNode, homeNext = mount.nextSibling;
+    var phone = window.matchMedia("(max-width: 1000px)");
+    var place = function () {
+      if (phone.matches) { if (mount.parentNode !== slot) slot.appendChild(mount); }
+      else if (mount.parentNode !== home) home.insertBefore(mount, homeNext);
+      resize();
+    };
+    if (phone.addEventListener) phone.addEventListener("change", place); else phone.addListener(place);
+    place();
+    vbtn.addEventListener("click", function () {
+      var open = !panel.classList.contains("is-open");
+      panel.classList.toggle("is-open", open);
+      panel.setAttribute("aria-hidden", String(!open));
+      panel.inert = !open;
+      vbtn.setAttribute("aria-expanded", String(open));
+      if (open) setTimeout(function () {
+        var r = panel.getBoundingClientRect();
+        if (r.bottom > window.innerHeight) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 420);
+    });
+  }
+
   resize();
   redraw();
 })();

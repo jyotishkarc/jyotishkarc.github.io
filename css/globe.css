@@ -59,7 +59,24 @@
 
 .globe-credit a:hover { color: #5b3cc4; }
 
-/* Desktop-only decoration: on phones it would push the bio further down. */
+/* Phones: the globe moves to the bottom of the homepage, behind a
+   "Visitor information" button (see javascript/globe.js). */
+.visitor-info { display: none; }
 @media (max-width: 1000px) {
   .visitor-globe { display: none; }
+  .visitor-info { display: block; text-align: center; margin: 4px auto 26px; padding: 0 16px; }
+  .visitor-btn .visitor-icon { display: block; }
+  .visitor-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: grid-template-rows 0.4s ease, opacity 0.3s ease, transform 0.4s ease;
+  }
+  .visitor-panel.is-open { grid-template-rows: 1fr; opacity: 1; transform: none; }
+  .visitor-panel-inner { min-height: 0; overflow: hidden; }
+  .visitor-slot .visitor-globe { display: block; width: min(280px, 76vw); max-width: none; margin: 18px auto 4px; }
+}
+@media (max-width: 1000px) and (prefers-reduced-motion: reduce) {
+  .visitor-panel { transition: none; }
 }
