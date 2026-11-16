@@ -273,3 +273,14 @@ html.theme-anim .publication-card, html.theme-anim p, html.theme-anim a {
   #navLinks ul li:not(:last-child)::after { margin-left: 10px; margin-right: 10px; }
   #navLinks ul li:nth-last-child(2)::after { margin-right: 4px; }
 }
+
+/* ---- News photos (dark) ---- */
+html[data-theme="dark"] .news-photos-btn,
+html[data-theme="dark"] .text-content .news-text a.news-photos-link {
+  color: var(--dm-accent);
+  text-decoration-color: rgba(185, 168, 255, 0.55);
+}
+html[data-theme="dark"] .news-photos-btn:hover,
+html[data-theme="dark"] .text-content .news-text a.news-photos-link:hover { color: #d6cbff; }
+html[data-theme="dark"] .news-thumb { background: var(--dm-surface-2); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+html[data-theme="dark"] .news-strong { color: var(--dm-strong); }

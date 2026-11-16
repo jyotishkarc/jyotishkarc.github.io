@@ -46,6 +46,7 @@
         <link rel="stylesheet" type="text/css" href="css/styling.css">
         <link rel="stylesheet" type="text/css" href="css/cv-list.css">
         <link rel="stylesheet" type="text/css" href="css/news-name.css">
+        <link rel="stylesheet" type="text/css" href="css/news-gallery.css">
         <!-- Devanagari font, subset to the two Sanskrit words in "What's in my name?" -->
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500&text=%E0%A4%95%E0%A4%9C%E0%A4%A4%E0%A4%AF%E0%A4%B7%E0%A4%B8%E0%A4%BF%E0%A5%8B%E0%A5%8D&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/globe.css">
@@ -257,31 +258,55 @@
                         <!-- Newest first. The list scrolls inside its box; just add new items at the top. -->
                         <ul class="news-list" tabindex="0" aria-label="News, newest first">
                             <li>
-                                <span class="news-date">Oct 2026</span>
+                                <span class="news-date">October 2026</span>
+                                <span class="news-text">Won the <strong class="news-strong">Best Poster Award</strong> at <a href="https://hg.gatech.edu/node/692380" target="_blank" rel="noopener">Georgia Statistics Day 2026</a>! Here are <button type="button" class="news-photos-btn" aria-expanded="false" aria-controls="gsd-2026-photos">some photos</button> and <a class="news-photos-link" href="https://lnkd.in/p/dKx9J_-5" target="_blank" rel="noopener">some more photos</a>.</span>
+                                <div class="news-gallery" id="gsd-2026-photos" aria-hidden="true" inert>
+                                    <div class="news-gallery-inner">
+                                        <!-- Up to a few photos; each opens in a full-size viewer. Put files in images/news/. -->
+                                        <button type="button" class="news-thumb" style="--ar: 1.962" data-full="images/news/gsd-2026-1.jpg"><img src="images/news/gsd-2026-1-thumb.jpg" alt="Group photo with faculty and fellow researchers at Georgia Statistics Day 2026" width="706" height="360" loading="lazy"></button>
+                                        <button type="button" class="news-thumb" style="--ar: 1.51" data-full="images/news/gsd-2026-2.jpg"><img src="images/news/gsd-2026-2-thumb.jpg" alt="Presenting my poster at Georgia Statistics Day 2026" width="544" height="360" loading="lazy"></button>
+                                        <button type="button" class="news-thumb" style="--ar: 1.553" data-full="images/news/gsd-2026-3.jpg"><img src="images/news/gsd-2026-3-thumb.jpg" alt="With Roshan Joseph and Xiaotian Wang at Georgia Statistics Day 2026" width="559" height="360" loading="lazy"></button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="news-date">October 2026</span>
                                 <span class="news-text">Our paper <em>Saddlepoint approximations for plug-in resampling</em> has been accepted at <a href="https://doi.org/10.1093/biomet/asag063" target="_blank" rel="noopener">Biometrika</a>.</span>
                             </li>
                             <li>
-                                <span class="news-date">Oct 2026</span>
+                                <span class="news-date">October 2026</span>
                                 <span class="news-text">New preprint: <a href="https://arxiv.org/abs/2610.07292" target="_blank" rel="noopener"><em>Assumption-lean logistic regression with missing covariates</em></a>, with Kabir Verchand, Richard Samworth and Ashwin Pananjady.</span>
                             </li>
                             <li>
-                                <span class="news-date">Jun 2026</span>
-                                <span class="news-text">Gave an invited talk at the International Workshop on Sequential Methodologies (IWSM) 2026 in Washington, D.C., supported by a travel award.</span>
+                                <span class="news-date">September 2026</span>
+                                <span class="news-text">Gave a talk on high-dimensional robust change-point detection at the <a href="https://csip.ece.gatech.edu/seminars/fall-2026/" target="_blank" rel="noopener">CSIP Seminar</a>, Georgia Tech.</span>
+                            </li>
+                            <li>
+                                <span class="news-date">August 2026</span>
+                                <span class="news-text">Graduate Teaching Assistant for ISyE 3770 at Georgia Tech (Fall 2026).</span>
+                            </li>
+                            <li>
+                                <span class="news-date">June 2026</span>
+                                <span class="news-text">Gave an invited talk at the International Workshop on Sequential Methodologies (IWSM) 2026 in Washington, D.C., supported by a $500 travel award.</span>
                             </li>
                             <li>
                                 <span class="news-date">May 2026</span>
-                                <span class="news-text">New preprint: <a href="https://arxiv.org/abs/2605.25855" target="_blank" rel="noopener"><em>High-dimensional robust change-point detection via angular kernel statistics</em></a>, with Yao Xie.</span>
+                                <span class="news-text">New preprint: <a href="https://arxiv.org/abs/2605.25855" target="_blank" rel="noopener"><em>High-Dimensional Robust Change-Point Detection via Angular Kernel Statistics</em></a>, with Yao Xie.</span>
                             </li>
                             <li>
-                                <span class="news-date">Fall 2025</span>
-                                <span class="news-text">Graduate Teaching Assistant for ISyE 6416 and ISyE 7416 at Georgia Tech.</span>
+                                <span class="news-date">September 2025</span>
+                                <span class="news-text">Featured in an <a href="https://www.isye.gatech.edu/news/beerman-presidential-fellowship-supports-next-generation-isye-graduate-researchers" target="_blank" rel="noopener">ISyE news story</a> on the Beerman Presidential Fellowship and its recipients.</span>
                             </li>
                             <li>
-                                <span class="news-date">Aug 2025</span>
-                                <span class="news-text">Our paper on Dirichlet process-based robust clustering appeared at <a href="https://doi.org/10.24963/ijcai.2025/531" target="_blank" rel="noopener">IJCAI 2025</a> in Montreal.</span>
+                                <span class="news-date">August 2025</span>
+                                <span class="news-text">Our paper on Dirichlet process-based robust clustering appeared at <a href="https://doi.org/10.24963/ijcai.2025/531" target="_blank" rel="noopener">IJCAI 2025</a>; Prof. Swagatam Das presented it in Guangzhou.</span>
                             </li>
                             <li>
-                                <span class="news-date">Aug 2024</span>
+                                <span class="news-date">August 2025</span>
+                                <span class="news-text">Graduate Teaching Assistant for ISyE 6416 and ISyE 7416 at Georgia Tech (Fall 2025).</span>
+                            </li>
+                            <li>
+                                <span class="news-date">August 2024</span>
                                 <span class="news-text">Started my Ph.D. in Machine Learning at Georgia Tech, with the Ronald J. and Carol T. Beerman President&rsquo;s Fellowship.</span>
                             </li>
                         </ul>
@@ -333,6 +358,7 @@
         <script src="javascript/remote-cv-button-trigger.js" defer></script>
         <script src="javascript/email-button.js" defer></script>
         <script src="javascript/news-name.js" defer></script>
+        <script src="javascript/news-gallery.js" defer></script>
         <script src="javascript/globe-land.js" defer></script>
         <script src="javascript/globe.js" defer></script>
 
