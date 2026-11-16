@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script>
+            /* Set light/dark before first paint: light unless the visitor chose dark. */
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t !== "dark") t = "light";
+                    document.documentElement.setAttribute("data-theme", t);
+                } catch (e) {}
+            })();
+        </script>
+        <meta name="color-scheme" content="light">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="robots" content="noindex">
+
+        <title>Page not found | Jyotishka Ray Choudhury</title>
+
+        <!-- Favicon -->
+        <link rel="icon" href="/images/favicon/jrc-logo-circle-border.png">
+
+        <!-- link to main stylesheet -->
+        <link rel="stylesheet" type="text/css" href="/css/styling.css">
+
+        <!-- Font Awesome symbols -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+        <!-- Academicions (for Google Scholar button)-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/dark.css">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1PHQE8C8N"></script>
+
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-W1PHQE8C8N');
+        </script>
+        <script src="/javascript/theme.js" defer></script>
+        <script src="/javascript/night-sky.js" defer></script>
+        <style>
+            .not-found { max-width: 34rem; margin: 18vh auto 22vh; padding: 0 1.5rem; text-align: center; }
+            .not-found .nf-code { font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase; color: #8a8698; margin: 0 0 0.9rem; }
+            .not-found h1 { font-size: 1.9rem; font-weight: 600; margin: 0 0 0.7rem; letter-spacing: 0.01em; }
+            .not-found .nf-note { color: #5f5b6b; margin: 0 0 1.8rem; line-height: 1.6; }
+            .not-found .nf-links { display: flex; justify-content: center; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+            .not-found .nf-links a { color: #2874A6; text-decoration: underline dotted; text-underline-position: under; }
+            .not-found .nf-links span { color: #b4b0c0; }
+            html[data-theme="dark"] .not-found .nf-code { color: var(--dm-muted); }
+            html[data-theme="dark"] .not-found h1 { color: var(--dm-strong, #f4f2fa); }
+            html[data-theme="dark"] .not-found .nf-note { color: var(--dm-muted); }
+            html[data-theme="dark"] .not-found .nf-links a { color: var(--dm-link); }
+            html[data-theme="dark"] .not-found .nf-links span { color: #5d596c; }
+        </style>
+    </head>
+
+    <body>
+        <div id="header-placeholder"></div>
+
+        <script>
+        fetch("/common-elements/site-header.html")
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+                if (window.initMobileMenu) window.initMobileMenu();
+            });
+        </script>
+
+        <main class="not-found">
+            <p class="nf-code">Error 404</p>
+            <h1>Page not found</h1>
+            <p class="nf-note">The link may be out of date, or the page may have moved.</p>
+            <p class="nf-links">
+                <a href="/">Home</a><span aria-hidden="true">&middot;</span>
+                <a href="/research.html">Research</a><span aria-hidden="true">&middot;</span>
+                <a href="/assets/cv/CV_JRC_2026_08_19.pdf">CV</a>
+            </p>
+        </main>
+
+        <div id="footer-placeholder"></div>
+        <script>
+        fetch("/common-elements/site-footer.html")
+            .then(r => r.text())
+            .then(html => { document.getElementById("footer-placeholder").innerHTML = html; });
+        </script>
+
+        <script src="/javascript/nav-name-icon-info.js" defer></script>
+        <script src="/javascript/open-close-menu.js" defer></script>
+    </body>
+</html>
