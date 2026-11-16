@@ -48,17 +48,20 @@
   transition: grid-template-rows 0.35s ease, opacity 0.25s ease, margin 0.35s ease;
 }
 .news-gallery.is-open { grid-template-rows: 1fr; opacity: 1; margin: 8px 0 4px; }
+/* photos share one row at the same height, each at its own shape (no cropping):
+   each takes width in proportion to its aspect ratio --ar (set inline) */
 .news-gallery-inner {
   min-height: 0;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 8px;
 }
 .news-thumb {
   all: unset;
   display: block;
-  aspect-ratio: 4 / 3;
+  flex: var(--ar, 1.5) 1 0;
+  min-width: 0;
+  aspect-ratio: var(--ar, 1.5);
   border-radius: 8px;
   overflow: hidden;
   cursor: zoom-in;
@@ -137,7 +140,8 @@ html.pv-lock, html.pv-lock body { overflow: hidden; }
 
 @media (max-width: 1000px) {
   .news-gallery { grid-column: 1; }
-  .news-gallery-inner { gap: 6px; }
+  .news-gallery-inner { gap: 5px; }
+  .news-thumb { border-radius: 6px; }
   .pv-btn { width: 40px; height: 40px; }
   .pv-prev { left: 8px; }
   .pv-next { right: 8px; }
