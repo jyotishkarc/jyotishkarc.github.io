@@ -141,7 +141,7 @@
   .cv-item {
     grid-template-columns: 44px 1fr;
     column-gap: 12px;
-    align-items: start;
+    align-items: center;
     padding: 8px;
     margin: 0 -8px;
   }
