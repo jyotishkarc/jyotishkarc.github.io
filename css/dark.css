@@ -7,6 +7,15 @@
    WCAG AA contrast (most reach AAA).
    ========================================================================== */
 
+/* Light mode is the default. Say so explicitly: the pages declare support for both
+   schemes, so without this a browser in dark mode would paint its own dark default
+   page background behind the (light-mode) dark text. */
+html, html[data-theme="light"] {
+  color-scheme: light;
+  background: #fff;
+}
+html[data-theme="light"] body { background: #fff; }
+
 html[data-theme="dark"] {
   color-scheme: dark;
 
@@ -166,7 +175,6 @@ html[data-theme="dark"] .name-play {
 html[data-theme="dark"] .cite-copy:hover,
 html[data-theme="dark"] .name-play:hover { background: var(--dm-accent-bg); }
 html[data-theme="dark"] .cite-copy.is-done { background: #1f8a4c; border-color: #1f8a4c; color: #fff; }
-html[data-theme="dark"] .cite-count { background: #173323; color: var(--dm-green); }
 
 /* ---- News ---- */
 html[data-theme="dark"] .news-date { color: var(--dm-accent); }
