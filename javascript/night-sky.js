@@ -44,7 +44,7 @@
         y: rand() * H * FIELD,
         r: k * (bright ? 1.3 + rand() * 0.55 : medium ? 0.9 + rand() * 0.35 : 0.5 + rand() * 0.5),
         a: bright ? 0.92 + rand() * 0.08 : medium ? 0.6 + rand() * 0.2 : 0.22 + rand() * 0.4,
-        h: bright ? 0.2 : medium ? 0.08 : 0,             // soft halo strength
+        kind: bright ? 2 : medium ? 1 : 0,
         // mostly white, some faintly blue or warm
         c: tint < 0.15 ? "200,214,255" : tint < 0.25 ? "255,230,205" : "236,234,248",
         tw: bright ? 0.12 + rand() * 0.18 : 0.2 + rand() * 0.35,   // twinkle depth (bright ones stay bright)
@@ -63,6 +63,38 @@
     draw(performance.now());
   }
 
+  // Star sprites: a pin-sharp core fading into a soft glow (no hard edge);
+  // the bright ones also get faint four-point diffraction spikes.
+  var sprites = {};
+  function sprite(c, kind) {
+    var key = c + "|" + kind;
+    if (sprites[key]) return sprites[key];
+    var S = 96, m = S / 2, sc = document.createElement("canvas");
+    sc.width = sc.height = S;
+    var g = sc.getContext("2d");
+    var core = kind === 2 ? 0.07 : kind === 1 ? 0.1 : 0.16;   // share of the sprite that is solid core
+    var rg = g.createRadialGradient(m, m, 0, m, m, m);
+    rg.addColorStop(0, "rgba(" + c + ",1)");
+    rg.addColorStop(core, "rgba(" + c + ",0.85)");
+    rg.addColorStop(core * 2.4, "rgba(" + c + ",0.22)");
+    rg.addColorStop(0.55, "rgba(" + c + ",0.04)");
+    rg.addColorStop(1, "rgba(" + c + ",0)");
+    g.fillStyle = rg;
+    g.fillRect(0, 0, S, S);
+    if (kind === 2) {
+      ["h", "v"].forEach(function (d) {
+        var lg = d === "h" ? g.createLinearGradient(0, m, S, m) : g.createLinearGradient(m, 0, m, S);
+        lg.addColorStop(0, "rgba(" + c + ",0)");
+        lg.addColorStop(0.5, "rgba(" + c + ",0.55)");
+        lg.addColorStop(1, "rgba(" + c + ",0)");
+        g.fillStyle = lg;
+        if (d === "h") g.fillRect(0, m - 0.9, S, 1.8); else g.fillRect(m - 0.9, 0, 1.8, S);
+      });
+    }
+    return (sprites[key] = sc);
+  }
+  var SPRITE_SIZE = [4.5, 7, 13];   // drawn size relative to the star's radius, per kind
+
   function draw(now) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
@@ -70,20 +102,14 @@
     for (var i = 0; i < stars.length; i++) {
       var s = stars[i];
       var y = s.y - off;
-      if (y < -2) y += H * FIELD;
-      if (y > H + 2) continue;
+      if (y < -12) y += H * FIELD;
+      if (y > H + 12) continue;
       var a = reduce ? s.a : s.a * (1 - s.tw * (0.5 + 0.5 * Math.sin(now * s.sp + s.ph)));
-      ctx.fillStyle = "rgba(" + s.c + "," + a.toFixed(3) + ")";
-      ctx.beginPath();
-      ctx.arc(s.x, y, s.r, 0, 2 * Math.PI);
-      ctx.fill();
-      if (s.h) {                                         // soft halo on the brighter ones
-        ctx.fillStyle = "rgba(" + s.c + "," + (a * s.h).toFixed(3) + ")";
-        ctx.beginPath();
-        ctx.arc(s.x, y, s.r * 3.2, 0, 2 * Math.PI);
-        ctx.fill();
-      }
+      var D = s.r * SPRITE_SIZE[s.kind];
+      ctx.globalAlpha = a;
+      ctx.drawImage(sprite(s.c, s.kind), s.x - D / 2, y - D / 2, D, D);
     }
+    ctx.globalAlpha = 1;
   }
 
   function between(r) { return r[0] + Math.random() * (r[1] - r[0]); }
