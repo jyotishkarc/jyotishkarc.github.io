@@ -1,0 +1,62 @@
+/* Cite boxes (research page). Box look comes from css/abstracts.css. */
+
+.cite-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 0 18px;
+}
+
+.cite-copy {
+  padding: 2px 12px;
+  border: 1px solid #cfc4ef;
+  border-radius: 999px;
+  background: #fff;
+  color: #4a2fb0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cite-copy:hover { background: #f4f0ff; }
+
+.cite-copy.is-done {
+  background: #1f8a4c;
+  border-color: #1f8a4c;
+  color: #fff;
+}
+
+.cite-code {
+  margin: 6px 0 0;
+  padding: 4px 18px 14px;
+  overflow-x: auto;
+  font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #2b2640;
+  white-space: pre;
+  tab-size: 2;
+}
+
+@media (max-width: 900px) {
+  .cite-head { padding: 8px 10px 0 12px; }
+  .cite-code { padding: 4px 12px 12px; font-size: 10.5px; }
+}
+
+/* "Cited by N" label after the venue line */
+.cite-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #eef6f0;
+  color: #1f6b3d;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+.cite-count i { font-size: 0.8em; margin-right: 2px; opacity: 0.8; }
