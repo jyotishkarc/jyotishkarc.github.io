@@ -1,0 +1,174 @@
+/* ==========================================================================
+   Homepage: "What's in my name?" dropdown and the News list
+   ========================================================================== */
+
+/* ---- What's in my name? ---- */
+.name-line { margin-top: 4px; }
+
+.name-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 12px;
+  border: 1px solid #cfc4ef;
+  border-radius: 999px;
+  background: #f4f0ff;
+  color: #4a2fb0;
+  font: inherit;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.name-btn:hover,
+.name-btn:focus-visible { background: #e9e1ff; border-color: #a996e6; outline: none; }
+
+.name-btn[aria-expanded="true"] { background: #4a2fb0; border-color: #4a2fb0; color: #fff; }
+
+.name-caret { font-size: 0.75em; transition: transform 0.3s ease; }
+.name-btn[aria-expanded="true"] .name-caret { transform: rotate(180deg); }
+
+.name-box {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: grid-template-rows 0.35s ease, opacity 0.25s ease, transform 0.35s ease, margin 0.35s ease;
+}
+
+.name-box.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: none;
+  margin: 6px 0 18px;
+}
+
+.name-inner { overflow: hidden; min-height: 0; }
+
+.name-box.is-open .name-inner {
+  border: 1px solid #ddd3f6;
+  border-left: 3px solid #6a4fd6;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fdfcff 0%, #faf8ff 100%);
+  box-shadow: 0 8px 22px rgba(60, 35, 140, 0.08);
+}
+
+.name-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 18px;
+  row-gap: 10px;
+  align-items: baseline;            /* labels sit on the same line as their text */
+  margin: 0;
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.name-list dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6a4fd6;
+}
+
+.name-list dd {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #2b2b33;
+}
+
+.name-deva {
+  font-family: "Noto Serif Devanagari", "Noto Sans Devanagari", "Kohinoor Devanagari", "Mangal", serif;
+  font-size: 1.05em;
+}
+
+.name-bengali {
+  font-family: "Noto Serif Bengali", serif;
+  font-size: 17px !important;
+}
+
+.name-play {
+  margin-left: 8px;
+  padding: 0 10px;
+  border: 1px solid #cfc4ef;
+  border-radius: 999px;
+  background: #fff;
+  color: #4a2fb0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.name-play[hidden] { display: none; }
+.name-play:hover { background: #f4f0ff; }
+.name-play.is-playing { background: #4a2fb0; color: #fff; border-color: #4a2fb0; }
+
+/* ---- News ---- */
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.news-list li {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  column-gap: 14px;
+  align-items: baseline;
+  padding: 6px 0;
+}
+
+.news-list li[hidden] { display: none; }
+
+.news-list li + li { border-top: 1px dashed #ebe6f7; }
+
+.news-date {
+  font-size: 12.5px;
+  font-weight: 650;
+  color: #5b4a9e;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.news-text {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #2b2b33;
+}
+
+.text-content .news-text a { font-size: inherit; }
+
+.news-more {
+  margin-top: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #5b4a9e;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.news-more span { display: inline-block; font-size: 0.75em; transition: transform 0.3s ease; }
+.news-more[aria-expanded="true"] span { transform: rotate(180deg); }
+.news-more:hover { color: #4a2fb0; text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .name-box, .name-caret, .news-more span { transition: none; }
+}
+
+@media (max-width: 1000px) {
+  .name-list { grid-template-columns: 1fr; row-gap: 2px; padding: 10px 12px; }
+  .name-list dd { font-size: 12.5px; margin-bottom: 8px; }
+  .name-bengali { font-size: 15px !important; }
+  .news-list li { grid-template-columns: 64px 1fr; column-gap: 10px; }
+  .news-date { font-size: 11px; }
+  .news-text { font-size: 12.5px; }
+}
