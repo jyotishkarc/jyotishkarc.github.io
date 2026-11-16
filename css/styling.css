@@ -1479,3 +1479,18 @@ nav .fa-bars {
   color: #8a8799;
 }
 html[data-theme="dark"] .last-updated { color: #908ca3; }
+
+
+/* ---- Page transitions (View Transitions API; browsers without it navigate as usual) ----
+   Moving between pages crossfades the content while the header stays put. */
+@view-transition { navigation: auto; }
+.site-header { view-transition-name: site-header; }
+::view-transition-group(root) { animation-duration: 0.28s; }
+::view-transition-old(root) { animation: 0.2s ease-in both vt-fade-out; }
+::view-transition-new(root) { animation: 0.28s ease-out both vt-fade-in; }
+::view-transition-group(site-header) { animation-duration: 0s; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
