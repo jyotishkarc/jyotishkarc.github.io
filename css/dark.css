@@ -219,8 +219,8 @@ html[data-theme="dark"] .footer { color: #8fb6d6; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   color: #4a2fb0;                 /* moon: the site's violet */
@@ -229,7 +229,7 @@ html[data-theme="dark"] .footer { color: #8fb6d6; }
 .theme-toggle:hover { background: rgba(90, 60, 200, 0.1); color: #3a1f9e; }
 .theme-toggle:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
 .theme-toggle--bar { position: relative; top: -3px; }   /* line up with the nav links */
-.theme-toggle .ti { display: block; width: 18px; height: 18px; transition: transform 0.45s ease; }
+.theme-toggle .ti { display: block; width: 23px; height: 23px; transition: transform 0.45s ease; }
 .theme-toggle:hover .ti-moon { transform: rotate(-18deg); }
 .theme-toggle:hover .ti-sun { transform: rotate(45deg); }
 .theme-toggle .ti-sun { display: none; }
@@ -247,11 +247,11 @@ html.theme-anim .publication-card, html.theme-anim p, html.theme-anim a {
 /* In the bar on larger screens; inside the dropdown menu on phones */
 .theme-menu-item { display: none !important; }
 .theme-toggle--menu {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
 }
-.theme-toggle--menu .ti { width: 16px; height: 16px; }
+.theme-toggle--menu .ti { width: 20px; height: 20px; }
 .theme-toggle-label {               /* kept for screen readers only */
   position: absolute;
   width: 1px; height: 1px;
@@ -267,7 +267,7 @@ html.theme-anim .publication-card, html.theme-anim p, html.theme-anim a {
   /* make room for the extra icon in the one-row menu */
   #navLinks ul { margin-left: 6px; margin-right: 6px; padding-left: 10px; padding-right: 10px; }
   #navLinks ul li:nth-last-child(2)::after { margin-right: 6px; }
-  .theme-toggle--menu { width: 26px; height: 26px; }
+  .theme-toggle--menu { width: 30px; height: 30px; }
 }
 @media (max-width: 380px) {
   #navLinks ul li:not(:last-child)::after { margin-left: 10px; margin-right: 10px; }
