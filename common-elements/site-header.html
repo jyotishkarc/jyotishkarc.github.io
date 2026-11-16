@@ -74,6 +74,9 @@
         .name-morph:hover span > span:nth-child(2) { transition-delay: 0.24s; }
         .name-morph:hover span > span:nth-child(3) { transition-delay: 0.33s; }
     }
+    /* touch screens: a tap on the name toggles .is-bn (javascript/name-morph.js) */
+    .name-morph.is-bn .nm-en > span { opacity: 0; filter: blur(4px); transform: translateY(-0.18em); }
+    .name-morph.is-bn .nm-bn > span { opacity: 1; filter: none; transform: none; }
     @media (prefers-reduced-motion: reduce) {
         .name-morph .nm-en > span, .name-morph .nm-bn > span { filter: none !important; transform: none !important; transition-duration: 0.2s; }
     }
