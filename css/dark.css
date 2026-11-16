@@ -205,17 +205,20 @@ html[data-theme="dark"] .footer { color: #8fb6d6; }
   height: 34px;
   border-radius: 50%;
   cursor: pointer;
-  color: #3a2f6b;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.4s ease;
+  color: #4a2fb0;                 /* moon: the site's violet */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-.theme-toggle:hover { background: rgba(90, 60, 200, 0.1); }
+.theme-toggle:hover { background: rgba(90, 60, 200, 0.1); color: #3a1f9e; }
 .theme-toggle:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
-.theme-toggle i { font-size: 17px; line-height: 1; }
-.theme-toggle .fa-sun { display: none; }
-html[data-theme="dark"] .theme-toggle { color: #f3d48a; }
-html[data-theme="dark"] .theme-toggle:hover { background: rgba(255, 255, 255, 0.08); }
-html[data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
-html[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+.theme-toggle--bar { position: relative; top: -3px; }   /* line up with the nav links */
+.theme-toggle .ti { display: block; width: 18px; height: 18px; transition: transform 0.45s ease; }
+.theme-toggle:hover .ti-moon { transform: rotate(-18deg); }
+.theme-toggle:hover .ti-sun { transform: rotate(45deg); }
+.theme-toggle .ti-sun { display: none; }
+html[data-theme="dark"] .theme-toggle { color: #f5c451; }  /* sun: warm amber */
+html[data-theme="dark"] .theme-toggle:hover { background: rgba(245, 196, 81, 0.12); color: #ffd36b; }
+html[data-theme="dark"] .theme-toggle .ti-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .ti-moon { display: none; }
 
 /* smooth fade when switching (not on first paint) */
 html.theme-anim, html.theme-anim body, html.theme-anim .site-header,
@@ -230,7 +233,7 @@ html.theme-anim .publication-card, html.theme-anim p, html.theme-anim a {
   height: 30px;
   border-radius: 50%;
 }
-.theme-toggle--menu i { font-size: 15px; padding-top: 0; }
+.theme-toggle--menu .ti { width: 16px; height: 16px; }
 .theme-toggle-label {               /* kept for screen readers only */
   position: absolute;
   width: 1px; height: 1px;
