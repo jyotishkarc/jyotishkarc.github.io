@@ -145,6 +145,12 @@ ol > li::marker {
     margin-left: 10px;
 }
 
+#technical_notes {
+    margin-top: 38px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
 
 @media(max-width: 900px){
 
