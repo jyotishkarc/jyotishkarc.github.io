@@ -232,7 +232,8 @@ html[data-theme="dark"] .theme-toggle:hover .ti { transform: rotate(45deg); }
 /* One icon that morphs: in light mode a crescent moon (a disc with a
    circular bite taken out); switching to dark, the bite slides away,
    the disc shrinks to the sun, and the rays turn in. Reverses on the way back. */
-.ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rays { transform-origin: 12px 12px; }
+.ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rim, .ti-orb .ti-rays { transform-origin: 12px 12px; }
+.ti-orb .ti-rim  { opacity: 0.22; transition: transform 0.5s cubic-bezier(0.45, 0, 0.2, 1) 0.1s, opacity 0.3s ease 0.2s; }   /* outlines the moon's dark side, so a new moon still shows */
 .ti-orb .ti-disc { transition: transform 0.5s cubic-bezier(0.45, 0, 0.2, 1) 0.1s; }
 .ti-orb .ti-cut  { transition: transform 0.5s cubic-bezier(0.45, 0, 0.2, 1) 0.1s; }
 .ti-orb .ti-rays {
@@ -240,14 +241,15 @@ html[data-theme="dark"] .theme-toggle:hover .ti { transform: rotate(45deg); }
   transition: opacity 0.25s ease, transform 0.35s ease;   /* leave quickly */
 }
 html[data-theme="dark"] .ti-orb .ti-disc { transform: scale(0.5); transition-delay: 0s; }
-html[data-theme="dark"] .ti-orb .ti-cut  { transform: translate(9px, -9px); transition-delay: 0s; }
+html[data-theme="dark"] .ti-orb .ti-rim  { transform: scale(0.5); opacity: 0; transition-delay: 0s; }
+html[data-theme="dark"] .ti-orb .ti-cut  { transform: translate(var(--cut-x, 9px), -9px); transition-delay: 0s; }   /* the shadow slides off on its own side (theme.js) */
 html[data-theme="dark"] .ti-orb .ti-rays {
   opacity: 1; transform: none;
   transition: opacity 0.35s ease 0.25s, transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) 0.2s;   /* arrive after the disc */
 }
 .theme-toggle { transition: background-color 0.2s ease, color 0.5s ease; }
 @media (prefers-reduced-motion: reduce) {
-  .ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rays, .theme-toggle .ti { transition: none !important; }
+  .ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rim, .ti-orb .ti-rays, .theme-toggle .ti { transition: none !important; }
 }
 
 /* smooth fade when switching (not on first paint) */
