@@ -29,5 +29,5 @@
       setTimeout(function () { if (!row.contains(document.activeElement) && !row.matches(":hover")) close(); }, 0);
     });
   });
-  row.addEventListener("pointerleave", function () { closing = setTimeout(close, 90); });
+  row.addEventListener("pointerleave", function () { closing = setTimeout(close, 60); });
 })();
