@@ -250,10 +250,26 @@ html[data-theme="dark"] .ti-orb .ti-rays {
   .ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rays, .theme-toggle .ti { transition: none !important; }
 }
 
-/* smooth fade when switching (not on first paint) */
-html.theme-anim, html.theme-anim body, html.theme-anim .site-header,
-html.theme-anim .publication-card, html.theme-anim p, html.theme-anim a {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+/* Switching theme, the smooth way: the whole page crossfades from the old
+   look to the new one as one image (javascript/theme.js starts a view
+   transition), while the toggle is lifted out so its morph plays on top. */
+::view-transition-old(theme-toggle) { display: none; }
+::view-transition-new(theme-toggle) { animation: none; }
+html.theme-vt::view-transition-group(root),
+html.theme-vt::view-transition-group(site-header) { animation-duration: 0.6s; }
+html.theme-vt::view-transition-old(root),
+html.theme-vt::view-transition-old(site-header) { animation: 0.6s cubic-bezier(0.4, 0, 0.2, 1) both vt-theme-out; }
+html.theme-vt::view-transition-new(root),
+html.theme-vt::view-transition-new(site-header) { animation: 0.6s cubic-bezier(0.4, 0, 0.2, 1) both vt-theme-in; }
+@keyframes vt-theme-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes vt-theme-in  { from { opacity: 0; } to { opacity: 1; } }
+
+/* Fallback (no view transitions, or reduced motion): fade every colour at once.
+   The toggle keeps its own transitions for the morph. */
+html.theme-anim, html.theme-anim *:not(.theme-toggle):not(.theme-toggle *),
+html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease,
+              fill 0.5s ease, stroke 0.5s ease, box-shadow 0.5s ease !important;
 }
 
 /* In the bar on larger screens; inside the dropdown menu on phones */
