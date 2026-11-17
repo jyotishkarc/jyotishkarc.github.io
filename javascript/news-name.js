@@ -3,7 +3,8 @@
   "use strict";
 
   /* ---- What's in my name? ---- */
-  var btn = document.querySelector(".name-btn");
+  // its own button, found by what it controls (other buttons share the .name-btn look)
+  var btn = document.querySelector('.name-btn[aria-controls="name-box"]');
   var box = document.getElementById("name-box");
   if (btn && box) {
     var setOpen = function (open) {
