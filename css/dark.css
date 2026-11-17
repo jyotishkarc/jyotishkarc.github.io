@@ -162,14 +162,12 @@ html[data-theme="dark"] .abs-tldr p { color: var(--dm-strong); }
 html[data-theme="dark"] .abs-full { border-top-color: var(--dm-border); }
 html[data-theme="dark"] .abs-more { color: var(--dm-accent); }
 html[data-theme="dark"] .cite-code { color: var(--dm-green); }
-html[data-theme="dark"] .cite-copy,
-html[data-theme="dark"] .name-play {
+html[data-theme="dark"] .cite-copy {
   background: var(--dm-surface);
   border-color: #4a4170;
   color: var(--dm-accent);
 }
-html[data-theme="dark"] .cite-copy:hover,
-html[data-theme="dark"] .name-play:hover { background: var(--dm-accent-bg); }
+html[data-theme="dark"] .cite-copy:hover { background: var(--dm-accent-bg); }
 html[data-theme="dark"] .cite-copy.is-done { background: #1f8a4c; border-color: #1f8a4c; color: #fff; }
 
 /* ---- News ---- */

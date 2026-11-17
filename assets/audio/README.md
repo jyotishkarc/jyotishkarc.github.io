@@ -1,3 +1,2 @@
-Put a short recording of your name here as `name.mp3` (2–4 seconds, MP3).
-The "Listen" button in the homepage's "About my name" box appears automatically
-once this file exists. Any phone voice-memo app works; convert to MP3 if needed.
+`jyotishka.mp3`: how the first name is pronounced (generated with CapySchool's reader),
+played by the small speaker beside "jo-TISH-ko" in the homepage's "What's in my name?" box.

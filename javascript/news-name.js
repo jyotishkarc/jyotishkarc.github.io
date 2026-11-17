@@ -1,4 +1,4 @@
-/* Homepage: "What's in my name?" dropdown, optional name recording, News "Show older". */
+/* Homepage: "What's in my name?" dropdown, first-name pronunciation, News "Show older". */
 (function () {
   "use strict";
 
@@ -36,20 +36,19 @@
     });
   }
 
-  /* ---- recording: the Listen button appears only once assets/audio/name.mp3 exists ---- */
-  var audio = document.querySelector(".name-audio");
-  var play = document.querySelector(".name-play");
-  if (audio && play) {
-    fetch(audio.getAttribute("src"), { method: "HEAD" })
-      .then(function (r) { if (r.ok) play.hidden = false; })
-      .catch(function () {});
-    play.addEventListener("click", function () {
-      audio.currentTime = 0;
-      audio.play();
+  /* ---- pronunciation of the first name: a small speaker beside "jo-TISH-ko" ---- */
+  var sayBtn = document.querySelector(".say-btn");
+  var say = document.querySelector(".say-audio");
+  if (sayBtn && say) {
+    sayBtn.addEventListener("click", function () {
+      if (!say.paused) { say.pause(); say.currentTime = 0; return; }
+      say.currentTime = 0;
+      var p = say.play();
+      if (p && p.catch) p.catch(function () {});
     });
-    audio.addEventListener("play", function () { play.classList.add("is-playing"); });
-    audio.addEventListener("ended", function () { play.classList.remove("is-playing"); });
-    audio.addEventListener("pause", function () { play.classList.remove("is-playing"); });
+    say.addEventListener("play", function () { sayBtn.classList.add("is-playing"); });
+    say.addEventListener("ended", function () { sayBtn.classList.remove("is-playing"); });
+    say.addEventListener("pause", function () { sayBtn.classList.remove("is-playing"); });
   }
 
 
