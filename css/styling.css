@@ -1377,16 +1377,17 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
 
 /* ---- Social icons: the hovered one opens into a labelled tile ----
    On devices with a mouse, the button under the pointer widens into a rounded
-   rectangle about 42% of the row and its name wipes in beside the icon; the
-   other three slide aside (the gaps tighten, the icons shrink a touch and dim).
-   The row's total width never changes, so nothing around it moves. A short
-   delay on the way back keeps the row from snapping open between buttons.
+   rectangle about 42% of the row: its gradient fades in and its name wipes in
+   beside the icon. The other three shrink to 80% and slide aside. The row's
+   total width never changes, so nothing around it moves. A short delay on the
+   way back keeps the row from snapping open between buttons.
    Phones and touch screens keep the plain icons. */
 .social-icons {
   --row: calc(4 * var(--icon-size) + 3 * var(--icon-gap));
-  --gap-tight: calc(var(--icon-gap) / 3);
   --wide: calc(var(--row) * 0.42);
-  --narrow: calc((var(--row) - var(--wide) - 3 * var(--gap-tight)) / 3);
+  --narrow: calc(var(--icon-size) * 0.8);
+  --gap-tight: calc((var(--row) - var(--wide) - 3 * var(--narrow)) / 3);
+  --soc-ease: cubic-bezier(0.45, 0, 0.15, 1);
   width: var(--row);
 }
 .soc-label {
@@ -1405,55 +1406,61 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
 }
 .soc-label--2 { line-height: 1.05; text-align: left; }   /* "Google / Scholar" on two lines */
 @media (hover: hover) and (pointer: fine) {
-  .social-icons {
-    transition: gap 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.06s;
-  }
-  .social-icons a {
+  .social-icons { transition: gap 0.5s var(--soc-ease) 0.06s; }
+  .social-icons a,
+  .social-icons a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
     height: var(--icon-size);
     border-radius: calc(var(--icon-size) * 0.3);
-    transition: flex-basis 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.06s,
-                height 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.06s,
-                opacity 0.3s ease 0.06s, box-shadow 0.3s ease;
+    transition: flex-basis 0.5s var(--soc-ease) 0.06s, height 0.5s var(--soc-ease) 0.06s,
+                opacity 0.4s ease 0.06s, box-shadow 0.4s ease;
   }
-  .social-icons a .fab, .social-icons a .ai, .social-icons a .fas { flex: none; }
+  .social-icons a :is(.fab, .ai, .fas) {
+    flex: none;
+    transition: transform 0.5s var(--soc-ease) 0.06s, color 0.4s ease;
+  }
+  /* the gradient fades in with the widening, instead of popping in */
+  .social-icons a::before,
+  .social-icons a:hover::before { transform: none; opacity: 0; transition: opacity 0.45s ease; }
   .soc-label {
-    transition: max-width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-                margin-left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transition: max-width 0.4s var(--soc-ease), margin-left 0.4s var(--soc-ease),
                 opacity 0.15s ease, clip-path 0.2s ease;
   }
 
-  /* one button is open: the row tightens around it */
+  /* one button is open: the others shrink and the row tightens around it */
   .social-icons:has(a:is(:hover, :focus-visible)) { gap: var(--gap-tight); transition-delay: 0s; }
   .social-icons:has(a:is(:hover, :focus-visible)) a {
     flex-basis: var(--narrow);
     height: var(--narrow);
-    opacity: 0.7;
+    opacity: 0.72;
+    --inner-scale: 0.82;
     transition-delay: 0s;
   }
+  .social-icons:has(a:is(:hover, :focus-visible)) a :is(.fab, .ai, .fas) { transition-delay: 0s; }
   .social-icons:has(a:is(:hover, :focus-visible)) a:is(:hover, :focus-visible) {
     flex-basis: var(--wide);
     height: var(--icon-size);
     opacity: 1;
-    border-radius: calc(var(--icon-size) * 0.3);
     --inner-scale: 1;
+    transition: flex-basis 0.5s var(--soc-ease), height 0.5s var(--soc-ease),
+                opacity 0.4s ease, box-shadow 0.4s ease;
   }
+  .social-icons a:is(:hover, :focus-visible)::before { opacity: 1; }
+  .social-icons a:is(:hover, :focus-visible) :is(.fab, .ai, .fas) { color: #fff; }
   .social-icons a:is(:hover, :focus-visible) .soc-label {
     max-width: 8em;
-    margin-left: 0.45em;
+    margin-left: 0.75em;
     opacity: 1;
     clip-path: inset(0 0 0 0);
-    transition: max-width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
-                margin-left 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
-                opacity 0.3s ease 0.12s, clip-path 0.4s cubic-bezier(0.3, 0.7, 0.2, 1) 0.12s;
+    transition: max-width 0.5s var(--soc-ease), margin-left 0.5s var(--soc-ease),
+                opacity 0.35s ease 0.15s, clip-path 0.45s var(--soc-ease) 0.15s;
   }
-  .social-icons a:is(:hover, :focus-visible)::before { transform: scale(1); }
-  .social-icons a:is(:hover, :focus-visible) :is(.fab, .ai, .fas) { color: #fff; }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .social-icons, .social-icons a, .soc-label { transition: none !important; }
+  .social-icons, .social-icons a, .social-icons a::before, .soc-label,
+  .social-icons a :is(.fab, .ai, .fas) { transition: none !important; }
 }
 
 
