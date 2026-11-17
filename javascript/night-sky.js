@@ -5,7 +5,8 @@
    as you scroll. Static (no twinkle, no drift) for visitors who prefer reduced
    motion; paused when the tab is hidden. Once in a while (every 30–70 s) a
    faint shooting star crosses the header bar; none for visitors who prefer
-   reduced motion.
+   reduced motion. When a visitor switches to dark mode, the stars come out
+   like at dusk: the brightest first, the faintest last, over about two seconds.
    ========================================================================== */
 (function () {
   "use strict";
@@ -25,6 +26,9 @@
   var METEOR_FIRST = [15000, 35000];   // first shooting star after 15–35 s
   var METEOR_GAP = [30000, 70000];     // then one every 30–70 s
   var meteor = null, nextMeteor = 0;
+  // dusk: per-star delay (ms) by brightness [bright, medium, dim] -> [start, spread]
+  var DUSK_DELAY = [[500, 900], [200, 600], [0, 250]], DUSK_FADE = 550, DUSK_LEN = 2000;
+  var dusk = 0, wasOn = false, ready = false;
 
   // Deterministic random numbers, so the sky looks the same on every page.
   var seed = 1729;
@@ -96,6 +100,7 @@
   var SPRITE_SIZE = [4.5, 7, 13];   // drawn size relative to the star's radius, per kind
 
   function draw(now) {
+    if (dusk && now - dusk > DUSK_LEN) dusk = 0;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     var off = reduce ? 0 : (window.scrollY * DRIFT) % (H * FIELD);
@@ -105,6 +110,12 @@
       if (y < -12) y += H * FIELD;
       if (y > H + 12) continue;
       var a = reduce ? s.a : s.a * (1 - s.tw * (0.5 + 0.5 * Math.sin(now * s.sp + s.ph)));
+      if (dusk) {
+        // the twinkle phase doubles as a stable random number for the delay
+        var dd = DUSK_DELAY[s.kind], u = (now - dusk - dd[0] - dd[1] * s.ph / (2 * Math.PI)) / DUSK_FADE;
+        u = u < 0 ? 0 : u > 1 ? 1 : u;
+        a *= u * u * (3 - 2 * u);
+      }
       var D = s.r * SPRITE_SIZE[s.kind];
       ctx.globalAlpha = a;
       ctx.drawImage(sprite(s.c, s.kind), s.x - D / 2, y - D / 2, D, D);
@@ -175,7 +186,7 @@
     raf = 0;
     if (!meteor && nextMeteor && now >= nextMeteor) spawnMeteor(now);
     // ~25 fps is plenty for a twinkle; full frame rate only while a star is falling
-    if (meteor || now - last > 40) { draw(now); if (meteor) drawMeteor(now); last = now; }
+    if (meteor || dusk || now - last > 40) { draw(now); if (meteor) drawMeteor(now); last = now; }
     schedule();
   }
   function schedule() {
@@ -193,6 +204,8 @@
 
   function update() {
     var on = active();
+    if (on && !wasOn && ready && !reduce) dusk = performance.now();   // switched to dark just now
+    wasOn = on;
     canvas.classList.toggle("is-on", on);
     if (on) { resetMeteors(); if (!W) resize(); else draw(performance.now()); schedule(); }
   }
@@ -207,6 +220,7 @@
     });
     document.addEventListener("themechange", update);
     update();
+    ready = true;
   }
 
   if (document.body) init();

@@ -309,7 +309,7 @@ html[data-theme="dark"] .text-content .news-credit a:hover { color: var(--dm-acc
   opacity: 0;
   transition: opacity 0.8s ease;
 }
-#night-sky.is-on { opacity: 1; }
+#night-sky.is-on { opacity: 1; transition-duration: 0.15s; }   /* the stars themselves fade in (night-sky.js) */
 /* the page colour stays on <html>; the body is transparent so the stars show
    through, while cards, header and boxes keep their own surfaces */
 html[data-theme="dark"] body { background: transparent; }
