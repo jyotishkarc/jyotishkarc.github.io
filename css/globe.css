@@ -59,26 +59,62 @@
 
 .globe-credit a:hover { color: #5b3cc4; }
 
-/* Phones: the globe moves to the bottom of the homepage, behind a
-   "Visitor information" button (see javascript/globe.js). */
-.visitor-info { display: none; }
+/* ---- Controls in the globe's top corners: reverse (left) and pause (right) ---- */
+.globe-ctl {
+  all: unset;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid #ddd3f7;
+  background: rgba(255, 255, 255, 0.8);
+  color: #5b3cc4;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.globe-ctl--dir { left: 0; }
+.globe-ctl--pause { right: 0; }
+.globe-ctl svg { display: block; width: 13px; height: 13px; }
+.globe-ctl:hover, .globe-ctl:focus-visible { opacity: 1; background: #f4f0ff; border-color: #a996e6; }
+.globe-ctl:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
+.globe-ctl--dir svg { transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1); }
+.globe-ctl--dir.is-reversed svg { transform: scaleX(-1); }       /* the arrow shows the way it turns */
+.globe-ctl--pause .ic-play { display: none; }
+.globe-ctl--pause[aria-pressed="true"] .ic-pause { display: none; }
+.globe-ctl--pause[aria-pressed="true"] .ic-play { display: block; transform: translateX(1px); }
+html[data-theme="dark"] .globe-ctl { background: rgba(30, 27, 46, 0.8); border-color: #3a3456; color: #c9bcff; }
+html[data-theme="dark"] .globe-ctl:hover,
+html[data-theme="dark"] .globe-ctl:focus-visible { background: #2a2445; border-color: #6d5fb0; }
+
+/* ---- "Visitor information": a button with the globe folding away under it ----
+   Larger screens: under the CV button, with room between them. Phones: the
+   whole section moves to the bottom of the page (javascript/globe.js). */
+.visitor-info { width: 100%; margin-top: 30px; text-align: center; }
+.visitor-btn .visitor-icon { display: block; }
+.visitor-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: grid-template-rows 0.4s ease, opacity 0.3s ease, transform 0.4s ease;
+}
+.visitor-panel.is-open { grid-template-rows: 1fr; opacity: 1; transform: none; }
+.visitor-panel-inner { min-height: 0; overflow: hidden; }
+/* room inside the fold for the globe's glow and shadow */
+.visitor-slot { padding: 0 14px 18px; }
+.visitor-slot .visitor-globe { margin: 14px auto 0; }
 @media (max-width: 1000px) {
-  .visitor-globe { display: none; }
   /* padding, not margin: neighbouring margins collapse here. Gives ~24px above the button
      and ~24px from the button (or the open globe) down to the footer line. */
-  .visitor-info { display: block; text-align: center; margin: 0 auto; padding: 4px 16px 13px; }
-  .visitor-btn .visitor-icon { display: block; }
-  .visitor-panel {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: grid-template-rows 0.4s ease, opacity 0.3s ease, transform 0.4s ease;
-  }
-  .visitor-panel.is-open { grid-template-rows: 1fr; opacity: 1; transform: none; }
-  .visitor-panel-inner { min-height: 0; overflow: hidden; }
-  .visitor-slot .visitor-globe { display: block; width: min(280px, 76vw); max-width: none; margin: 18px auto 4px; }
+  .visitor-info { margin: 0 auto; padding: 4px 16px 13px; width: auto; }
+  .visitor-slot { padding: 0; }
+  .visitor-slot .visitor-globe { width: min(280px, 76vw); max-width: none; margin: 18px auto 4px; }
 }
-@media (max-width: 1000px) and (prefers-reduced-motion: reduce) {
-  .visitor-panel { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .visitor-panel, .globe-ctl--dir svg { transition: none; }
 }

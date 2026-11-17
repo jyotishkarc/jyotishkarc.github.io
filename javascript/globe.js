@@ -70,9 +70,13 @@
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var D2R = Math.PI / 180;
-  var SPIN = reduceMotion ? 0 : -6;   // degrees per second, always on
+  var SPEED = 6;                      // degrees per second
   var state = {
     lon0: -40, lat0: 20,              // opens on the Atlantic, both coasts in view
+    dir: -1,                          // spin direction (the reverse button flips it)
+    paused: reduceMotion,             // the pause button; starts paused for reduced motion
+    spin: reduceMotion ? 0 : -SPEED,  // current spin (deg/s), eases towards dir * SPEED
+    collapsed: false,                 // folded away under the "Visitor information" button
     vel: 0,                           // extra spin from a drag flick (deg/s)
     dragging: false,
     visible: true,
@@ -240,16 +244,20 @@
     rafId = 0;
     var dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
     last = now;
+    // pausing, resuming and reversing ease in and out rather than jump
+    var target = state.paused ? 0 : state.dir * SPEED;
+    state.spin += (target - state.spin) * (1 - Math.pow(0.004, dt));
+    if (Math.abs(target - state.spin) < 0.02) state.spin = target;
     if (!state.dragging) {
-      state.lon0 += (SPIN + state.vel) * dt;
+      state.lon0 += (state.spin + state.vel) * dt;
       state.vel *= Math.pow(0.06, dt);          // flick decays in about a second
       if (Math.abs(state.vel) < 0.05) state.vel = 0;
     }
     state.lon0 = ((state.lon0 + 540) % 360) - 180;
     draw(now);
-    if (SPIN || state.vel || state.dragging) schedule();
+    if (state.spin || target || state.vel || state.dragging) schedule();
   }
-  function schedule() { if (!rafId && state.visible) rafId = requestAnimationFrame(frame); }
+  function schedule() { if (!rafId && state.visible && !state.collapsed) rafId = requestAnimationFrame(frame); }
   function redraw() { last = 0; draw(performance.now()); schedule(); }
 
   function resize() {
@@ -366,30 +374,58 @@
       .catch(function () {});
   }
 
-  /* ---- phones: move the globe to the bottom of the page, behind a button ---- */
-  var slot = document.querySelector(".visitor-slot");
+  /* ---- controls: reverse direction (top left) and pause (top right) ---- */
+  var dirBtn = mount.querySelector(".globe-ctl--dir");
+  var pauseBtn = mount.querySelector(".globe-ctl--pause");
+  function syncPause() {
+    pauseBtn.setAttribute("aria-pressed", String(state.paused));
+    pauseBtn.setAttribute("aria-label", state.paused ? "Resume rotation" : "Pause rotation");
+    pauseBtn.title = state.paused ? "Play" : "Pause";
+  }
+  if (dirBtn) dirBtn.addEventListener("click", function () {
+    state.dir = -state.dir;
+    dirBtn.classList.toggle("is-reversed", state.dir > 0);
+    if (state.paused) { state.paused = false; if (pauseBtn) syncPause(); }   // reversing a still globe starts it
+    redraw();
+  });
+  if (pauseBtn) {
+    syncPause();
+    pauseBtn.addEventListener("click", function () { state.paused = !state.paused; syncPause(); redraw(); });
+  }
+
+  /* ---- "Visitor information": fold the globe away, and its place on the page ----
+     On larger screens the section sits under the CV button; on phones it moves
+     to the bottom of the page. Open by default either way. */
+  var section = document.querySelector(".visitor-info");
   var panel = document.getElementById("visitor-panel");
   var vbtn = document.querySelector(".visitor-btn");
-  if (slot && panel && vbtn && window.matchMedia) {
-    var home = mount.parentNode, homeNext = mount.nextSibling;
-    var phone = window.matchMedia("(max-width: 1000px)");
-    var place = function () {
-      if (phone.matches) { if (mount.parentNode !== slot) slot.appendChild(mount); }
-      else if (mount.parentNode !== home) home.insertBefore(mount, homeNext);
-      resize();
-    };
-    if (phone.addEventListener) phone.addEventListener("change", place); else phone.addListener(place);
-    place();
+  var spot = document.querySelector(".visitor-phone-spot");
+  if (section && panel && vbtn) {
+    if (spot && window.matchMedia) {
+      var home = section.parentNode, homeNext = section.nextSibling;
+      var phone = window.matchMedia("(max-width: 1000px)");
+      var place = function () {
+        if (phone.matches) { if (section.parentNode !== spot) spot.appendChild(section); }
+        else if (section.parentNode !== home) home.insertBefore(section, homeNext);
+        resize();
+      };
+      if (phone.addEventListener) phone.addEventListener("change", place); else phone.addListener(place);
+      place();
+    }
     vbtn.addEventListener("click", function () {
       var open = !panel.classList.contains("is-open");
       panel.classList.toggle("is-open", open);
       panel.setAttribute("aria-hidden", String(!open));
       panel.inert = !open;
       vbtn.setAttribute("aria-expanded", String(open));
-      if (open) setTimeout(function () {
-        var r = panel.getBoundingClientRect();
-        if (r.bottom > window.innerHeight) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 420);
+      state.collapsed = !open;          // no drawing while folded away
+      if (open) {
+        redraw();
+        setTimeout(function () {
+          var r = panel.getBoundingClientRect();
+          if (r.bottom > window.innerHeight) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 420);
+      } else hideTip();
     });
   }
 
