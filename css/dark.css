@@ -219,19 +219,36 @@ html[data-theme="dark"] .footer { color: #8fb6d6; }
   border-radius: 50%;
   cursor: pointer;
   color: #4a2fb0;                 /* moon: the site's violet */
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 .theme-toggle:hover { background: rgba(90, 60, 200, 0.1); color: #3a1f9e; }
 .theme-toggle:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
 .theme-toggle--bar { position: relative; top: -3px; }   /* line up with the nav links */
-.theme-toggle .ti { display: block; width: 23px; height: 23px; transition: transform 0.45s ease; }
-.theme-toggle:hover .ti-moon { transform: rotate(-18deg); }
-.theme-toggle:hover .ti-sun { transform: rotate(45deg); }
-.theme-toggle .ti-sun { display: none; }
+.theme-toggle .ti { display: block; width: 23px; height: 23px; overflow: visible; transition: transform 0.45s ease; }
+.theme-toggle:hover .ti { transform: rotate(-18deg); }
 html[data-theme="dark"] .theme-toggle { color: #f5c451; }  /* sun: warm amber */
 html[data-theme="dark"] .theme-toggle:hover { background: rgba(245, 196, 81, 0.12); color: #ffd36b; }
-html[data-theme="dark"] .theme-toggle .ti-sun { display: block; }
-html[data-theme="dark"] .theme-toggle .ti-moon { display: none; }
+html[data-theme="dark"] .theme-toggle:hover .ti { transform: rotate(45deg); }
+
+/* One icon that morphs: in light mode a crescent moon (a disc with a
+   circular bite taken out); switching to dark, the bite slides away,
+   the disc shrinks to the sun, and the rays turn in. Reverses on the way back. */
+.ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rays { transform-origin: 12px 12px; }
+.ti-orb .ti-disc { transition: transform 0.5s cubic-bezier(0.45, 0, 0.2, 1) 0.1s; }
+.ti-orb .ti-cut  { transition: transform 0.5s cubic-bezier(0.45, 0, 0.2, 1) 0.1s; }
+.ti-orb .ti-rays {
+  opacity: 0; transform: scale(0.5) rotate(-60deg);
+  transition: opacity 0.25s ease, transform 0.35s ease;   /* leave quickly */
+}
+html[data-theme="dark"] .ti-orb .ti-disc { transform: scale(0.5); transition-delay: 0s; }
+html[data-theme="dark"] .ti-orb .ti-cut  { transform: translate(9px, -9px); transition-delay: 0s; }
+html[data-theme="dark"] .ti-orb .ti-rays {
+  opacity: 1; transform: none;
+  transition: opacity 0.35s ease 0.25s, transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) 0.2s;   /* arrive after the disc */
+}
+.theme-toggle { transition: background-color 0.2s ease, color 0.5s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .ti-orb .ti-disc, .ti-orb .ti-cut, .ti-orb .ti-rays, .theme-toggle .ti { transition: none !important; }
+}
 
 /* smooth fade when switching (not on first paint) */
 html.theme-anim, html.theme-anim body, html.theme-anim .site-header,
