@@ -107,7 +107,7 @@ ol > li::marker {
     margin-top: 5px;
     margin-bottom: 5px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 500;
+    font-weight: 400;   /* Trebuchet has no 500; phones would draw a near-bold medium */
 }
 
 .publication-access {
@@ -122,7 +122,7 @@ ol > li::marker {
     text-decoration: none;
     font-weight: normal;
     /* font-size: 0.9rem; */
-    font-weight: 500;
+    font-weight: 400;
     color: rgb(1, 102, 1);
     text-decoration: underline dotted; 
     text-underline-position: under;
