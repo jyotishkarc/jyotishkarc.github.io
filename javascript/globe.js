@@ -38,7 +38,7 @@
     coast: "rgba(29,27,41,0.72)",
     border: "rgba(29,27,41,0.26)",
     marker: "#5b3cc4",
-    markerHalo: "rgba(91,60,196,0.22)",
+    markerHalo: "rgba(91,60,196,0.34)",
     night: [52, 40, 112, 0.15],        // rgb + max alpha of the night side
     lights: "#d08a1e",                 // visitor markers that are in darkness
     lightsHalo: "rgba(232,160,48,0.3)"
@@ -54,7 +54,7 @@
     coast: "rgba(232,228,245,0.78)",
     border: "rgba(232,228,245,0.26)",
     marker: "#c4b5ff",
-    markerHalo: "rgba(196,181,255,0.25)",
+    markerHalo: "rgba(196,181,255,0.32)",
     night: [4, 3, 12, 0.5],
     lights: "#ffd27f",
     lightsHalo: "rgba(255,200,110,0.32)"
@@ -209,25 +209,28 @@
     ctx.fillStyle = limb;
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.fill();
 
-    // visitor markers, sized by sqrt(count)
-    var pulse = reduceMotion ? 0.5 : (now / 1800) % 1;
+    // visitor markers: small diamonds with a soft, steady glow, sized by sqrt(count)
     screenPts = [];
     for (var j = 0; j < points.length; j++) {
       var pt = points[j], o = scr(rot(pt.lon, pt.lat));
       if (o.z <= 0.04) continue;
-      var a = Math.min(1, o.z * 4), s = 1.8 + 3.2 * Math.sqrt(pt.count / maxCount);
+      var a = Math.min(1, o.z * 4), s = 2.2 + 2.6 * Math.sqrt(pt.count / maxCount);
       // after dark, a visitor's city glows warm, like city lights
       var lit = darkness(sv.x * o.x + sv.y * o.y + sv.z * o.z) > 0.5;
-      ctx.globalAlpha = a * (1 - pulse) * 0.8;
-      ctx.fillStyle = lit ? C.lightsHalo : C.markerHalo;
-      ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 2 + pulse * 6, 0, 2 * Math.PI); ctx.fill();
+      var gr = s * 2.7, glow = ctx.createRadialGradient(o.sx, o.sy, 0, o.sx, o.sy, gr);
+      var hc = lit ? C.lightsHalo : C.markerHalo;
+      glow.addColorStop(0, hc);
+      glow.addColorStop(1, hc.replace(/[\d.]+\)$/, "0)"));   // same colour, fully clear
       ctx.globalAlpha = a;
-      ctx.fillStyle = isDark() ? "#121119" : "#fff";
-      ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 1.2, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(o.sx, o.sy, gr, 0, 2 * Math.PI); ctx.fill();
       ctx.fillStyle = lit ? C.lights : C.marker;
-      ctx.beginPath(); ctx.arc(o.sx, o.sy, s, 0, 2 * Math.PI); ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(o.sx, o.sy - s); ctx.lineTo(o.sx + s, o.sy);
+      ctx.lineTo(o.sx, o.sy + s); ctx.lineTo(o.sx - s, o.sy);
+      ctx.closePath(); ctx.fill();
       ctx.globalAlpha = 1;
-      screenPts.push({ x: o.sx, y: o.sy, r: Math.max(s + 2, 6), pt: pt });
+      screenPts.push({ x: o.sx, y: o.sy, r: Math.max(s + 3, 6), pt: pt });
     }
   }
 
