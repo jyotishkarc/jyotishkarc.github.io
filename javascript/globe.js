@@ -34,7 +34,10 @@
     coastHalo: "rgba(40,30,80,0.07)",
     coast: "rgba(29,27,41,0.72)",
     marker: "#5b3cc4",
-    markerHalo: "rgba(91,60,196,0.22)"
+    markerHalo: "rgba(91,60,196,0.22)",
+    night: [52, 40, 112, 0.15],        // rgb + max alpha of the night side
+    lights: "#d08a1e",                 // visitor markers that are in darkness
+    lightsHalo: "rgba(232,160,48,0.3)"
   };
   var DARK = {
     orbHi: "rgba(52,47,82,0.98)",
@@ -46,7 +49,10 @@
     coastHalo: "rgba(185,168,255,0.10)",
     coast: "rgba(232,228,245,0.78)",
     marker: "#c4b5ff",
-    markerHalo: "rgba(196,181,255,0.25)"
+    markerHalo: "rgba(196,181,255,0.25)",
+    night: [4, 3, 12, 0.5],
+    lights: "#ffd27f",
+    lightsHalo: "rgba(255,200,110,0.32)"
   };
   function isDark() { return document.documentElement.getAttribute("data-theme") === "dark"; }
   var C = isDark() ? DARK : LIGHT;
@@ -93,6 +99,53 @@
     ctx.stroke();
   }
 
+  /* ---- day and night --------------------------------------------------- */
+  // Where the sun is overhead right now (accurate to a fraction of a degree).
+  var sun = { lon: 0, lat: 0, t: -1 };
+  function updateSun() {
+    var d = new Date(), t = d.getTime();
+    if (t - sun.t < 60000) return;
+    sun.t = t;
+    var N = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) -
+             Date.UTC(d.getUTCFullYear(), 0, 0)) / 864e5;
+    var B = 2 * Math.PI * (N - 81) / 365;
+    var eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);   // minutes
+    var h = d.getUTCHours() + d.getUTCMinutes() / 60 + d.getUTCSeconds() / 3600;
+    sun.lat = -23.44 * Math.cos(2 * Math.PI * (N + 10) / 365);
+    sun.lon = ((-15 * (h - 12 + eot / 60)) + 540) % 360 - 180;
+  }
+  // How dark it is at a point, 0 (day) to 1 (night), with a soft twilight band.
+  function darkness(dot) {
+    var u = Math.min(1, Math.max(0, (0.06 - dot) / 0.26));
+    return u * u * (3 - 2 * u);
+  }
+  // The night side is shaded on a small canvas and scaled up, which keeps the
+  // terminator soft and costs very little per frame.
+  var shade = document.createElement("canvas"), sctx = shade.getContext("2d"), SH = 90, simg = null;
+  shade.width = shade.height = SH;
+  function drawNight(cx, cy, R) {
+    var sv = rot(sun.lon, sun.lat), col = C.night;
+    if (!simg) simg = sctx.createImageData(SH, SH);
+    var px = simg.data, half = SH / 2;
+    for (var yy = 0; yy < SH; yy++) {
+      var y = (half - yy - 0.5) / half;
+      for (var xx = 0; xx < SH; xx++) {
+        var x = (xx + 0.5 - half) / half, rr = x * x + y * y, o = 4 * (yy * SH + xx);
+        // pixels just past the rim reuse the rim value, so scaling leaves no seam
+        var z = rr < 1 ? Math.sqrt(1 - rr) : 0, f = rr < 1 ? 1 : 1 / Math.sqrt(rr);
+        var a = darkness(sv.x * x * f + sv.y * y * f + sv.z * z) * col[3];
+        px[o] = col[0]; px[o + 1] = col[1]; px[o + 2] = col[2]; px[o + 3] = Math.round(a * 255);
+      }
+    }
+    sctx.putImageData(simg, 0, 0);
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.clip();
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(shade, cx - R, cy - R, 2 * R, 2 * R);
+    ctx.restore();
+    return sv;
+  }
+
   /* ---- drawing -------------------------------------------------------- */
   function draw(now) {
     var S = state.size, R = S / 2 - 6, cx = S / 2, cy = S / 2;
@@ -105,6 +158,10 @@
     g.addColorStop(0, C.orbHi); g.addColorStop(0.55, C.orbMid); g.addColorStop(1, C.orbLo);
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.fill();
+
+    // night side, under the grid and coastlines
+    updateSun();
+    var sv = drawNight(cx, cy, R);
 
     ctx.lineWidth = 0.6; ctx.strokeStyle = C.graticule;
     var k;
@@ -136,13 +193,15 @@
       var pt = points[j], o = scr(rot(pt.lon, pt.lat));
       if (o.z <= 0.04) continue;
       var a = Math.min(1, o.z * 4), s = 1.8 + 3.2 * Math.sqrt(pt.count / maxCount);
+      // after dark, a visitor's city glows warm, like city lights
+      var lit = darkness(sv.x * o.x + sv.y * o.y + sv.z * o.z) > 0.5;
       ctx.globalAlpha = a * (1 - pulse) * 0.8;
-      ctx.fillStyle = C.markerHalo;
+      ctx.fillStyle = lit ? C.lightsHalo : C.markerHalo;
       ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 2 + pulse * 6, 0, 2 * Math.PI); ctx.fill();
       ctx.globalAlpha = a;
       ctx.fillStyle = isDark() ? "#121119" : "#fff";
       ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 1.2, 0, 2 * Math.PI); ctx.fill();
-      ctx.fillStyle = C.marker;
+      ctx.fillStyle = lit ? C.lights : C.marker;
       ctx.beginPath(); ctx.arc(o.sx, o.sy, s, 0, 2 * Math.PI); ctx.fill();
       ctx.globalAlpha = 1;
       screenPts.push({ x: o.sx, y: o.sy, r: Math.max(s + 2, 6), pt: pt });
