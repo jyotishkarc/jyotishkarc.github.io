@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..1000&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
 
@@ -1383,4 +1384,21 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
 @keyframes vt-fade-in { from { opacity: 0; transform: translateY(6px); } }
 @media (prefers-reduced-motion: reduce) {
   @view-transition { navigation: none; }
+}
+
+
+/* ---- Phones: bio typography ----
+   15px text with a little air (1.55), still justified. Phones without Optima
+   (Android, etc.) get Alegreya Sans, a humanist face close to Optima in spirit,
+   instead of the system default; Macs and iPhones keep Optima. Numerals are set
+   to standard (lining) figures so years sit on the line as they do in Optima. */
+@media (max-width: 1000px) {
+  html { font-family: Optima, "Alegreya Sans", Candara, Calibri, "Avenir Next", "Segoe UI", Arial, sans-serif; }
+  .text-content > p {
+    font-size: 15px;
+    line-height: 1.55;
+    font-variant-numeric: lining-nums;
+  }
+  /* footer: readable copyright and "last updated" lines */
+  .footer { font-size: 0.82em; }
 }

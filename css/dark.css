@@ -142,7 +142,7 @@ html[data-theme="dark"] .name-btn:hover, html[data-theme="dark"] .name-btn:focus
   border-color: #6a5bb0;
 }
 html[data-theme="dark"] .abs-btn[aria-expanded="true"],
-html[data-theme="dark"] .name-btn[aria-expanded="true"] {
+html[data-theme="dark"] .name-btn:not(.visitor-btn)[aria-expanded="true"] {
   background: var(--dm-accent-on);
   border-color: var(--dm-accent-on);
   color: #fff;

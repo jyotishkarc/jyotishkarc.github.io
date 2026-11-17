@@ -64,7 +64,9 @@
 .visitor-info { display: none; }
 @media (max-width: 1000px) {
   .visitor-globe { display: none; }
-  .visitor-info { display: block; text-align: center; margin: 4px auto 26px; padding: 0 16px; }
+  /* padding, not margin: neighbouring margins collapse here. Gives ~24px above the button
+     and ~24px from the button (or the open globe) down to the footer line. */
+  .visitor-info { display: block; text-align: center; margin: 0 auto; padding: 4px 16px 13px; }
   .visitor-btn .visitor-icon { display: block; }
   .visitor-panel {
     display: grid;
