@@ -10,7 +10,8 @@
      GET  {base}/stats  -> { points: [{ city, country, lat, lon, count }] }
    With data-stats empty the globe still turns, just without markers.
 
-   Coastlines come from javascript/globe-land.js (window.__GLOBE_LAND__).
+   Coastlines come from javascript/globe-land.js (window.__GLOBE_LAND__),
+   country borders from javascript/globe-borders.js (window.__GLOBE_BORDERS__).
    ========================================================================== */
 (function () {
   "use strict";
@@ -24,6 +25,8 @@
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext("2d");
 
+  var BORDERS = window.__GLOBE_BORDERS__ || [];   // optional: country borders (globe-borders.js)
+
   var LIGHT = {
     orbHi: "rgba(255,255,255,0.98)",
     orbMid: "rgba(246,244,252,0.9)",
@@ -33,6 +36,7 @@
     equator: "rgba(91,60,196,0.35)",
     coastHalo: "rgba(40,30,80,0.07)",
     coast: "rgba(29,27,41,0.72)",
+    border: "rgba(29,27,41,0.26)",
     marker: "#5b3cc4",
     markerHalo: "rgba(91,60,196,0.22)",
     night: [52, 40, 112, 0.15],        // rgb + max alpha of the night side
@@ -48,6 +52,7 @@
     equator: "rgba(185,168,255,0.38)",
     coastHalo: "rgba(185,168,255,0.10)",
     coast: "rgba(232,228,245,0.78)",
+    border: "rgba(232,228,245,0.26)",
     marker: "#c4b5ff",
     markerHalo: "rgba(196,181,255,0.25)",
     night: [4, 3, 12, 0.5],
@@ -188,6 +193,12 @@
         strokeVisible(ring.length / 2, function (i) { return scr(rot(ring[2 * i], ring[2 * i + 1])); });
       })(LAND[r]);
     }
+
+    // country borders: hairlines, lighter than the coasts
+    ctx.strokeStyle = C.border; ctx.lineWidth = 0.5;
+    for (var bi = 0; bi < BORDERS.length; bi++) (function (line) {
+      strokeVisible(line.length / 2, function (i) { return scr(rot(line[2 * i], line[2 * i + 1])); });
+    })(BORDERS[bi]);
 
     ctx.strokeStyle = C.rim; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.stroke();
