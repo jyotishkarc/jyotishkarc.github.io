@@ -1,4 +1,4 @@
-/* Homepage: "What's in my name?" dropdown, first-name pronunciation, News "Show older". */
+/* Homepage: "What's in my name?" dropdown, name pronunciations, News "Show older". */
 (function () {
   "use strict";
 
@@ -36,12 +36,17 @@
     });
   }
 
-  /* ---- pronunciation of the first name: a small speaker beside "jo-TISH-ko" ---- */
-  var sayBtn = document.querySelector(".say-btn");
-  var say = document.querySelector(".say-audio");
-  if (sayBtn && say) {
+  /* ---- pronunciation: a "Listen" pill beside each name, playing the clip right after it ---- */
+  var sayBtns = document.querySelectorAll(".say-btn");
+  Array.prototype.forEach.call(sayBtns, function (sayBtn) {
+    var say = sayBtn.nextElementSibling;
+    if (!say || say.tagName !== "AUDIO") return;
     sayBtn.addEventListener("click", function () {
       if (!say.paused) { say.pause(); say.currentTime = 0; return; }
+      // only one clip at a time
+      document.querySelectorAll(".say-audio").forEach(function (other) {
+        if (other !== say && !other.paused) { other.pause(); other.currentTime = 0; }
+      });
       say.currentTime = 0;
       var p = say.play();
       if (p && p.catch) p.catch(function () {});
@@ -49,7 +54,7 @@
     say.addEventListener("play", function () { sayBtn.classList.add("is-playing"); });
     say.addEventListener("ended", function () { sayBtn.classList.remove("is-playing"); });
     say.addEventListener("pause", function () { sayBtn.classList.remove("is-playing"); });
-  }
+  });
 
 
   /* ---- News box: fade the bottom edge while there is more to scroll ---- */
