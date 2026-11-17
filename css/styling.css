@@ -438,7 +438,8 @@ h6 {
 
 p {
     font-family: inherit;
-    font-weight: 500;   /* try 400 first; use 450 or 500 only if too light */
+    font-weight: 400;   /* 400, not 500: Optima/Trebuchet/Candara have no medium face, so desktops already show regular;
+       phones (Roboto, Avenir Next) do have one and drew 500 as near-bold */
     font-size: 15px;
     line-height: 1.5em;
     color: #333;
@@ -838,12 +839,12 @@ p {
 .text-content p {
     /* font-family: "Source Sans 3", Optima, Candara, Calibri, Arial, sans-serif; */
     /* font-weight: 520; */
-    font-weight: 500;
+    font-weight: 400;   /* see the note on p above */
     color: #000000;
 }
 
 .text-content a {
-  font-weight: 510;
+  font-weight: 400;
   font-size: 14px;
 }
 
@@ -950,7 +951,7 @@ nav .fa-bars {
         /* font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; */
         /* font-family: Optima, Candara, Calibri, Arial, sans-serif; */
         /* font-weight: normal; */
-        font-weight: 500;
+        font-weight: 400;   /* phones: normal weight (500 drew near-bold in Roboto/Avenir Next) */
     }
 
     .nav-name {
