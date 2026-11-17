@@ -187,7 +187,20 @@ html[data-theme="dark"] .affiliation .aff-light { display: none; }
 html[data-theme="dark"] .affiliation .aff-dark { display: block; }
 html[data-theme="dark"] .affiliation:hover { border-color: #b9a8ff; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 0 1px #b9a8ff; }
 @media (prefers-reduced-motion: reduce) { .affiliation { transition: none; } }
+/* ---- Phones: ISyE card, social icons and CV button exactly as wide as the photo ----
+   The photo is 80% of the column and drawn at 92%, so its visible width is
+   73.6% of the column; the stack below uses the same share. Icons scale with
+   the stack (container units), keeping their proportions (50px icons, 24px gaps
+   across a 272px row on desktop). */
 @media (max-width: 1000px) {
-  /* the social icons are drawn at 80% on phones; match their width */
-  .affiliation { align-self: center; width: calc(0.8 * (4 * var(--icon-size, 50px) + 3 * var(--icon-gap, 24px))); margin-bottom: 4px; }
+  .icon-stack { width: 73.6%; container-type: inline-size; }
+  .icon-stack .social-icons {
+    --icon-size: calc(100cqw * 50 / 272);
+    --icon-gap: calc(100cqw * 24 / 272);
+    transform: none;
+  }
+  .icon-stack .social-icons a { font-size: calc(100cqw * 16 / 272); }
+  .affiliation { align-self: stretch; width: auto; margin-bottom: 13px; }
+  .icon-stack .cv-btn { transform: none; margin-top: 6px; }
+  .icon-stack .cv-btn a { width: 100%; }
 }
