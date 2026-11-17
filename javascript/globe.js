@@ -152,6 +152,12 @@
     if (!S) return;
     ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
     ctx.clearRect(0, 0, S, S);
+    // atmosphere: a faint glow just outside the rim
+    var dk = isDark(), atm = ctx.createRadialGradient(cx, cy, R * 0.985, cx, cy, R + 5.5);
+    atm.addColorStop(0, dk ? "rgba(170,150,255,0.24)" : "rgba(120,95,220,0.16)");
+    atm.addColorStop(1, "rgba(120,95,220,0)");
+    ctx.fillStyle = atm;
+    ctx.beginPath(); ctx.arc(cx, cy, R + 5.5, 0, 2 * Math.PI); ctx.fill();
     function scr(o) { o.sx = cx + R * o.x; o.sy = cy - R * o.y; return o; }
 
     var g = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
@@ -185,6 +191,12 @@
 
     ctx.strokeStyle = C.rim; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.stroke();
+    // limb: very light shading toward the edge, for a sense of depth
+    var limb = ctx.createRadialGradient(cx, cy, R * 0.72, cx, cy, R);
+    limb.addColorStop(0, "rgba(0,0,0,0)");
+    limb.addColorStop(1, dk ? "rgba(0,0,0,0.22)" : "rgba(60,40,130,0.07)");
+    ctx.fillStyle = limb;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.fill();
 
     // visitor markers, sized by sqrt(count)
     var pulse = reduceMotion ? 0.5 : (now / 1800) % 1;
