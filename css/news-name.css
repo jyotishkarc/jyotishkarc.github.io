@@ -90,24 +90,6 @@
   font-size: 17px !important;
 }
 
-.name-play {
-  margin-left: 8px;
-  padding: 0 10px;
-  border: 1px solid #cfc4ef;
-  border-radius: 999px;
-  background: #fff;
-  color: #4a2fb0;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.7;
-  cursor: pointer;
-}
-
-.name-play[hidden] { display: none; }
-.name-play:hover { background: #f4f0ff; }
-.name-play.is-playing { background: #4a2fb0; color: #fff; border-color: #4a2fb0; }
-
 /* ---- News ----
    The rounded border and background live on an outer frame; the list scrolls
    inside it. That keeps all four corners cleanly rounded even where the system
@@ -223,6 +205,32 @@
   transition: background-color 0.2s ease;
 }
 .ipa-btn:hover { background: #f4f0ff; }
+/* "Listen" pill beside the first name; while it plays, the pill fills and its sound waves pulse */
+.say-btn {
+  all: unset;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: -3px;
+  padding: 0 9px 0 6px;
+  border: 1px solid #d9d0f3;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: #4a2fb0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.say-btn svg { width: 14px; height: 14px; flex: none; }
+.say-btn:hover { background: #f4f0ff; }
+.say-btn:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
+.say-btn.is-playing { background: #4a2fb0; border-color: #4a2fb0; color: #fff; }
+.say-btn.is-playing .say-w1 { animation: say-wave 0.8s ease-in-out infinite; }
+.say-btn.is-playing .say-w2 { animation: say-wave 0.8s ease-in-out 0.16s infinite; }
+@keyframes say-wave { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 .ipa-btn:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
 .ipa-caret { display: inline-block; font-size: 0.9em; transition: transform 0.3s ease; }
 .ipa-btn[aria-expanded="true"] .ipa-caret { transform: rotate(180deg); }
@@ -244,9 +252,12 @@
   text-underline-offset: 3px;
 }
 .name-list .name-ipa:hover { color: #4a2fb0; text-decoration-color: currentColor; }
-@media (prefers-reduced-motion: reduce) { .ipa-reveal, .ipa-caret { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .ipa-reveal, .ipa-caret { transition: none; } .say-btn .say-w1, .say-btn .say-w2 { animation: none !important; } }
 html[data-theme="dark"] .name-say-part { color: #9a96ad; }
 html[data-theme="dark"] .ipa-btn { border-color: #3a3456; color: #c9bcff; }
 html[data-theme="dark"] .ipa-btn:hover { background: #2a2445; }
+html[data-theme="dark"] .say-btn { border-color: #3a3456; color: #c9bcff; }
+html[data-theme="dark"] .say-btn:hover { background: #2a2445; }
+html[data-theme="dark"] .say-btn.is-playing { background: #c9bcff; border-color: #c9bcff; color: #17151f; }
 html[data-theme="dark"] .name-list .name-ipa { color: #c8c4d6; text-decoration-color: #5d5878; }
 html[data-theme="dark"] .name-list .name-ipa:hover { color: #d4c9ff; }
