@@ -223,7 +223,7 @@ html[data-theme="dark"] .footer { color: #8fb6d6; }
 .theme-toggle:hover { background: rgba(90, 60, 200, 0.1); color: #3a1f9e; }
 .theme-toggle:focus-visible { outline: 2px solid #6a4fd6; outline-offset: 2px; }
 .theme-toggle--bar { position: relative; top: -3px; }   /* line up with the nav links */
-.theme-toggle .ti { display: block; width: 23px; height: 23px; overflow: visible; transition: transform 0.45s ease; }
+.theme-toggle .ti { display: block; width: 28px; height: 28px; overflow: visible; transition: transform 0.45s ease; }
 .theme-toggle:hover .ti { transform: rotate(-18deg); }
 html[data-theme="dark"] .theme-toggle { color: #f5c451; }  /* sun: warm amber */
 html[data-theme="dark"] .theme-toggle:hover { background: rgba(245, 196, 81, 0.12); color: #ffd36b; }
@@ -263,7 +263,7 @@ html.theme-anim .publication-card, html.theme-anim p, html.theme-anim a {
   height: 34px;
   border-radius: 50%;
 }
-.theme-toggle--menu .ti { width: 20px; height: 20px; }
+.theme-toggle--menu .ti { width: 24px; height: 24px; }
 .theme-toggle-label {               /* kept for screen readers only */
   position: absolute;
   width: 1px; height: 1px;
