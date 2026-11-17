@@ -24,7 +24,7 @@
 .name-btn:hover,
 .name-btn:focus-visible { background: #e9e1ff; border-color: #a996e6; outline: none; }
 
-.name-btn[aria-expanded="true"] { background: #4a2fb0; border-color: #4a2fb0; color: #fff; }
+.name-btn:not(.visitor-btn)[aria-expanded="true"] { background: #4a2fb0; border-color: #4a2fb0; color: #fff; }
 
 .name-caret { font-size: 0.75em; transition: transform 0.3s ease; }
 .name-btn[aria-expanded="true"] .name-caret { transform: rotate(180deg); }

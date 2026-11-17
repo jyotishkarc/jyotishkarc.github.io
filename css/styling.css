@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..1000&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
 
@@ -21,7 +22,10 @@
 
 html {
     /* font-family: Optima, "Source Sans 3", Candara, Calibri, Arial, sans-serif; */
-    font-family: Optima, Candara, Calibri, "Avenir Next", "Segoe UI", Arial, sans-serif;
+    /* Optima on Apple devices; Alegreya Sans everywhere else (web font, only
+       downloaded where Optima is missing); Source Sans 3 if that can't load. */
+    font-family: Optima, "Alegreya Sans", "Source Sans 3", Candara, Calibri, "Segoe UI", Arial, sans-serif;
+    font-variant-numeric: lining-nums;   /* Alegreya's years sit on the line, like Optima's */
     font-weight: 400;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
@@ -849,7 +853,7 @@ p {
 }
 
 .text-content b {
-  font-size: 14px;
+  font-size: inherit;   /* same size as the paragraph (was a fixed 14px) */
 }
 
 .gt-fellowship {
@@ -1038,7 +1042,7 @@ nav .fa-bars {
     }
 
     .text-content b {
-      font-size: 12px;
+      font-size: inherit;   /* was a fixed 12px, smaller than the 15px text around it */
     }
 
     .visitor {
@@ -1383,4 +1387,17 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
 @keyframes vt-fade-in { from { opacity: 0; transform: translateY(6px); } }
 @media (prefers-reduced-motion: reduce) {
   @view-transition { navigation: none; }
+}
+
+
+/* ---- Phones: bio typography ----
+   15px text with a little air (1.55), still justified. (The font stack itself,
+   Optima / Alegreya Sans / Source Sans 3, is set on html above.) */
+@media (max-width: 1000px) {
+  .text-content > p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  /* footer: readable copyright and "last updated" lines */
+  .footer { font-size: 0.74em; }
 }
