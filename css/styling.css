@@ -1375,6 +1375,88 @@ nav .fa-bars {
 html[data-theme="dark"] .last-updated { color: #908ca3; }
 
 
+/* ---- Social icons: the hovered one opens into a labelled tile ----
+   On devices with a mouse, the button under the pointer widens into a rounded
+   rectangle about 42% of the row and its name wipes in beside the icon; the
+   other three slide aside (the gaps tighten, the icons shrink a touch and dim).
+   The row's total width never changes, so nothing around it moves. A short
+   delay on the way back keeps the row from snapping open between buttons.
+   Phones and touch screens keep the plain icons. */
+.social-icons {
+  --row: calc(4 * var(--icon-size) + 3 * var(--icon-gap));
+  --gap-tight: calc(var(--icon-gap) / 3);
+  --wide: calc(var(--row) * 0.42);
+  --narrow: calc((var(--row) - var(--wide) - 3 * var(--gap-tight)) / 3);
+  width: var(--row);
+}
+.soc-label {
+  position: relative;
+  z-index: 2;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: #fff;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+}
+.soc-label--2 { line-height: 1.05; text-align: left; }   /* "Google / Scholar" on two lines */
+@media (hover: hover) and (pointer: fine) {
+  .social-icons {
+    transition: gap 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.06s;
+  }
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--icon-size);
+    border-radius: calc(var(--icon-size) * 0.3);
+    transition: flex-basis 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.06s,
+                height 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.06s,
+                opacity 0.3s ease 0.06s, box-shadow 0.3s ease;
+  }
+  .social-icons a .fab, .social-icons a .ai, .social-icons a .fas { flex: none; }
+  .soc-label {
+    transition: max-width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                margin-left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 0.15s ease, clip-path 0.2s ease;
+  }
+
+  /* one button is open: the row tightens around it */
+  .social-icons:has(a:is(:hover, :focus-visible)) { gap: var(--gap-tight); transition-delay: 0s; }
+  .social-icons:has(a:is(:hover, :focus-visible)) a {
+    flex-basis: var(--narrow);
+    height: var(--narrow);
+    opacity: 0.7;
+    transition-delay: 0s;
+  }
+  .social-icons:has(a:is(:hover, :focus-visible)) a:is(:hover, :focus-visible) {
+    flex-basis: var(--wide);
+    height: var(--icon-size);
+    opacity: 1;
+    border-radius: calc(var(--icon-size) * 0.3);
+    --inner-scale: 1;
+  }
+  .social-icons a:is(:hover, :focus-visible) .soc-label {
+    max-width: 8em;
+    margin-left: 0.45em;
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transition: max-width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+                margin-left 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 0.3s ease 0.12s, clip-path 0.4s cubic-bezier(0.3, 0.7, 0.2, 1) 0.12s;
+  }
+  .social-icons a:is(:hover, :focus-visible)::before { transform: scale(1); }
+  .social-icons a:is(:hover, :focus-visible) :is(.fab, .ai, .fas) { color: #fff; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .social-icons, .social-icons a, .soc-label { transition: none !important; }
+}
+
+
 /* ---- Page transitions (View Transitions API; browsers without it navigate as usual) ----
    Moving between pages crossfades the content while the header stays put. */
 @view-transition { navigation: auto; }
