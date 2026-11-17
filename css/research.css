@@ -81,7 +81,10 @@ ol > li::marker {
 
 .publication-card h3 {
     color: #333;
-    margin: 6px 0; /* Set margin to 10px above and below title */
+    /* paper titles: Source Sans 3 Semibold on every device */
+    font-family: "Source Sans 3", Optima, "Alegreya Sans", "Segoe UI", Arial, sans-serif;
+    font-weight: 600;
+    margin: 6px 0 4px; /* a little tighter above the authors (was 6px) */
 }
 
 .publication-authors {
@@ -219,7 +222,7 @@ ol > li::marker {
     }
     .publication-card h3 {
         font-size: 0.85em;
-        margin: 8px 0; /* Set margin to 10px above and below title */
+        margin: 8px 0 5px; /* a little tighter above the authors (was 8px) */
     }
 
     .publication-venue {
