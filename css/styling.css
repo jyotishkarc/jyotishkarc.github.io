@@ -1391,6 +1391,7 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
   width: var(--row);
 }
 .soc-label {
+  display: none;            /* only shown on devices with a mouse (below) */
   position: relative;
   z-index: 2;
   max-width: 0;
@@ -1425,6 +1426,7 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
   .social-icons a::before,
   .social-icons a:hover::before { transform: none; opacity: 0; transition: opacity 0.3s ease; }
   .soc-label {
+    display: block;
     transition: max-width 0.28s var(--soc-ease), margin-left 0.28s var(--soc-ease),
                 opacity 0.12s ease, clip-path 0.15s ease;
   }
