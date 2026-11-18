@@ -1376,18 +1376,20 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
 
 
 /* ---- Social icons: the hovered one opens into a labelled tile ----
-   On devices with a mouse, the button under the pointer widens into a rounded
-   rectangle about 42% of the row: its gradient fades in and its name wipes in
-   beside the icon. The other three shrink to 80% and slide aside. The row's
-   total width never changes, so nothing around it moves. The open button is
-   tracked by javascript/social-icons.js, so it stays open across the gaps.
-   Phones and touch screens keep the plain icons. */
+   On devices with a mouse, the button under the pointer springs open into a
+   rounded rectangle about 42% of the row: its gradient spreads out from the
+   icon like ink and the letters of its name rise in one after another. The
+   other three shrink to 80% and slide aside. The row's width and height never
+   change, so nothing around it moves. The open button is tracked by
+   javascript/social-icons.js (which also splits the names into letters), so
+   it stays open across the gaps. Phones and touch screens keep the plain icons. */
 .social-icons {
   --row: calc(4 * var(--icon-size) + 3 * var(--icon-gap));
   --wide: calc(var(--row) * 0.42);
   --narrow: calc(var(--icon-size) * 0.8);
   --gap-tight: calc((var(--row) - var(--wide) - 3 * var(--narrow)) / 3);
   --soc-ease: cubic-bezier(0.45, 0, 0.15, 1);
+  --soc-spring: cubic-bezier(0.3, 1.3, 0.5, 1);      /* a gentle overshoot, then settle */
   width: var(--row);
 }
 .soc-label {
@@ -1402,12 +1404,13 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
   letter-spacing: 0.01em;
   line-height: 1;
   color: #fff;
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
 }
 .soc-label--2 { line-height: 1.05; text-align: left; }   /* "Google / Scholar" on two lines */
+.soc-label .soc-ch { display: inline-block; }
 @media (hover: hover) and (pointer: fine) {
-  .social-icons { transition: gap 0.34s var(--soc-ease); }
+  /* fixed height: tiles grow and shrink inside it, so the CV button and the
+     globe below never move, even while one button hands over to the next */
+  .social-icons { height: calc(var(--icon-size) + 4px); transition: gap 0.3s var(--soc-spring); }   /* + its 2px padding top and bottom */
   .social-icons a,
   .social-icons a:hover {
     display: flex;
@@ -1415,30 +1418,40 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
     justify-content: center;
     height: var(--icon-size);
     border-radius: calc(var(--icon-size) * 0.3);
-    transition: flex-basis 0.34s var(--soc-ease), height 0.34s var(--soc-ease),
-                opacity 0.28s ease, box-shadow 0.28s ease;
+    transition: flex-basis 0.22s var(--soc-ease), height 0.22s var(--soc-ease),
+                opacity 0.22s ease, box-shadow 0.22s ease;
   }
   .social-icons a :is(.fab, .ai, .fas) {
     flex: none;
-    transition: transform 0.34s var(--soc-ease), color 0.28s ease;
+    transition: transform 0.3s var(--soc-spring), color 0.2s ease;
   }
-  /* the gradient fades in with the widening, instead of popping in */
+  /* the gradient spreads out from the icon like ink (and drains back into it) */
   .social-icons a::before,
-  .social-icons a:hover::before { transform: none; opacity: 0; transition: opacity 0.3s ease; }
+  .social-icons a:hover::before {
+    transform: none;
+    opacity: 1;
+    clip-path: circle(0% at 30% 50%);
+    transition: clip-path 0.2s ease-in;
+  }
   .soc-label {
     display: block;
-    transition: max-width 0.28s var(--soc-ease), margin-left 0.28s var(--soc-ease),
-                opacity 0.12s ease, clip-path 0.15s ease;
+    transition: max-width 0.2s var(--soc-ease), margin-left 0.2s var(--soc-ease);
+  }
+  .soc-label .soc-ch {
+    opacity: 0;
+    transform: translateY(0.45em);
+    transition: opacity 0.1s ease, transform 0.1s ease;
   }
 
-  /* one button is open (javascript/social-icons.js keeps it open across the
-     gaps): the others shrink and the row tightens around it */
+  /* one button is open: the others shrink and the row tightens around it */
   .social-icons.has-open { gap: var(--gap-tight); }
   .social-icons.has-open a {
     flex-basis: var(--narrow);
     height: var(--narrow);
     opacity: 0.72;
     --inner-scale: 0.82;
+    transition: flex-basis 0.3s var(--soc-spring), height 0.3s var(--soc-spring),
+                opacity 0.22s ease, box-shadow 0.22s ease;
   }
   .social-icons.has-open a.is-open {
     flex-basis: var(--wide);
@@ -1446,25 +1459,30 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
     opacity: 1;
     --inner-scale: 1;
     box-shadow: inset 0 0 0 var(--ring) var(--ring-color-hover), 0 0 20px 10px rgba(0, 0, 0, 0.05);
-    transition: flex-basis 0.34s var(--soc-ease), height 0.34s var(--soc-ease),
-                opacity 0.28s ease, box-shadow 0.28s ease;
   }
   html[data-theme="dark"] .social-icons.has-open a.is-open {
     box-shadow: inset 0 0 0 var(--ring) var(--ring-color), 0 0 20px 10px rgba(0, 0, 0, 0.25);
   }
-  .social-icons a.is-open::before { opacity: 1; }
+  .social-icons a.is-open::before {
+    clip-path: circle(150% at 30% 50%);
+    transition: clip-path 0.38s cubic-bezier(0.25, 0.6, 0.3, 1);
+  }
   .social-icons a.is-open :is(.fab, .ai, .fas) { color: #fff; }
   .social-icons a.is-open .soc-label {
     max-width: 8em;
     margin-left: 0.75em;
+    transition: max-width 0.3s var(--soc-spring), margin-left 0.3s var(--soc-spring);
+  }
+  /* the letters rise in one after another */
+  .social-icons a.is-open .soc-label .soc-ch {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transition: max-width 0.34s var(--soc-ease), margin-left 0.34s var(--soc-ease),
-                opacity 0.24s ease 0.08s, clip-path 0.3s var(--soc-ease) 0.08s;
+    transform: none;
+    transition: opacity 0.2s ease calc(0.06s + var(--i, 0) * 0.022s),
+                transform 0.32s var(--soc-spring) calc(0.06s + var(--i, 0) * 0.022s);
   }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .social-icons, .social-icons a, .social-icons a::before, .soc-label,
+  .social-icons, .social-icons a, .social-icons a::before, .soc-label, .soc-label .soc-ch,
   .social-icons a :is(.fab, .ai, .fas) { transition: none !important; }
 }
 
