@@ -492,7 +492,7 @@ p {
     max-width: 370px;
     min-width: 200px;
     height: auto;
-    transform: scale(0.92);
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(0.92);
     padding: 3px;
 
     transition: transform 0.35s ease, box-shadow 0.25s ease;
@@ -500,7 +500,7 @@ p {
 }
 
 .photo:hover .profile_image {
-    transform: scale(0.94);
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(0.94);
 
     box-shadow: 
         0 0 0 2px white,        /* gap color */
@@ -522,6 +522,29 @@ p {
 .photo:hover + .icon-stack {
     transform: translateY(10px) scale(0.92);
 }
+
+/* ---- The photo, with depth (javascript/photo-tilt.js) ----
+   On devices with a mouse the photo tilts very slightly toward the cursor
+   (at most 3 degrees) while a soft band of light slides across it, like light
+   on a glossy print; it eases back when the pointer leaves. The script only
+   sets the angles, and lays the light exactly over the picture. */
+.photo.is-tilting .profile_image { transition: transform 0.14s ease-out, box-shadow 0.25s ease; }
+.photo.is-settling .profile_image { transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease; }
+.photo-sheen {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 3px;                           /* match the image's padding, so the light stays on the picture */
+    border-radius: 15%;
+    background: linear-gradient(110deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.3) 47%, rgba(255, 255, 255, 0.1) 54%, rgba(255, 255, 255, 0) 64%)
+                var(--sheen, 50%) 0 / 300% 100% no-repeat content-box;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(0.92);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s ease, opacity 0.5s ease;
+}
+.photo:hover .photo-sheen { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(0.94); opacity: 1; }
+.photo.is-tilting .photo-sheen { transition: transform 0.14s ease-out, opacity 0.5s ease; }
+.photo.is-settling .photo-sheen { transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease; }
 
 
 

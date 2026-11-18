@@ -80,6 +80,9 @@ html[data-theme="dark"] #mobileMenuToggle { color: var(--dm-text); }
 
 /* ---- homepage left column ---- */
 html[data-theme="dark"] .profile_image { filter: brightness(0.94); }
+html[data-theme="dark"] .photo-sheen {
+  background-image: linear-gradient(110deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.17) 47%, rgba(255, 255, 255, 0.06) 54%, rgba(255, 255, 255, 0) 64%);
+}
 html[data-theme="dark"] .photo:hover .profile_image {
   box-shadow: 0 0 0 2px var(--dm-bg), 0 0 4px 4px #8f7be0, 0 10px 25px rgba(0, 0, 0, 0.5);
 }
