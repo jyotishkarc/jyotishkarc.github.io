@@ -1469,6 +1469,39 @@ html[data-theme="dark"] .last-updated { color: #908ca3; }
 }
 
 
+/* ---- Light that follows the pointer (javascript/spotlight.js) ----
+   Publication cards and the News box catch a soft glow at the cursor, as if
+   a reading lamp were passing over paper: brightest along the border, with
+   a faint wash inside. Mouse only; off for reduced motion. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .publication-card, .news-box { position: relative; }
+  .publication-card::before, .news-box::before,
+  .publication-card::after, .news-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+  /* the wash */
+  .publication-card::before, .news-box::before {
+    background: radial-gradient(340px circle at var(--sx, 50%) var(--sy, 50%), rgba(124, 92, 230, 0.085), transparent 70%);
+  }
+  /* the lit edge: the same light, masked to a thin ring just inside the border */
+  .publication-card::after, .news-box::after {
+    padding: 1.5px;
+    background: radial-gradient(250px circle at var(--sx, 50%) var(--sy, 50%), rgba(124, 92, 230, 0.85), transparent 70%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  .publication-card:hover::before, .news-box:hover::before,
+  .publication-card:hover::after, .news-box:hover::after { opacity: 1; }
+}
+
+
 /* ---- Page transitions (View Transitions API; browsers without it navigate as usual) ----
    Moving between pages crossfades the content while the header stays put. */
 @view-transition { navigation: auto; }
