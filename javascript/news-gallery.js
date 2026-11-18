@@ -53,18 +53,19 @@
     vCap.textContent = list.length > 1 ? (idx + 1) + " / " + list.length : "";
   }
 
-  // Credit line: plain text, or a link when the gallery has data-credit-url.
+  // Credit line: plain text, with only the photographer's name linked when the
+  // gallery has data-credit-url (data-credit-name says which words are the name).
   function renderCredit(target, c) {
     target.textContent = "";
     if (!c || !c.text) return;
-    if (c.url) {
-      var a = document.createElement("a");
-      a.href = c.url; a.target = "_blank"; a.rel = "noopener";
-      a.textContent = c.text;
-      target.appendChild(a);
-    } else {
-      target.textContent = c.text;
-    }
+    var at = c.url && c.name ? c.text.indexOf(c.name) : -1;
+    if (at < 0) { target.textContent = c.text; return; }
+    var a = document.createElement("a");
+    a.href = c.url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = c.name;
+    target.appendChild(document.createTextNode(c.text.slice(0, at)));
+    target.appendChild(a);
+    target.appendChild(document.createTextNode(c.text.slice(at + c.name.length)));
   }
   function openViewer(imgs, i, from, c) {
     list = imgs; returnFocus = from;
@@ -107,7 +108,8 @@
       setGallery(box, btn, !box.classList.contains("is-open"));
     });
     var c = box.hasAttribute("data-credit")
-      ? { text: box.getAttribute("data-credit"), url: box.getAttribute("data-credit-url") }
+      ? { text: box.getAttribute("data-credit"), url: box.getAttribute("data-credit-url"),
+          name: box.getAttribute("data-credit-name") }
       : null;
     if (c) {                       // small credit line under the row of photos
       var line = document.createElement("p");
