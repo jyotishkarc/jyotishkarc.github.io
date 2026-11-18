@@ -29,12 +29,27 @@
     });
   });
 
+  // The row closes only once the pointer is clearly away from it (more than
+  // SLACK px beyond its edge), so a pointer resting on the very edge of the
+  // first or last button can't flicker it open and shut.
+  var SLACK = 4;
+  function away(e) {
+    var r = row.getBoundingClientRect();
+    return e.clientX < r.left - SLACK || e.clientX > r.right + SLACK ||
+           e.clientY < r.top - SLACK || e.clientY > r.bottom + SLACK;
+  }
+  function watch(e) {
+    if (away(e)) { document.removeEventListener("pointermove", watch); closing = setTimeout(close, 60); }
+  }
+
   function open(a) {
     clearTimeout(closing);
+    document.removeEventListener("pointermove", watch);
     links.forEach(function (l) { l.classList.toggle("is-open", l === a); });
     row.classList.add("has-open");
   }
   function close() {
+    document.removeEventListener("pointermove", watch);
     links.forEach(function (l) { l.classList.remove("is-open"); });
     row.classList.remove("has-open");
   }
@@ -47,5 +62,11 @@
       setTimeout(function () { if (!row.contains(document.activeElement) && !row.matches(":hover")) close(); }, 0);
     });
   });
-  row.addEventListener("pointerleave", function () { closing = setTimeout(close, 60); });
+  row.addEventListener("pointerleave", function (e) {
+    if (!row.classList.contains("has-open")) return;
+    if (away(e)) closing = setTimeout(close, 60);
+    else document.addEventListener("pointermove", watch, { passive: true });   // close once clearly away
+  });
+  // the pointer left the window altogether
+  document.documentElement.addEventListener("pointerleave", function () { closing = setTimeout(close, 60); });
 })();
