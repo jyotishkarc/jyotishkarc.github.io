@@ -80,7 +80,7 @@
     vel: 0,                           // extra spin from a drag flick (deg/s)
     dragging: false,
     focus: null,                      // a country picked in the list: its dots get a ring
-    fly: null,                        // where the view is gliding to: { lon, lat }
+    fly: null,                        // where the view is gliding to: { lon, lat } (lon null: tilt only)
     visible: true,
     size: 0, dpr: 1
   };
@@ -257,7 +257,9 @@
     if (Math.abs(target - state.spin) < 0.02) state.spin = target;
     var flying = false;
     if (state.fly && !state.dragging) {               // glide to a country picked in the list
-      var dl = ((state.fly.lon - state.lon0 + 540) % 360) - 180, dp = state.fly.lat - state.lat0;
+      // lon null: only the tilt glides back, and the turning carries on meanwhile
+      var dl = state.fly.lon === null ? 0 : ((state.fly.lon - state.lon0 + 540) % 360) - 180;
+      var dp = state.fly.lat - state.lat0;
       var k = reduceMotion ? 1 : 1 - Math.pow(0.003, dt);
       state.lon0 += dl * k; state.lat0 += dp * k;
       if (Math.abs(dl) < 0.05 && Math.abs(dp) < 0.05) {
@@ -418,7 +420,7 @@
     if (pinned) return;
     if (state.focus === null) return;
     state.focus = null;
-    state.fly = homeLat === null ? null : { lon: state.lon0, lat: homeLat };   // tilt back, then turn on
+    state.fly = homeLat === null ? null : { lon: null, lat: homeLat };   // tilt back while it turns on
     homeLat = null;
     redraw();
   }
