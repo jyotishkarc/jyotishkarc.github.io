@@ -391,7 +391,8 @@
      "N countries" opens a short list, most visits first, each with a hairline
      bar for its share. Pointing at (or tapping) a country glides the globe
      there, pauses it and rings that country's dots; leaving the list lets it
-     turn again. */
+     turn again. Clicking a country pins it: other countries can still be
+     previewed, and the globe returns to the pinned one when the preview ends. */
   function countryList() {
     var m = {};
     points.forEach(function (p) {
@@ -409,7 +410,7 @@
     }).sort(function (a, b) { return b.count - a.count || a.name.localeCompare(b.name); });
   }
 
-  var homeLat = null, pinned = null;
+  var homeLat = null, pinned = null, pinnedC = null;   // the pinned row and its country
   function focusCountry(c) {
     if (homeLat === null) homeLat = state.lat0;
     state.focus = c.cc;
@@ -417,7 +418,8 @@
     redraw();
   }
   function releaseCountry() {
-    if (pinned) return;
+    // a preview of another country has ended: go back to the pinned one
+    if (pinnedC) { if (state.focus !== pinnedC.cc) focusCountry(pinnedC); return; }
     if (state.focus === null) return;
     state.focus = null;
     state.fly = homeLat === null ? null : { lon: null, lat: homeLat };   // tilt back while it turns on
@@ -455,6 +457,7 @@
         var was = pinned === b;
         if (pinned) pinned.setAttribute("aria-pressed", "false");
         pinned = was ? null : b;
+        pinnedC = was ? null : c;
         if (pinned) { b.setAttribute("aria-pressed", "true"); focusCountry(c); }
         else releaseCountry();
       });
@@ -487,7 +490,7 @@
       box.inert = !open;
       cbtn.setAttribute("aria-expanded", String(open));
       if (!open) {
-        if (pinned) { pinned.setAttribute("aria-pressed", "false"); pinned = null; }
+        if (pinned) { pinned.setAttribute("aria-pressed", "false"); pinned = null; pinnedC = null; }
         releaseCountry();
       }
     });
