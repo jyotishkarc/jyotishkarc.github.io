@@ -79,6 +79,8 @@
     collapsed: false,                 // folded away under the "Visitor information" button
     vel: 0,                           // extra spin from a drag flick (deg/s)
     dragging: false,
+    focus: null,                      // a country picked in the list: its dots get a ring
+    fly: null,                        // where the view is gliding to: { lon, lat } (lon null: tilt only)
     visible: true,
     size: 0, dpr: 1
   };
@@ -233,6 +235,11 @@
       ctx.moveTo(o.sx, o.sy - s); ctx.lineTo(o.sx + s, o.sy);
       ctx.lineTo(o.sx, o.sy + s); ctx.lineTo(o.sx - s, o.sy);
       ctx.closePath(); ctx.fill();
+      if (state.focus && pt.cc === state.focus) {       // picked in the list: a fine ring
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = lit ? C.lights : C.marker;
+        ctx.beginPath(); ctx.arc(o.sx, o.sy, s + 4.5, 0, 2 * Math.PI); ctx.stroke();
+      }
       ctx.globalAlpha = 1;
       screenPts.push({ x: o.sx, y: o.sy, r: Math.max(s + 3, 6), pt: pt });
     }
@@ -245,9 +252,21 @@
     var dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
     last = now;
     // pausing, resuming and reversing ease in and out rather than jump
-    var target = state.paused ? 0 : state.dir * SPEED;
+    var target = (state.paused || state.focus) ? 0 : state.dir * SPEED;
     state.spin += (target - state.spin) * (1 - Math.pow(0.004, dt));
     if (Math.abs(target - state.spin) < 0.02) state.spin = target;
+    var flying = false;
+    if (state.fly && !state.dragging) {               // glide to a country picked in the list
+      // lon null: only the tilt glides back, and the turning carries on meanwhile
+      var dl = state.fly.lon === null ? 0 : ((state.fly.lon - state.lon0 + 540) % 360) - 180;
+      var dp = state.fly.lat - state.lat0;
+      var k = reduceMotion ? 1 : 1 - Math.pow(0.003, dt);
+      state.lon0 += dl * k; state.lat0 += dp * k;
+      if (Math.abs(dl) < 0.05 && Math.abs(dp) < 0.05) {
+        state.lon0 += dl * (1 - k); state.lat0 += dp * (1 - k);
+        if (!state.focus) state.fly = null;           // back home: done
+      } else flying = true;
+    }
     if (!state.dragging) {
       state.lon0 += (state.spin + state.vel) * dt;
       state.vel *= Math.pow(0.06, dt);          // flick decays in about a second
@@ -255,7 +274,7 @@
     }
     state.lon0 = ((state.lon0 + 540) % 360) - 180;
     draw(now);
-    if (state.spin || target || state.vel || state.dragging) schedule();
+    if (state.spin || target || state.vel || state.dragging || flying) schedule();
   }
   function schedule() { if (!rafId && state.visible && !state.collapsed) rafId = requestAnimationFrame(frame); }
   function redraw() { last = 0; draw(performance.now()); schedule(); }
@@ -289,6 +308,7 @@
   });
   canvas.addEventListener("pointermove", function (e) {
     if (drag) {
+      state.fly = null;
       var k = 180 / state.size, now = performance.now();
       state.lon0 = drag.lon - (e.clientX - drag.x) * k;
       state.lat0 = Math.max(-60, Math.min(60, drag.lat + (e.clientY - drag.y) * k));
@@ -343,20 +363,137 @@
       return isFinite(p.lat) && isFinite(p.lon) && p.count > 0;
     }).map(function (p) {
       var country = p.country ? regionName(p.country) : "";
-      return { lat: +p.lat, lon: +p.lon, count: +p.count,
+      return { lat: +p.lat, lon: +p.lon, count: +p.count, cc: p.country || "",
                label: p.city ? p.city + (country ? ", " + country : "") : (country || "Somewhere") };
     });
     maxCount = points.reduce(function (m, p) { return Math.max(m, p.count); }, 1);
     if (caption && points.length) {
       var visits = points.reduce(function (s, p) { return s + p.count; }, 0);
-      var countries = {};
-      (list || []).forEach(function (p) { if (p.country) countries[p.country] = 1; });
-      var nc = Object.keys(countries).length;
-      caption.textContent = visits.toLocaleString("en-US") + (visits === 1 ? " visit" : " visits") +
-        " from " + nc + (nc === 1 ? " country" : " countries");
+      var byCountry = countryList();
+      var nc = byCountry.length;
+      caption.textContent = visits.toLocaleString("en-US") + (visits === 1 ? " visit" : " visits") + " from ";
+      if (nc) {
+        var cbtn = document.createElement("button");
+        cbtn.type = "button";
+        cbtn.className = "globe-countries-btn";
+        cbtn.setAttribute("aria-expanded", "false");
+        cbtn.setAttribute("aria-controls", "globe-countries");
+        cbtn.innerHTML = nc + (nc === 1 ? " country" : " countries") + ' <span class="name-caret" aria-hidden="true">&#9662;</span>';
+        caption.appendChild(cbtn);
+        buildCountries(byCountry, cbtn);
+      } else caption.appendChild(document.createTextNode("somewhere"));
       caption.hidden = false;
     }
     redraw();
+  }
+
+  /* ---- countries: a ranked list under the caption ----------------------
+     "N countries" opens a short list, most visits first, each with a hairline
+     bar for its share. Pointing at (or tapping) a country glides the globe
+     there, pauses it and rings that country's dots; leaving the list lets it
+     turn again. Clicking a country pins it: other countries can still be
+     previewed, and the globe returns to the pinned one when the preview ends. */
+  function countryList() {
+    var m = {};
+    points.forEach(function (p) {
+      if (!p.cc) return;
+      var c = m[p.cc] || (m[p.cc] = { cc: p.cc, name: regionName(p.cc), count: 0, x: 0, y: 0, lat: 0 });
+      c.count += p.count;
+      c.x += p.count * Math.cos(p.lon * D2R); c.y += p.count * Math.sin(p.lon * D2R);   // average longitude, the round way
+      c.lat += p.count * p.lat;
+    });
+    return Object.keys(m).map(function (k) {
+      var c = m[k];
+      c.lon = Math.atan2(c.y, c.x) / D2R;
+      c.lat = c.lat / c.count;
+      return c;
+    }).sort(function (a, b) { return b.count - a.count || a.name.localeCompare(b.name); });
+  }
+
+  var homeLat = null, pinned = null, pinnedC = null;   // the pinned row and its country
+  function focusCountry(c) {
+    if (homeLat === null) homeLat = state.lat0;
+    state.focus = c.cc;
+    state.fly = { lon: c.lon, lat: Math.max(-40, Math.min(50, c.lat)) };
+    redraw();
+  }
+  function releaseCountry() {
+    // a preview of another country has ended: go back to the pinned one
+    if (pinnedC) { if (state.focus !== pinnedC.cc) focusCountry(pinnedC); return; }
+    if (state.focus === null) return;
+    state.focus = null;
+    state.fly = homeLat === null ? null : { lon: null, lat: homeLat };   // tilt back while it turns on
+    homeLat = null;
+    redraw();
+  }
+
+  var SHOW = 6;
+  function buildCountries(list, cbtn) {
+    var box = document.createElement("div");
+    box.className = "globe-countries";
+    box.id = "globe-countries";
+    box.setAttribute("aria-hidden", "true");
+    box.inert = true;
+    var inner = document.createElement("div");
+    inner.className = "globe-countries-inner";
+    var ol = document.createElement("ol");
+    var top = list[0].count, total = list.reduce(function (s, c) { return s + c.count; }, 0);
+    list.forEach(function (c, i) {
+      var li = document.createElement("li");
+      if (i >= SHOW) li.hidden = true;
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "gc-row";
+      b.setAttribute("aria-pressed", "false");
+      b.title = c.name + ": " + c.count + (c.count === 1 ? " visit" : " visits") +
+                " (" + Math.round(100 * c.count / total) + "%)";
+      b.innerHTML = '<span class="gc-name"></span><span class="gc-n"></span><span class="gc-bar" aria-hidden="true"><i></i></span>';
+      b.querySelector(".gc-name").textContent = c.name;
+      b.querySelector(".gc-n").textContent = c.count.toLocaleString("en-US");
+      b.querySelector(".gc-bar i").style.setProperty("--w", (100 * c.count / top).toFixed(1) + "%");
+      b.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") focusCountry(c); });
+      b.addEventListener("focus", function () { if (b.matches(":focus-visible")) focusCountry(c); });
+      b.addEventListener("click", function () {         // pin (or unpin) the country
+        var was = pinned === b;
+        if (pinned) pinned.setAttribute("aria-pressed", "false");
+        pinned = was ? null : b;
+        pinnedC = was ? null : c;
+        if (pinned) { b.setAttribute("aria-pressed", "true"); focusCountry(c); }
+        else releaseCountry();
+      });
+      li.appendChild(b);
+      ol.appendChild(li);
+    });
+    inner.appendChild(ol);
+    if (list.length > SHOW) {
+      var more = document.createElement("button");
+      more.type = "button";
+      more.className = "gc-more";
+      more.textContent = "Show all " + list.length;
+      more.addEventListener("click", function () {
+        Array.prototype.forEach.call(ol.children, function (li) { li.hidden = false; });
+        more.remove();
+      });
+      inner.appendChild(more);
+    }
+    box.appendChild(inner);
+    box.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") releaseCountry(); });
+    box.addEventListener("focusout", function () {
+      setTimeout(function () { if (!box.contains(document.activeElement)) releaseCountry(); }, 0);
+    });
+    caption.insertAdjacentElement("afterend", box);
+
+    cbtn.addEventListener("click", function () {
+      var open = !box.classList.contains("is-open");
+      box.classList.toggle("is-open", open);
+      box.setAttribute("aria-hidden", String(!open));
+      box.inert = !open;
+      cbtn.setAttribute("aria-expanded", String(open));
+      if (!open) {
+        if (pinned) { pinned.setAttribute("aria-pressed", "false"); pinned = null; pinnedC = null; }
+        releaseCountry();
+      }
+    });
   }
 
   var base = (mount.getAttribute("data-stats") || "").replace(/\/+$/, "");
